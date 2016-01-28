@@ -1,0 +1,229 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">-->
+    <title>English 3.1</title>
+
+    <!-- English31 references -->
+    <link href="css/index.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet" />
+    <style type="text/css">
+        body {
+            background: silver;
+            font-size: 24px;
+        }
+    </style>
+
+    
+    <!-- Cordova reference, this is added to your app when it's built. -->
+    <script src="cordova.js"></script>
+    <script src="scripts/platformOverrides.js"></script>
+    <script src="scripts/jquery-1.11.3.min.js"></script>
+    <!--<script src="scripts/jquery-2.1.4.min.js"></script>-->
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/model.js"></script>
+    <script src="scripts/controller.js"></script>
+    <script src="scripts/index.js"></script>
+
+    <script type="text/javascript" charset="utf-8">
+        
+        function onLoad() {
+            document.addEventListener("deviceready", onDeviceReady, false);
+        }
+
+        function onDeviceReady() {
+            document.addEventListener("backbutton", onBackKeyDown, false);
+
+            hideAll();
+            $("#frmStart").show();
+            createTablesWithCheck(0);
+        }
+
+        function onBackKeyDown() {
+            onClickBack();
+        }
+
+    </script>
+
+</head>
+
+<body onload="onLoad();">
+    
+    <form>
+        <div class="panel-body">
+            <div class="form-group">
+                <div class="col-xs-4">
+                    <button type="button" class="btn btn btn-primary" onclick="onClickBack();">Back</button>
+                </div>
+                <div class="col-xs-4">
+                    <strong>ENGLISH</strong>
+                </div>
+            </div>
+        </div>
+    </form>
+    
+    <form id="frmStart">
+        <div class="panel-body">
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <button type="button" class="btn btn-default btn-lg btn-block" onclick="onClickButton(BTN_WORDS_PHRASES)">Words + Phrases</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <button type="button" class="btn btn-default btn-lg btn-block" onclick="onClickButton(BTN_NEW_WORDS)">New Words</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <button type="button" class="btn btn-default btn-lg btn-block" onclick="onClickButton(BTN_ALL_WORDS)">All Words</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <button type="button" class="btn btn-info btn-lg btn-block" onclick="confirmCreateTables()">Reload All</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    
+    <form id="frmWords">
+        <div class="panel-body">
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_PHRASES);">Phrases</button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_ANY);">Else</button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_VERB);">Verbs</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_HOUSE);">House</button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_CLOTHING);">Clothing</button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_FOOD);">Food</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_ADJECTIVE);">Adjective</button>
+                    </div>
+                    <div class="col-xs-6">
+                        <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_OFFICE);">Office</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_COLLOCATION);">Collocation</button>
+                    </div>
+                    <div class="col-xs-6">
+                        <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_TRANSPORT);">Transport</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_MONEY);">Money</button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_NATURAL);">Natural</button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_ANIMALS);">Animals</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_REST);">Rest</button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_MEDICAL);">Medical</button>
+                    </div>
+                    <div class="col-xs-4">
+                        <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_IDIOM);">Idiom</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_CRIME_PUNISHMENT);">Crime+Punishment</button>
+                    </div>
+                    <div class="col-xs-6">
+                        <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_PERSON_FAMILY);">Person+Family</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+
+    <form id="frmList">
+        <div class="panel-body" id="frmListBody">
+            <div class="form-group">
+                <div class="col-xs-9">
+                    <input type="search" class="form-control" id="searchText" placeholder="Find">
+                </div>
+                <div class="col-xs-3">
+                    <button type="button" class="btn btn-success" onclick="onClickButtonFind();">Find</button>
+                </div>
+            </div>
+            <br>
+            <br>
+            <table class="table table-striped" id="gridWords">
+                <tbody></tbody>
+            </table>
+        </div>
+
+    </form>
+
+    <form id="frmVerbs">
+        <div class="panel-body">
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <button type="button" class="btn btn-default btn-block" onclick="onClickButton(1020);">Verbs</button>
+                    </div>
+                    <div class="col-xs-6">
+                        <button type="button" class="btn btn-default btn-block" onclick="onClickButton(1021);">Verbs Irregular</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</body>
+</html>
