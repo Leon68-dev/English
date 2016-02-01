@@ -65,7 +65,7 @@ function strInsertType(sqlValue) {
 }
 
 function strInsertWords(sqlValue) {
-    var strSql = "INSERT INTO words(value_w) VALUES('" + sqlValue + "');";
+    var strSql = "INSERT INTO words(value_w, is_checked) VALUES('" + sqlValue + "', 0);";
     return strSql;
 }
 
@@ -110,11 +110,28 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("CREATE UNIQUE INDEX 'ix_name' on types ('name' ASC);");
                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 tx.executeSql("DROP TABLE IF EXISTS words;");
-                tx.executeSql("CREATE TABLE IF NOT EXISTS words (id integer primary key, value_w text);");
+                tx.executeSql("CREATE TABLE IF NOT EXISTS words (id integer primary key, value_w text, is_checked integer);");
                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("to release - выпускать"));
+                tx.executeSql(strInsertWords("wonder - чудо"));
+                tx.executeSql(strInsertWords("to wonder - удивляться"));
+                tx.executeSql(strInsertWords("inquir/look into - интересоватся, узнать, запросить"));
+                tx.executeSql(strInsertWords("to question - ставить под вопрос"));
+                tx.executeSql(strInsertWords("reply/to reply - ответ, отвечать"));
+                tx.executeSql(strInsertWords("miller - мельник"));
+                tx.executeSql(strInsertWords("Dutch - голандец"));
+                tx.executeSql(strInsertWords("attitude - отношение"));
+                tx.executeSql(strInsertWords("find out - выяснить"));
+                tx.executeSql(strInsertWords("missareble - ничтожный"));
+                tx.executeSql(strInsertWords("to attract - привлекать"));
+                tx.executeSql(strInsertWords("tidal wave - приливная волна"));
+                tx.executeSql(strInsertWords("to cause - приченять"));
+                tx.executeSql(strInsertWords("wrestler - борец"));
+                tx.executeSql(strInsertWords("heavier - тяжелее"));
+                tx.executeSql(strInsertWords("constellation of stars - созвездия"));
                 tx.executeSql(strInsertWords("struck - пораженный"));
                 tx.executeSql(strInsertWords("to pull - вытащить"));
                 tx.executeSql(strInsertWords("unconscious - без сознания"));
@@ -1311,7 +1328,7 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("CREATE INDEX 'ix_value_w' on words ('value_w' ASC);");
 
                 tx.executeSql("DROP VIEW IF EXISTS vRows;");
-                tx.executeSql("CREATE VIEW IF NOT EXISTS vRows AS select w.value_w, t.id as code, t.name, w.id from words w join relations r on w.id = r.id_words join types t on t.id = r.id_type order by w.value_w;");
+                tx.executeSql("CREATE VIEW IF NOT EXISTS vRows AS select w.value_w, t.id as code, t.name, w.id, w.is_checked from words w join relations r on w.id = r.id_words join types t on t.id = r.id_type order by w.value_w;");
 
                 window.plugins.toast.showShortBottom("Data was uploaded");
             }

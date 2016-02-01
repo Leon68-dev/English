@@ -11,8 +11,18 @@ function hideAll() {
     $("#frmList").hide();
 }
 
-function addStrValue(res) {
-    var str = "<tr><td>" + res + "</td></tr><tr><td><br/></td></tr>";
+function checkedValue(val) {
+    if (val == 1)
+        return "checked";
+    else
+        return "";
+}
+
+function addStrValue(value_text, id, isChecked) {
+    //var str = "<tr><td>" + res + "</td></tr><tr><td><br/></td></tr>";
+    //var str = "<tr><td style='text-align:center'><input type='checkbox' onclick=onClickCheckBox(" + id + ", " + isChecked + "); ></td><td>" + value_text + "</td></tr>";
+
+    var str = "<tr><td style='text-align:center'><input type='checkbox' onclick='onClickCheckBox(this);' value ='" + id + "' " + checkedValue(isChecked) + " ></td><td>" + value_text + "<br/></td></tr>";
     $("#gridWords > tbody:last").after(str);
 }
 
@@ -25,7 +35,9 @@ function getToastCountItems(itemsFound) {
 
 function setGridWordsBody(wordType) {
     $("#searchText").val("");
-    $("#gridWords tr").remove();
+    //$("#gridWords tbody tr").remove();
+    $("#gridWords").find("tr.body_caption, tr.body_caption_top").remove();
+
     currentWordType = wordType;
 
     var db = window.sqlitePlugin.openDatabase({ name: dbname });
@@ -34,7 +46,7 @@ function setGridWordsBody(wordType) {
             tx.executeSql("select * from vrows order by value_w desc;", [], function (tx, res) {
                 var cnt = res.rows.length;
                 for (i = 0; i < cnt; i++) {
-                    addStrValue(res.rows.item(i).value_w, i);
+                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).id, res.rows.item(i).is_checked);
                 }
                 getToastCountItems(cnt);
             });
@@ -42,7 +54,7 @@ function setGridWordsBody(wordType) {
             tx.executeSql("select * from vrows where code = " + NEW + " order by id desc;", [], function (tx, res) {
                 var cnt = res.rows.length;
                 for (i = 0; i < cnt; i++) {
-                    addStrValue(res.rows.item(i).value_w, i);
+                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).id, res.rows.item(i).is_checked);
                 }
                 getToastCountItems(cnt);
             });
@@ -50,7 +62,7 @@ function setGridWordsBody(wordType) {
             tx.executeSql("select * from vrows where code = " + wordType + " order by value_w desc;", [], function (tx, res) {
                 var cnt = res.rows.length;
                 for (i = 0; i < cnt; i++) {
-                    addStrValue(res.rows.item(i).value_w, i);
+                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).id, res.rows.item(i).is_checked);
                 }
                 getToastCountItems(cnt);
             });
@@ -159,6 +171,16 @@ function showCurrentForm(index) {
     }
 }
 
+
+function onClickCheckBox(param) {
+    
+    var id = param.value;
+    var isChecked = param.checked;
+
+    return;
+}
+
+
 function onClickButton(index) {
     currentForm = index;
     showCurrentForm(currentForm);
@@ -166,7 +188,7 @@ function onClickButton(index) {
 
 function onClickButtonFind() {
     var str = $("#searchText").val().toLowerCase();
-    $("#gridWords tr").remove();
+    $("#gridWords").find("tr.body_caption, tr.body_caption_top").remove();
 
     var db = window.sqlitePlugin.openDatabase({ name: dbname });
     db.transaction(function (tx) {
