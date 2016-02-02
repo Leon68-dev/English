@@ -2,7 +2,6 @@
     Alert('function test()');
 }
 
-
 function hideAll() {
     $("#frmStart").hide();
     $("#frmVerbs").hide();
@@ -171,15 +170,18 @@ function showCurrentForm(index) {
     }
 }
 
-
 function onClickCheckBox(param) {
-    
     var id = param.value;
     var isChecked = param.checked;
 
-    return;
+    var db = window.sqlitePlugin.openDatabase({ name: dbname });
+    db.transaction(function (tx) {
+        var chk = 0;
+        if(isChecked == true)
+            chk = 1;
+        tx.executeSql("update words set is_checked = " + chk + " where id = " + id);
+    });
 }
-
 
 function onClickButton(index) {
     currentForm = index;
