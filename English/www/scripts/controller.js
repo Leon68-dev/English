@@ -21,7 +21,7 @@ function addStrValue(value_text, id, isChecked) {
     //var str = "<tr><td>" + res + "</td></tr><tr><td><br/></td></tr>";
     //var str = "<tr><td style='text-align:center'><input type='checkbox' onclick=onClickCheckBox(" + id + ", " + isChecked + "); ></td><td>" + value_text + "</td></tr>";
 
-    var str = "<tr><td style='text-align:center'><input type='checkbox' onclick='onClickCheckBox(this);' value ='" + id + "' " + checkedValue(isChecked) + " ></td><td>" + value_text + "<br/></td></tr>";
+    var str = "<tr><td style='text-align:center'><input type='checkbox' style='zoom:4' onclick='onClickCheckBox(this);' value ='" + id + "' " + checkedValue(isChecked) + " ></td><td>" + value_text + "<br/></td></tr>";
     $("#gridWords > tbody:last").after(str);
 }
 
@@ -51,6 +51,14 @@ function setGridWordsBody(wordType) {
             });
         } else if (wordType == NEW) {
             tx.executeSql("select * from vrows where code = " + NEW + " order by id desc;", [], function (tx, res) {
+                var cnt = res.rows.length;
+                for (i = 0; i < cnt; i++) {
+                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).id, res.rows.item(i).is_checked);
+                }
+                getToastCountItems(cnt);
+            });
+        } else if (wordType == CHK) {
+            tx.executeSql("select * from vrows where is_checked = 1 order by id desc;", [], function (tx, res) {
                 var cnt = res.rows.length;
                 for (i = 0; i < cnt; i++) {
                     addStrValue(res.rows.item(i).value_w, res.rows.item(i).id, res.rows.item(i).is_checked);
@@ -165,6 +173,11 @@ function showCurrentForm(index) {
             setGridWordsBody(PERSON_FAMILY);
             $("#frmList").show();
             break;
+        case BTN_CHK_WORDS:
+            setGridWordsBody(CHK);
+            $("#frmList").show();
+            break;
+
         default:
 
     }
@@ -227,6 +240,7 @@ function onClickBack() {
         case BTN_WORDS_PHRASES:
         case BTN_NEW_WORDS:
         case BTN_ALL_WORDS:
+        case BTN_CHK_WORDS:
             currentForm = 0;
             showCurrentForm(currentForm);
             break;

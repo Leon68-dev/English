@@ -26,10 +26,12 @@ var VERB_IRREG = 18;
 var PHRASES = 19;
 var COLLOCATION = 20;
 var IDIOM = 21;
+var CHK = 22;
 
 var BTN_WORDS_PHRASES = 1;
 var BTN_NEW_WORDS = 2;
 var BTN_ALL_WORDS = 3;
+var BTN_CHK_WORDS = 4;
 var BTN_PHRASES = 100;
 var BTN_ANY = 101;
 var BTN_VERB = 102;
@@ -73,7 +75,6 @@ function strInsertRelation(sqlValue) {
     var strSql = "INSERT INTO relations (id_words, id_type) select w.id, (select id from types where name = '" + sqlValue + "') from words w where w.id between (select min(t.id) from words t where t.id not in (select id_words from relations)) and (select max(t.id) from words t where t.id not in (select id_words from relations));";
     return strSql;
 }
-
 
 function createTablesWithCheck(isReload) {
     var db = window.sqlitePlugin.openDatabase({ name: dbname });
