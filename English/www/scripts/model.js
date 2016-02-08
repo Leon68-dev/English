@@ -116,37 +116,26 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
-                tx.executeSql(strInsertWords("to estimate - оценить"));
-                tx.executeSql(strInsertWords("doughnuts - пончики"));
-                tx.executeSql(strInsertWords("to release - выпускать"));
-                tx.executeSql(strInsertWords("wonder - чудо"));
-                tx.executeSql(strInsertWords("to wonder - удивляться"));
-                tx.executeSql(strInsertWords("inquir/look into - интересоватся, узнать, запросить"));
-                tx.executeSql(strInsertWords("to question - ставить под вопрос"));
-                tx.executeSql(strInsertWords("reply/to reply - ответ, отвечать"));
-                tx.executeSql(strInsertWords("miller - мельник"));
-                tx.executeSql(strInsertWords("Dutch - голандец"));
-                tx.executeSql(strInsertWords("attitude - отношение"));
-                tx.executeSql(strInsertWords("find out - выяснить"));
-                tx.executeSql(strInsertWords("missareble - ничтожный"));
-                tx.executeSql(strInsertWords("to attract - привлекать"));
-                tx.executeSql(strInsertWords("tidal wave - приливная волна"));
-                tx.executeSql(strInsertWords("to cause - приченять"));
-                tx.executeSql(strInsertWords("wrestler - борец"));
-                tx.executeSql(strInsertWords("heavier - тяжелее"));
-                tx.executeSql(strInsertWords("constellation of stars - созвездия"));
-                tx.executeSql(strInsertWords("struck - пораженный"));
-                tx.executeSql(strInsertWords("to pull - вытащить"));
-                tx.executeSql(strInsertWords("unconscious - без сознания"));
-                tx.executeSql(strInsertWords("although - несмотря на то что"));
-                tx.executeSql(strInsertWords("harmless - безвредны"));
-                tx.executeSql(strInsertWords("uncommon - редкий"));
-                tx.executeSql(strInsertWords("arm - рука"));
-                tx.executeSql(strInsertWords("leg - нога"));
-                tx.executeSql(strInsertWords("mouth - рот"));
+                tx.executeSql(strInsertWords("broccoli - брокколи"));
+                tx.executeSql(strInsertWords("walnuts - грецкие орехи"));
+                tx.executeSql(strInsertWords("detoxify - детоксикация"));
+                tx.executeSql(strInsertWords("plenty - много, достаточно"));
+                tx.executeSql(strInsertWords("boredom - скука"));
+                tx.executeSql(strInsertWords("benefit - выгода"));
+                tx.executeSql(strInsertWords("lifting - подъем"));
+                tx.executeSql(strInsertWords("purpose - цель, назначение"));
+                tx.executeSql(strInsertWords("particularly - особенно, в частности"));
+                tx.executeSql(strInsertWords("to breed - разводить"));
+                tx.executeSql(strInsertWords("larvae - личинки"));
+                tx.executeSql(strInsertWords("rot - гниль"));
+                tx.executeSql(strInsertWords("adult - взрослый"));
+                tx.executeSql(strInsertWords("potentially - потенциально"));
+
                 tx.executeSql(strInsertRelation("NEW"));
                 //ADJECTIVE////////////////////////////////////////////////////////////////////////////////////////////////////
-                tx.executeSql(strInsertWords("miserable - жалкий, убогий"));
+                tx.executeSql(strInsertWords("uncommon - редкий"));
+                tx.executeSql(strInsertWords("struck - пораженный"));
+                tx.executeSql(strInsertWords("missareble - жалкий, убогий, ничтожный"));
                 tx.executeSql(strInsertWords("huge - огромный"));
                 tx.executeSql(strInsertWords("attentive - внимательный"));
                 tx.executeSql(strInsertWords("enormous - огромный"));
@@ -254,6 +243,22 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("python - питон"));
                 tx.executeSql(strInsertRelation("ANIMALS"));
                 //ANY//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("wonder - чудо"));
+                tx.executeSql(strInsertWords("inquiry/look into - интересоватся, узнать, запросить"));
+                tx.executeSql(strInsertWords("reply/to reply - ответ, отвечать"));
+                tx.executeSql(strInsertWords("miller - мельник"));
+                tx.executeSql(strInsertWords("Dutch - голандец"));
+                tx.executeSql(strInsertWords("attitude - отношение"));
+                tx.executeSql(strInsertWords("find out - выяснить"));
+                tx.executeSql(strInsertWords("tidal wave - приливная волна"));
+                tx.executeSql(strInsertWords("wrestler - борец"));
+                tx.executeSql(strInsertWords("heavier - тяжелее"));
+                tx.executeSql(strInsertWords("constellation of stars - созвездия"));
+                tx.executeSql(strInsertWords("unconscious - без сознания"));
+                tx.executeSql(strInsertWords("although - несмотря на то что"));
+                tx.executeSql(strInsertWords("arm - рука"));
+                tx.executeSql(strInsertWords("leg - нога"));
+                tx.executeSql(strInsertWords("mouth - рот"));
                 tx.executeSql(strInsertWords("fee - взнос, гонорар, сбор, пошлина"));
                 tx.executeSql(strInsertWords("I pass by - проходить мимо"));
                 tx.executeSql(strInsertWords("for fun - для развлечения"));
@@ -322,7 +327,6 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("stressful - напряженный"));
                 tx.executeSql(strInsertWords("although - несмотря на то что"));
                 tx.executeSql(strInsertWords("enhances - усиливает"));
-                tx.executeSql(strInsertWords("reduce - уменьшить"));
                 tx.executeSql(strInsertWords("indeed - действительно"));
                 tx.executeSql(strInsertWords("spreadsheet - таблица"));
                 tx.executeSql(strInsertWords("alienate - отчуждать"));
@@ -651,6 +655,7 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertRelation("CRIME_PUNISHMENT"));
                 //FOOD/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 tx.executeSql(strInsertWords("soft - без алкогольная выпивка"));
+                tx.executeSql(strInsertWords("doughnuts - пончики"));
                 tx.executeSql(strInsertWords("waiter - официант"));
                 tx.executeSql(strInsertWords("pizza - пица"));
                 tx.executeSql(strInsertWords("meat - мясо"));
@@ -1021,6 +1026,13 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("to vote - голосовать"));
                 tx.executeSql(strInsertWords("to knock - стучать"));
                 tx.executeSql(strInsertWords("to be ill - болеть"));
+                tx.executeSql(strInsertWords("to release - выпускать"));
+                tx.executeSql(strInsertWords("to wonder - удивляться"));
+                tx.executeSql(strInsertWords("to estimate - оценить"));
+                tx.executeSql(strInsertWords("to question - ставить под вопрос"));
+                tx.executeSql(strInsertWords("to attract - привлекать"));
+                tx.executeSql(strInsertWords("to cause - приченять"));
+                tx.executeSql(strInsertWords("to pull - вытащить"));
                 tx.executeSql(strInsertRelation("VERB"));
                 //VERB_IRREG///////////////////////////////////////////////////////////////////////////////////////////////////////////
                 tx.executeSql(strInsertWords("to be-was-were-been - быть"));
