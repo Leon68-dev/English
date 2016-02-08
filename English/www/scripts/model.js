@@ -116,6 +116,8 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("to estimate - оценить"));
+                tx.executeSql(strInsertWords("doughnuts - пончики"));
                 tx.executeSql(strInsertWords("to release - выпускать"));
                 tx.executeSql(strInsertWords("wonder - чудо"));
                 tx.executeSql(strInsertWords("to wonder - удивляться"));
