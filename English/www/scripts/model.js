@@ -116,14 +116,20 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("retail - розничная торговля"));
+                tx.executeSql(strInsertWords("ever - когда-либо"));
+                tx.executeSql(strInsertWords("cut-throat - ожесточенной"));
+                tx.executeSql(strInsertWords("such - такой"));
+                tx.executeSql(strInsertWords("bear the cost - нести расходы"));
+                tx.executeSql(strInsertWords("rival - соперник"));
+                tx.executeSql(strInsertWords("purchase - покупка"));
+                //--
                 tx.executeSql(strInsertWords("further - далее"));
                 tx.executeSql(strInsertWords("responsible - ответственный"));
                 tx.executeSql(strInsertWords("to acquire - приобрести"));
                 tx.executeSql(strInsertWords("a flair for tracking down inconsistencies - чутье для отслеживания несоответствий"));
                 tx.executeSql(strInsertWords("a wider range of experience - более широкий диапазон знаний (опыта)"));
                 //--
-                tx.executeSql(strInsertWords("broccoli - брокколи"));
-                tx.executeSql(strInsertWords("walnuts - грецкие орехи"));
                 tx.executeSql(strInsertWords("detoxify - детоксикация"));
                 tx.executeSql(strInsertWords("plenty - много, достаточно"));
                 tx.executeSql(strInsertWords("boredom - скука"));
@@ -131,7 +137,6 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("lifting - подъем"));
                 tx.executeSql(strInsertWords("purpose - цель, назначение"));
                 tx.executeSql(strInsertWords("particularly - особенно, в частности"));
-                tx.executeSql(strInsertWords("to breed - разводить"));
                 tx.executeSql(strInsertWords("larvae - личинки"));
                 tx.executeSql(strInsertWords("rot - гниль"));
                 tx.executeSql(strInsertWords("adult - взрослый"));
@@ -644,6 +649,8 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("crash - авария"));
                 tx.executeSql(strInsertRelation("CRIME_PUNISHMENT"));
                 //FOOD/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("broccoli - брокколи"));
+                tx.executeSql(strInsertWords("walnuts - грецкие орехи"));
                 tx.executeSql(strInsertWords("soft - без алкогольная выпивка"));
                 tx.executeSql(strInsertWords("doughnuts - пончики"));
                 tx.executeSql(strInsertWords("waiter - официант"));
@@ -1022,6 +1029,7 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("to attract - привлекать"));
                 tx.executeSql(strInsertWords("to cause - приченять"));
                 tx.executeSql(strInsertWords("to pull - вытащить"));
+                tx.executeSql(strInsertWords("to breed - разводить"));
                 tx.executeSql(strInsertRelation("VERB"));
                 //VERB_IRREG///////////////////////////////////////////////////////////////////////////////////////////////////////////
                 tx.executeSql(strInsertWords("to be-was-were-been - быть"));
