@@ -116,6 +116,22 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("lovable - привлекательный"));
+                tx.executeSql(strInsertWords("peaceful - спокойный, мирный"));
+                tx.executeSql(strInsertWords("messy - беспорядочный"));
+                tx.executeSql(strInsertWords("hairy - волосатый"));
+                tx.executeSql(strInsertWords("explosive - взрывной"));
+                tx.executeSql(strInsertWords("wafers - вафли"));
+                tx.executeSql(strInsertWords("to expose - разоблачать"));
+                tx.executeSql(strInsertWords("to bear a name - носить имя"));
+                tx.executeSql(strInsertWords("sick pay - больничный"));
+                tx.executeSql(strInsertWords("to last - длиться"));
+                tx.executeSql(strInsertWords("decipeher - расшифровывать"));
+                tx.executeSql(strInsertWords("speak up - говорить громко"));
+                tx.executeSql(strInsertWords("to hatch - вылупиться"));
+                tx.executeSql(strInsertWords("to measure - измерять"));
+                tx.executeSql(strInsertWords("to reach - добираться"));
+                //--
                 tx.executeSql(strInsertWords("retail - розничная торговля"));
                 tx.executeSql(strInsertWords("ever - когда-либо"));
                 tx.executeSql(strInsertWords("cut-throat - ожесточенной"));
@@ -475,7 +491,7 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("surprisingly - удивительно"));
                 tx.executeSql(strInsertWords("too - тоже"));
                 tx.executeSql(strInsertWords("so - также"));
-                tx.executeSql(strInsertWords("advice - уведомление"));
+                tx.executeSql(strInsertWords("advice - уведомление, совет"));
                 tx.executeSql(strInsertWords("district - район"));
                 tx.executeSql(strInsertWords("permission - разрешение"));
                 tx.executeSql(strInsertWords("quote - ссылка"));

@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">-->
-    <title>English 3.1</title>
-
-    <!-- English31 references -->
+    <title>English</title>
+        
     <link href="css/index.css" rel="stylesheet" />
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="css/custom.css" rel="stylesheet" />
     <style type="text/css">
         body {
             background: silver;
@@ -20,8 +20,8 @@
     <!-- Cordova reference, this is added to your app when it's built. -->
     <script src="cordova.js"></script>
     <script src="scripts/platformOverrides.js"></script>
-    <script src="scripts/jquery-1.11.3.min.js"></script>
-    <!--<script src="scripts/jquery-2.1.4.min.js"></script>-->
+    <!--<script src="scripts/jquery-1.11.3.min.js"></script>-->
+    <script src="scripts/jquery-2.1.4.min.js"></script>
     <script src="scripts/bootstrap.min.js"></script>
     <script src="scripts/model.js"></script>
     <script src="scripts/controller.js"></script>
@@ -87,7 +87,7 @@
 
             <div class="form-group">
                 <div class="col-md-10">
-                    <button type="button" class="btn btn-warning btn-lg btn-block" onclick="onClickButton(BTN_CHK_WORDS)">All checked</button>
+                    <button type="button" class="btn btn-warning btn-lg btn-block" onclick="onClickButton(BTN_CHK_WORDS)">Checked</button>
                 </div>
             </div>
 
@@ -209,11 +209,11 @@
             </div>
             <br>
             <br>
-            <table class="table table-bordered table-hover" id="gridWords">
+            <table class="table table-condensed" id="gridWords">
                 <thead>
                     <tr>
                         <th>
-                            Check
+                            *
                         </th>
                         <th>
                             Value
