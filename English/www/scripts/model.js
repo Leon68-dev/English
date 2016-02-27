@@ -116,6 +116,10 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("I''m buzzing to day - мне сегодня классно"));
+                tx.executeSql(strInsertWords("precious - драгоценный"));
+                tx.executeSql(strInsertWords("to chew - жевать"));
+                //--
                 tx.executeSql(strInsertWords("lovable - привлекательный"));
                 tx.executeSql(strInsertWords("peaceful - спокойный, мирный"));
                 tx.executeSql(strInsertWords("messy - беспорядочный"));
@@ -890,7 +894,7 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("worth - стоимость"));
                 tx.executeSql(strInsertWords("loan - заем"));
                 tx.executeSql(strInsertWords("enough - достаточно"));
-                tx.executeSql(strInsertWords("salary - зарплата"));
+                tx.executeSql(strInsertWords("salary, wage - зарплата"));
                 tx.executeSql(strInsertWords("payment - оплата"));
                 tx.executeSql(strInsertWords("decision - решение"));
                 tx.executeSql(strInsertWords("store - запас, резерв"));

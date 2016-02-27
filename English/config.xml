@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<widget xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps" id="io.cordova.myapp3349a7" version="1.1.3" xmlns="http://www.w3.org/ns/widgets" defaultlocale="en-US">
+<widget xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps" id="io.cordova.myapp3349a7" version="1.2.0" xmlns="http://www.w3.org/ns/widgets" defaultlocale="en-US">
   <name>English</name>
   <description>study english words</description>
   <author href="http://cordova.io" email="dev@cordova.apache.org">private</author>
@@ -105,9 +105,9 @@
   <platform name="wp8">
     <splash src="res/screens/wp8/SplashScreenImage.jpg" width="480" height="800" />
   </platform>
-  <vs:plugin name="me.rahul.plugins.sqlDB" version="1.0.3" src="https://github.com/an-rahulpandey/cordova-plugin-dbcopy" />
-  <vs:plugin name="cordova-plugin-dialogs" version="1.2.1-dev" src="https://github.com/apache/cordova-plugin-dialogs" />
-  <vs:plugin name="cordova-plugin-x-toast" version="2.3.1" src="https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin" />
-  <vs:plugin name="cordova-sqlite-storage" version="0.7.15-dev" src="https://github.com/litehelpers/Cordova-sqlite-storage" />
   <preference name="Orientation" value="portrait" />
+  <plugin name="me.rahul.plugins.sqlDB" version="1.0.3" src="https://github.com/an-rahulpandey/cordova-plugin-dbcopy" />
+  <plugin name="cordova-plugin-dialogs" version="1.2.1-dev" src="https://github.com/apache/cordova-plugin-dialogs" />
+  <plugin name="cordova-plugin-x-toast" version="2.3.1" src="https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin" />
+  <plugin name="cordova-sqlite-storage" version="0.7.15-dev" src="https://github.com/litehelpers/Cordova-sqlite-storage" />
 </widget>

@@ -39,13 +39,13 @@ function setGridWordsBody(wordType) {
     var db = window.sqlitePlugin.openDatabase({ name: dbname });
     db.transaction(function (tx) {
         if (wordType == ALL) {
-            tx.executeSql("select * from vrows order by value_w desc;", [], function (tx, res) {
-                var cnt = res.rows.length;
-                for (i = 0; i < cnt; i++) {
-                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).id, res.rows.item(i).is_checked);
-                }
-                getToastCountItems(cnt);
-            });
+            //tx.executeSql("select * from vrows order by value_w desc;", [], function (tx, res) {
+            //    var cnt = res.rows.length;
+            //    for (i = 0; i < cnt; i++) {
+            //        addStrValue(res.rows.item(i).value_w, res.rows.item(i).id, res.rows.item(i).is_checked);
+            //    }
+            //    getToastCountItems(cnt);
+            //});
         } else if (wordType == NEW) {
             tx.executeSql("select * from vrows where code = " + NEW + " order by id desc;", [], function (tx, res) {
                 var cnt = res.rows.length;
