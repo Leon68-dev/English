@@ -116,6 +116,27 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("fear - страх"));
+                tx.executeSql(strInsertWords("anger - гнев"));
+                tx.executeSql(strInsertWords("distress - скорбь"));
+                tx.executeSql(strInsertWords("promts - проворство"));
+                tx.executeSql(strInsertWords("sadness - грусть"));
+                tx.executeSql(strInsertWords("chest - грудная клетка"));
+                tx.executeSql(strInsertWords("joy - радость"));
+                tx.executeSql(strInsertWords("rejoice - радуйся"));
+                tx.executeSql(strInsertWords("predictable - предсказуемый"));
+                tx.executeSql(strInsertWords("eyebrows - брови"));
+                tx.executeSql(strInsertWords("surprise - удивление"));
+                tx.executeSql(strInsertWords("disgust - отвращение"));
+                tx.executeSql(strInsertWords("smell - запах"));
+                tx.executeSql(strInsertWords("dicease - заболевание"));
+                //--
+                tx.executeSql(strInsertWords("sluggish - тормозить, замедляться"));
+                tx.executeSql(strInsertWords("funds - средства"));
+                tx.executeSql(strInsertWords("to refund - возвращать"));
+                tx.executeSql(strInsertWords("concentrate - концентрироваться"));
+                tx.executeSql(strInsertWords("turn over - переключить"));
+                //--
                 tx.executeSql(strInsertWords("I''m buzzing to day - мне сегодня классно"));
                 tx.executeSql(strInsertWords("precious - драгоценный"));
                 tx.executeSql(strInsertWords("to chew - жевать"));
