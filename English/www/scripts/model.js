@@ -116,16 +116,30 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("fed up - надоело"));
+                tx.executeSql(strInsertWords("upset - расстройство, расстроенный"));
+                tx.executeSql(strInsertWords("laughter - смех"));
+                tx.executeSql(strInsertWords("to clap - хлопать (в ладоши)"));
+                tx.executeSql(strInsertWords("to strengthen - укреплять"));
+                tx.executeSql(strInsertWords("immune - иммунный"));
+                tx.executeSql(strInsertWords("thousand - тысяча"));
+                tx.executeSql(strInsertWords("laughing - смеющийся"));
+                tx.executeSql(strInsertWords("embarrassed - смущенный"));
+                tx.executeSql(strInsertWords("annoyed - раздраженный"));
+                tx.executeSql(strInsertWords("issue - спорный вопрос"));
+                tx.executeSql(strInsertWords("satisfied - удовлетворенный"));
+                tx.executeSql(strInsertWords("frustrated - обескураживающий"));
+                tx.executeSql(strInsertWords("tense - напряженный"));
+                tx.executeSql(strInsertWords("meditation - размышление"));
+                //--
                 tx.executeSql(strInsertWords("fear - страх"));
                 tx.executeSql(strInsertWords("anger - гнев"));
                 tx.executeSql(strInsertWords("distress - скорбь"));
                 tx.executeSql(strInsertWords("promts - проворство"));
                 tx.executeSql(strInsertWords("sadness - грусть"));
-                tx.executeSql(strInsertWords("chest - грудная клетка"));
                 tx.executeSql(strInsertWords("joy - радость"));
                 tx.executeSql(strInsertWords("rejoice - радуйся"));
                 tx.executeSql(strInsertWords("predictable - предсказуемый"));
-                tx.executeSql(strInsertWords("eyebrows - брови"));
                 tx.executeSql(strInsertWords("surprise - удивление"));
                 tx.executeSql(strInsertWords("disgust - отвращение"));
                 tx.executeSql(strInsertWords("smell - запах"));
@@ -295,6 +309,7 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("python - питон"));
                 tx.executeSql(strInsertRelation("ANIMALS"));
                 //ANY//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("facility - объект, возможность"));
                 tx.executeSql(strInsertWords("wonder - чудо"));
                 tx.executeSql(strInsertWords("inquiry/look into - интересоватся, узнать, запросить"));
                 tx.executeSql(strInsertWords("reply/to reply - ответ, отвечать"));
@@ -308,6 +323,8 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("constellation of stars - созвездия"));
                 tx.executeSql(strInsertWords("unconscious - без сознания"));
                 tx.executeSql(strInsertWords("although - несмотря на то что"));
+                tx.executeSql(strInsertWords("eyebrows - брови"));
+                tx.executeSql(strInsertWords("chest - грудная клетка"));
                 tx.executeSql(strInsertWords("arm - рука"));
                 tx.executeSql(strInsertWords("leg - нога"));
                 tx.executeSql(strInsertWords("mouth - рот"));

@@ -14,9 +14,18 @@
             background: silver;
             font-size: 24px;
         }
-    </style>
+        
+        [class*="col-"] {
+            padding: 2pt;
+        }
 
-    
+        [class*="row"] {
+            margin-left:5pt;
+            margin-right:5pt;
+        }
+
+    </style>
+        
     <!-- Cordova reference, this is added to your app when it's built. -->
     <script src="cordova.js"></script>
     <script src="scripts/platformOverrides.js"></script>
@@ -53,10 +62,10 @@
     <form>
         <div class="panel-body">
             <div class="form-group">
-                <div class="col-xs-4">
+                <div class="col-xs-4 col-sm-4">
                     <button type="button" class="btn btn btn-primary" onclick="onClickBack();">Back</button>
                 </div>
-                <div class="col-xs-4">
+                <div class="col-xs-8 col-sm-8">
                     <strong>ENGLISH</strong>
                 </div>
             </div>
@@ -65,37 +74,23 @@
     
     <form id="frmStart">
         <div class="panel-body">
-
             <div class="form-group">
-                <div class="col-md-10">
+                <div class="col-xs-12 col-sm-12">
                     <button type="button" class="btn btn-default btn-lg btn-block" onclick="onClickButton(BTN_WORDS_PHRASES)">Words + Phrases</button>
                 </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-10">
+                <div class="col-xs-12 col-sm-12">
                     <button type="button" class="btn btn-default btn-lg btn-block" onclick="onClickButton(BTN_NEW_WORDS)">New Words</button>
                 </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-10">
+                <div class="col-xs-12 col-sm-12">
                     <button type="button" class="btn btn-default btn-lg btn-block" onclick="onClickButton(BTN_ALL_WORDS)">All Words(find)</button>
                 </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-10">
+                <div class="col-xs-12 col-sm-12">
                     <button type="button" class="btn btn-warning btn-lg btn-block" onclick="onClickButton(BTN_CHK_WORDS)">Checked</button>
                 </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-10">
+                <div class="col-xs-12 col-sm-12">
                     <button type="button" class="btn btn-info btn-lg btn-block" onclick="confirmCreateTables()">Reload All</button>
                 </div>
             </div>
-
         </div>
     </form>
     
@@ -104,89 +99,70 @@
 
             <div class="form-group">
                 <div class="row">
-                    <div class="col-xs-4">
+                    <div class="col-xs-4 col-sm-4">
                         <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_PHRASES);">Phrases</button>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-xs-4 col-sm-4">
                         <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_ANY);">Else</button>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-xs-4 col-sm-4">
                         <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_VERB);">Verbs</button>
                     </div>
                 </div>
-            </div>
-
-            <div class="form-group">
                 <div class="row">
-                    <div class="col-xs-4">
+                    <div class="col-xs-4 col-sm-4">
                         <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_HOUSE);">House</button>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-xs-4 col-sm-4">
                         <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_CLOTHING);">Clothing</button>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-xs-4 col-sm-4">
                         <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_FOOD);">Food</button>
                     </div>
                 </div>
-            </div>
-
-            <div class="form-group">
                 <div class="row">
-                    <div class="col-xs-6">
+                    <div class="col-xs-6 col-sm-6">
                         <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_ADJECTIVE);">Adjective</button>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-xs-6 col-sm-6">
                         <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_OFFICE);">Office</button>
                     </div>
                 </div>
-            </div>
-
-            <div class="form-group">
                 <div class="row">
-                    <div class="col-xs-6">
+                    <div class="col-xs-6 col-sm-6">
                         <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_COLLOCATION);">Collocation</button>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-xs-6 col-sm-6">
                         <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_TRANSPORT);">Transport</button>
                     </div>
                 </div>
-            </div>
-
-            <div class="form-group">
                 <div class="row">
-                    <div class="col-xs-4">
+                    <div class="col-xs-4 col-sm-4">
                         <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_MONEY);">Money</button>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-xs-4 col-sm-4">
                         <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_NATURAL);">Natural</button>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-xs-4 col-sm-4">
                         <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_ANIMALS);">Animals</button>
                     </div>
                 </div>
-            </div>
-
-
-            <div class="form-group">
                 <div class="row">
-                    <div class="col-xs-4">
+                    <div class="col-xs-4 col-sm-4">
                         <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_REST);">Rest</button>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-xs-4 col-sm-4">
                         <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_MEDICAL);">Medical</button>
                     </div>
-                    <div class="col-xs-4">
+                    <div class="col-xs-4 col-sm-4">
                         <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_IDIOM);">Idiom</button>
                     </div>
                 </div>
-            </div>
-
-            <div class="form-group">
                 <div class="row">
-                    <div class="col-xs-6">
+                    <div class="col-xs-7 col-sm-7">
                         <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_CRIME_PUNISHMENT);">Crime+Punishment</button>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-xs-5 col-sm-5">
                         <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_PERSON_FAMILY);">Person+Family</button>
                     </div>
                 </div>
@@ -199,10 +175,10 @@
     <form id="frmList">
         <div class="panel-body" id="frmListBody">
             <div class="form-group">
-                <div class="col-xs-9">
+                <div class="col-xs-10 col-sm-10">
                     <input type="search" class="form-control" id="searchText" placeholder="Find">
                 </div>
-                <div class="col-xs-3">
+                <div class="col-xs-2 col-sm-2">
                     <button type="button" class="btn btn-success" onclick="onClickButtonFind();">Find</button>
                 </div>
             </div>
@@ -227,13 +203,12 @@
 
     <form id="frmVerbs">
         <div class="panel-body">
-
             <div class="form-group">
                 <div class="row">
-                    <div class="col-xs-6">
+                    <div class="col-xs-6 col-sm-6">
                         <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_VERBS);">Verbs</button>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-xs-6 col-sm-6">
                         <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_VERBS_IRREG);">Verbs Irregular</button>
                     </div>
                 </div>
