@@ -1,0 +1,7 @@
+﻿tr, td {
+    border-top:1pt solid #ddd !important;
+}
+
+thead {
+    border-bottom: 2pt solid #ddd !important;
+}
