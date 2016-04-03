@@ -116,6 +116,27 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("tried on - примерил"));
+                tx.executeSql(strInsertWords("take off - снимать"));
+                tx.executeSql(strInsertWords("log off - выйти"));
+                tx.executeSql(strInsertWords("chatted up - разговорить"));
+                tx.executeSql(strInsertWords("dress up - нарядиться"));
+                tx.executeSql(strInsertWords("scroll up - переместиться на верх"));
+                tx.executeSql(strInsertWords("settle down - обосноваться"));
+                tx.executeSql(strInsertWords("dresse down - снимать одежду"));
+                tx.executeSql(strInsertWords("shut down - выкл. комп"));
+                //-
+                tx.executeSql(strInsertWords("smash into pieces - раздовить"));
+                tx.executeSql(strInsertWords("get rid of stress - избавться от стресса"));
+                tx.executeSql(strInsertWords("get on me nerves - действует мне на нервы"));
+                tx.executeSql(strInsertWords("to deal with (to cope with) - справляться с чем либо"));
+                tx.executeSql(strInsertWords("society - общество"));
+                tx.executeSql(strInsertWords("to benefit - приносить выгоду"));
+                tx.executeSql(strInsertWords("feel down - чувствовать подавленным"));
+                tx.executeSql(strInsertWords("deep breath - - глубокий вдох"));
+                //-
+                
+                //-
                 tx.executeSql(strInsertWords("fed up - надоело"));
                 tx.executeSql(strInsertWords("upset - расстройство, расстроенный"));
                 tx.executeSql(strInsertWords("laughter - смех"));
