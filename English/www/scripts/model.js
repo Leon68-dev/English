@@ -53,6 +53,7 @@ var BTN_IDIOM = 115;
 var BTN_CRIME_PUNISHMENT = 116;
 var BTN_PERSON_FAMILY = 117;
 
+
 function confirmCreateTables() {
     if (confirm('Are you sure you want to reload data?')) {
         createTablesWithCheck(1);
@@ -116,6 +117,22 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("to persuade - уговаривать"));
+                tx.executeSql(strInsertWords("pretended - притворятся"));
+                tx.executeSql(strInsertWords("to convince - убедить (с доказательствами)"));
+                tx.executeSql(strInsertWords("to hold - держать"));
+                tx.executeSql(strInsertWords("to hold a meeting - проводить встречу"));
+                tx.executeSql(strInsertWords("raise, rise - поднимать"));
+                tx.executeSql(strInsertWords("on anothere occasion - в другом случае"));
+                tx.executeSql(strInsertWords("hypothetical - гипотетический"));
+                tx.executeSql(strInsertWords("imaginary - воображаемый"));
+                tx.executeSql(strInsertWords("dress the salad - заправить салат"));
+                tx.executeSql(strInsertWords("accidentally - случайно"));
+                tx.executeSql(strInsertWords("silk - шелк"));
+                tx.executeSql(strInsertWords("to claim - утверждать"));
+                tx.executeSql(strInsertWords("to prove - доказать"));
+                tx.executeSql(strInsertWords("apart from that - кроме того"));
+                //-
                 tx.executeSql(strInsertWords("tried on - примерил"));
                 tx.executeSql(strInsertWords("take off - снимать"));
                 tx.executeSql(strInsertWords("log off - выйти"));
