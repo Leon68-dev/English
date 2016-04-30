@@ -117,15 +117,28 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("darkness - темнота"));
+                tx.executeSql(strInsertWords("parkin lot - небольшая стоянка"));
+                tx.executeSql(strInsertWords("a babysitter - няня"));
+                tx.executeSql(strInsertWords("first aid - первая помощь"));
+                tx.executeSql(strInsertWords("award - награда"));
+                tx.executeSql(strInsertWords("to survive - выживать"));
+                tx.executeSql(strInsertWords("in all likelihood - скорее всего"));
+                tx.executeSql(strInsertWords("in all probability - вероятнее всего"));
+                tx.executeSql(strInsertWords("rather - лучьшеб довольно"));
+                tx.executeSql(strInsertWords("obsession - навождение"));
+                tx.executeSql(strInsertWords("to get united - обединяться"));
+                tx.executeSql(strInsertWords("split up - расколотся"));
+                //-
                 tx.executeSql(strInsertWords("to persuade - уговаривать"));
                 tx.executeSql(strInsertWords("pretended - притворятся"));
                 tx.executeSql(strInsertWords("to convince - убедить (с доказательствами)"));
-                tx.executeSql(strInsertWords("to hold - держать"));
                 tx.executeSql(strInsertWords("to hold a meeting - проводить встречу"));
                 tx.executeSql(strInsertWords("raise, rise - поднимать"));
                 tx.executeSql(strInsertWords("on anothere occasion - в другом случае"));
                 tx.executeSql(strInsertWords("hypothetical - гипотетический"));
                 tx.executeSql(strInsertWords("imaginary - воображаемый"));
+                //-
                 tx.executeSql(strInsertWords("dress the salad - заправить салат"));
                 tx.executeSql(strInsertWords("accidentally - случайно"));
                 tx.executeSql(strInsertWords("silk - шелк"));
@@ -143,22 +156,15 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("dresse down - снимать одежду"));
                 tx.executeSql(strInsertWords("shut down - выкл. комп"));
                 //-
-                tx.executeSql(strInsertWords("a neck - шея"));
                 tx.executeSql(strInsertWords("to procrastinate - откладывать на потом"));
                 tx.executeSql(strInsertWords("procrastination - откладывание на потом"));
                 tx.executeSql(strInsertWords("procrastinator - откладывающий на потом")); 
-                tx.executeSql(strInsertWords("an arm - часть руки"));
-                tx.executeSql(strInsertWords("a back - спина"));
-                tx.executeSql(strInsertWords("a belly (stomack) - живот"));
-                tx.executeSql(strInsertWords("a palm - ладонь"));
-                tx.executeSql(strInsertWords("a leg - нога"));
                 //-
                 tx.executeSql(strInsertWords("smash into pieces - раздовить"));
                 tx.executeSql(strInsertWords("get rid of stress - избавться от стресса"));
                 tx.executeSql(strInsertWords("get on me nerves - действует мне на нервы"));
                 tx.executeSql(strInsertWords("to deal with (to cope with) - справляться с чем либо"));
                 tx.executeSql(strInsertWords("society - общество"));
-                tx.executeSql(strInsertWords("to benefit - приносить выгоду"));
                 tx.executeSql(strInsertWords("feel down - чувствовать подавленным"));
                 tx.executeSql(strInsertWords("deep breath - - глубокий вдох"));
                 //-
@@ -166,32 +172,16 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("upset - расстройство, расстроенный"));
                 tx.executeSql(strInsertWords("laughter - смех"));
                 tx.executeSql(strInsertWords("thousand - тысяча"));
+                tx.executeSql(strInsertWords("meditation - размышление"));
+                //--
+                tx.executeSql(strInsertRelation("NEW"));
+                //ADJECTIVE////////////////////////////////////////////////////////////////////////////////////////////////////
                 tx.executeSql(strInsertWords("laughing - смеющийся"));
                 tx.executeSql(strInsertWords("embarrassed - смущенный"));
                 tx.executeSql(strInsertWords("annoyed - раздраженный"));
                 tx.executeSql(strInsertWords("satisfied - удовлетворенный"));
                 tx.executeSql(strInsertWords("frustrated - обескураживающий"));
                 tx.executeSql(strInsertWords("tense - напряженный"));
-                tx.executeSql(strInsertWords("meditation - размышление"));
-                //--
-                tx.executeSql(strInsertWords("fear - страх"));
-                tx.executeSql(strInsertWords("anger - гнев"));
-                tx.executeSql(strInsertWords("distress - скорбь"));
-                tx.executeSql(strInsertWords("promts - проворство"));
-                tx.executeSql(strInsertWords("sadness - грусть"));
-                tx.executeSql(strInsertWords("joy - радость"));
-                tx.executeSql(strInsertWords("rejoice - радуйся"));
-                tx.executeSql(strInsertWords("predictable - предсказуемый"));
-                tx.executeSql(strInsertWords("surprise - удивление"));
-                tx.executeSql(strInsertWords("disgust - отвращение"));
-                tx.executeSql(strInsertWords("smell - запах"));
-                //--
-                tx.executeSql(strInsertWords("to bear a name - носить имя"));
-                tx.executeSql(strInsertWords("decipeher - расшифровывать"));
-                tx.executeSql(strInsertWords("speak up - говорить громко"));
-                //--
-                tx.executeSql(strInsertRelation("NEW"));
-                //ADJECTIVE////////////////////////////////////////////////////////////////////////////////////////////////////
                 tx.executeSql(strInsertWords("delicious - восхитительный"));
                 tx.executeSql(strInsertWords("responsible - ответственный"));
                 tx.executeSql(strInsertWords("lovable - привлекательный"));
@@ -312,6 +302,20 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("larvae - личинки"));
                 tx.executeSql(strInsertRelation("ANIMALS"));
                 //ANY//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("fear - страх"));
+                tx.executeSql(strInsertWords("anger - гнев"));
+                tx.executeSql(strInsertWords("distress - скорбь"));
+                tx.executeSql(strInsertWords("promts - проворство"));
+                tx.executeSql(strInsertWords("sadness - грусть"));
+                tx.executeSql(strInsertWords("joy - радость"));
+                tx.executeSql(strInsertWords("rejoice - радуйся"));
+                tx.executeSql(strInsertWords("predictable - предсказуемый"));
+                tx.executeSql(strInsertWords("surprise - удивление"));
+                tx.executeSql(strInsertWords("disgust - отвращение"));
+                tx.executeSql(strInsertWords("smell - запах"));
+                tx.executeSql(strInsertWords("to bear a name - носить имя"));
+                tx.executeSql(strInsertWords("decipeher - расшифровывать"));
+                tx.executeSql(strInsertWords("speak up - говорить громко"));
                 tx.executeSql(strInsertWords("further - далее"));
                 tx.executeSql(strInsertWords("a flair for tracking down inconsistencies - чутье для отслеживания несоответствий"));
                 tx.executeSql(strInsertWords("a wider range of experience - более широкий диапазон знаний (опыта)"));
@@ -838,6 +842,12 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("life expectancy - продолжительность жизни"));
                 tx.executeSql(strInsertWords("immune - иммунный"));
                 tx.executeSql(strInsertWords("sick pay - больничный"));
+                tx.executeSql(strInsertWords("a neck - шея"));
+                tx.executeSql(strInsertWords("an arm - часть руки"));
+                tx.executeSql(strInsertWords("a back - спина"));
+                tx.executeSql(strInsertWords("a belly (stomack) - живот"));
+                tx.executeSql(strInsertWords("a palm - ладонь"));
+                tx.executeSql(strInsertWords("a leg - нога"));
                 tx.executeSql(strInsertRelation("MEDICAL"));
                 //MONEY////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 tx.executeSql(strInsertWords("currency - валюта"));
@@ -883,6 +893,7 @@ function createTablesWithCheck(isReload) {
                 //OFFICE///////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 tx.executeSql(strInsertWords("funds - средства"));
                 tx.executeSql(strInsertWords("benefit - выгода"));
+                tx.executeSql(strInsertWords("to benefit - приносить выгоду"));
                 tx.executeSql(strInsertWords("issue - спорный вопрос"));
                 tx.executeSql(strInsertWords("apply (for a job) - наниматься на работу"));
                 tx.executeSql(strInsertWords("accountancy - бухгалтерия; бухгалтерское дело"));
