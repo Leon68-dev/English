@@ -117,6 +117,16 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("incredible ability - невероятные способности"));
+                tx.executeSql(strInsertWords("confident - уверенный в себе"));
+                tx.executeSql(strInsertWords("hats - головные уборы"));
+                tx.executeSql(strInsertWords("dyslexic - дислексический"));
+                tx.executeSql(strInsertWords("demand - спрос"));
+                tx.executeSql(strInsertWords("struggled with - боролись с"));
+                tx.executeSql(strInsertWords("spread the world - распространять"));
+                tx.executeSql(strInsertWords("recently - в последнее время"));
+                tx.executeSql(strInsertWords("shoe laces - шнурки обувные"));
+                //-
                 tx.executeSql(strInsertWords("wedding - свадьба"));
                 tx.executeSql(strInsertWords("nightmare - кошмар"));
                 tx.executeSql(strInsertWords("desperately - в отчаянии"));
