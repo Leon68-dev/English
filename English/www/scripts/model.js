@@ -117,6 +117,18 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("depend on - зависит от"));
+                tx.executeSql(strInsertWords("succeed in - добиться успеха в"));
+                tx.executeSql(strInsertWords("pay attention in - обратить внимание на"));
+                tx.executeSql(strInsertWords("rely on - полагаться на"));
+                tx.executeSql(strInsertWords("pick up on - поднять на"));
+                tx.executeSql(strInsertWords("have a talent for - иметь талант для"));
+                tx.executeSql(strInsertWords("think about - думать о"));
+                tx.executeSql(strInsertWords("have access to - иметь доступ к"));
+                //-
+                tx.executeSql(strInsertWords("spare - запасной"));
+                tx.executeSql(strInsertWords("straightaway - сразу"));
+                //-
                 tx.executeSql(strInsertWords("incredible ability - невероятные способности"));
                 tx.executeSql(strInsertWords("confident - уверенный в себе"));
                 tx.executeSql(strInsertWords("hats - головные уборы"));
