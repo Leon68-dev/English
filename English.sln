@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "English", "English\English.jsproj", "{53B10435-3E22-47BF-BEB6-9666CB9CFA4D}"
 EndProject
@@ -27,7 +27,6 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{53B10435-3E22-47BF-BEB6-9666CB9CFA4D}.Debug|Android.ActiveCfg = Debug|Android
 		{53B10435-3E22-47BF-BEB6-9666CB9CFA4D}.Debug|Android.Build.0 = Debug|Android
-		{53B10435-3E22-47BF-BEB6-9666CB9CFA4D}.Debug|Android.Deploy.0 = Debug|Android
 		{53B10435-3E22-47BF-BEB6-9666CB9CFA4D}.Debug|iOS.ActiveCfg = Debug|iOS
 		{53B10435-3E22-47BF-BEB6-9666CB9CFA4D}.Debug|iOS.Build.0 = Debug|iOS
 		{53B10435-3E22-47BF-BEB6-9666CB9CFA4D}.Debug|iOS.Deploy.0 = Debug|iOS

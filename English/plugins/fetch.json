@@ -7,15 +7,6 @@
         "is_top_level": true,
         "variables": {}
     },
-    "me.rahul.plugins.sqlDB": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/an-rahulpandey/cordova-plugin-dbcopy",
-            "subdir": "."
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "cordova-plugin-dialogs": {
         "source": {
             "type": "git",
