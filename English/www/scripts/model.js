@@ -123,11 +123,34 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("a high achiever - человек многого достиг"));
+                tx.executeSql(strInsertWords("apprenticeship - практическое обучение"));
+                tx.executeSql(strInsertWords("emerge - проявилось"));
+                tx.executeSql(strInsertWords("rural - сельский"));
+                tx.executeSql(strInsertWords("survey - исследоваение"));
+                tx.executeSql(strInsertWords("reveal - показывать, обнаруживать"));
+                tx.executeSql(strInsertWords("climb - возрастать"));
+                tx.executeSql(strInsertWords("turnout - оказывается"));
+                tx.executeSql(strInsertWords("plenty of - много"));
+                tx.executeSql(strInsertWords("caught fire - загораться"));
+                tx.executeSql(strInsertWords("knock of a door - стучать в дверь"));
+                tx.executeSql(strInsertWords("rescue - спасать, выручать"));
+                tx.executeSql(strInsertWords("take your time - не спешите"));
+                tx.executeSql(strInsertWords("used to - иметь привычку"));
+                tx.executeSql(strInsertWords("get used to - привыкнуть"));
+                tx.executeSql(strInsertWords("for free - бесплатно"));
+                tx.executeSql(strInsertWords("instant - мгонвенный"));
+                tx.executeSql(strInsertWords("greeting - приветствие"));
+                tx.executeSql(strInsertWords("if I were you - если б я был на твоем месте"));
+                tx.executeSql(strInsertWords("have a seat - присаживайтесь"));
+                tx.executeSql(strInsertWords("it depends - когда как, смотря по обстоятельствам"));
+                //-
+                tx.executeSql(strInsertRelation("NEW"));
+                //ANY//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 tx.executeSql(strInsertWords("council - совет"));
                 tx.executeSql(strInsertWords("ruling - господствующий"));
                 tx.executeSql(strInsertWords("packed - уплотненный"));
                 tx.executeSql(strInsertWords("pupil - ученик"));
-                //-
                 tx.executeSql(strInsertWords("depend on - зависит от"));
                 tx.executeSql(strInsertWords("succeed in - добиться успеха в"));
                 tx.executeSql(strInsertWords("pay attention in - обратить внимание на"));
@@ -136,10 +159,8 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("have a talent for - иметь талант для"));
                 tx.executeSql(strInsertWords("think about - думать о"));
                 tx.executeSql(strInsertWords("have access to - иметь доступ к"));
-                //-
                 tx.executeSql(strInsertWords("spare - запасной"));
                 tx.executeSql(strInsertWords("straightaway - сразу"));
-                //-
                 tx.executeSql(strInsertWords("incredible ability - невероятные способности"));
                 tx.executeSql(strInsertWords("confident - уверенный в себе"));
                 tx.executeSql(strInsertWords("hats - головные уборы"));
@@ -149,7 +170,6 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("spread the world - распространять"));
                 tx.executeSql(strInsertWords("recently - в последнее время"));
                 tx.executeSql(strInsertWords("shoe laces - шнурки обувные"));
-                //-
                 tx.executeSql(strInsertWords("wedding - свадьба"));
                 tx.executeSql(strInsertWords("nightmare - кошмар"));
                 tx.executeSql(strInsertWords("desperately - в отчаянии"));
@@ -158,29 +178,23 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("tears - слезы"));
                 tx.executeSql(strInsertWords("impresse - впечатление"));
                 tx.executeSql(strInsertWords("anxious - озабоченный"));
-                //-
                 tx.executeSql(strInsertWords("darkness - темнота"));
                 tx.executeSql(strInsertWords("parkin lot - небольшая стоянка"));
                 tx.executeSql(strInsertWords("a babysitter - няня"));
                 tx.executeSql(strInsertWords("first aid - первая помощь"));
                 tx.executeSql(strInsertWords("award - награда"));
-                //-
                 tx.executeSql(strInsertWords("in all likelihood - скорее всего"));
                 tx.executeSql(strInsertWords("in all probability - вероятнее всего"));
                 tx.executeSql(strInsertWords("rather - лучьше довольно"));
                 tx.executeSql(strInsertWords("obsession - навождение"));
                 tx.executeSql(strInsertWords("to get united - обединяться"));
                 tx.executeSql(strInsertWords("split up - расколотся"));
-                //-
                 tx.executeSql(strInsertWords("on anothere occasion - в другом случае"));
                 tx.executeSql(strInsertWords("hypothetical - гипотетический"));
                 tx.executeSql(strInsertWords("imaginary - воображаемый"));
-                //-
                 tx.executeSql(strInsertWords("accidentally - случайно"));
                 tx.executeSql(strInsertWords("silk - шелк"));
                 tx.executeSql(strInsertWords("apart from that - кроме того"));
-                tx.executeSql(strInsertRelation("NEW"));
-                //ANY//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 tx.executeSql(strInsertWords("pretended - притворятся"));
                 tx.executeSql(strInsertWords("procrastination - откладывание на потом"));
                 tx.executeSql(strInsertWords("procrastinator - откладывающий на потом"));
