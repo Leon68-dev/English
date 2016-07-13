@@ -2,8 +2,7 @@
 var currentWordType = 0;
 var itemsFound = 0;
 
-var dbname = "english31.db";
-var db;
+var model_dbname = "english31.db";
 
 var ALL = 0;
 var ANY = 1;
@@ -77,8 +76,15 @@ function strInsertRelation(sqlValue) {
     return strSql;
 }
 
+var dbLocation = 'default';
+    
+function openDatabase() {
+    var db = window.sqlitePlugin.openDatabase({ name: model_dbname, location: dbLocation });
+    return db;
+}
+
 function createTablesWithCheck(isReload) {
-    var db = window.sqlitePlugin.openDatabase({ name: dbname });
+    var db = openDatabase();
     db.transaction(function (tx) {
         tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' AND name='words'", [], function (tx, res) {
             var cnt = res.rows.length;
@@ -117,6 +123,11 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("council - совет"));
+                tx.executeSql(strInsertWords("ruling - господствующий"));
+                tx.executeSql(strInsertWords("packed - уплотненный"));
+                tx.executeSql(strInsertWords("pupil - ученик"));
+                //-
                 tx.executeSql(strInsertWords("depend on - зависит от"));
                 tx.executeSql(strInsertWords("succeed in - добиться успеха в"));
                 tx.executeSql(strInsertWords("pay attention in - обратить внимание на"));

@@ -22,14 +22,9 @@
 - Cordova 2.7+ port with background processing by @j3k0 (Jean-Christophe Hoelt <hoelt@fovea.cc>)
 - Maintained by @brodybits (Chris Brody)
 
-## Windows (8.1) version
+## Windows version
 
 - SQLiteProxy.js by @vldmrrr (Vladimir Avdonin) and @brodybits (Chris Brody)
-- SQLite3-WinRT C++ classes and SQLite3JS (Javascript part) by @doo (doo GmbH)
-
-## WP(7/8) version
-
-- Original author: @marcucio (Mike Arcucio <mike@marcucio.com>)
-- Enhancements for background processing & improved transaction support by @Gillardo (Darren Gillard <darren.gillard81@gmail.com>)
-- DB threading and open/close/delete fixes by Mark Oppenheim <mark.oppenheim@mnetics.co.uk>
-- Uses csharp-sqlite library by Noah Hart and others (MIT license)
+- Using SQLite3-WinRT C++ classes and SQLite3JS (Javascript part) by @doo (doo GmbH)
+- Visual C++ build files for Windows 8.1, Windows Phone 8.1, and Windows 10 UWP by @brodybits (with some help from Visual Studio Express 2013)
+- Thanks to @AllJoyn-Cordova for idea how to integrate Windows 8.1/Windows Phone 8.1 Visual C++ projects in plugin.xml

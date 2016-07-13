@@ -9,8 +9,6 @@
 # N.B. if you functionally change this script you _must_ change .\bin\test.sh too.
 #
 
-# N.B. if you functionally change this script you _must_ change ./bin/test.ps1 too.
-
 platform=$1
 
 if [[ -z $platform ]]; then
@@ -47,7 +45,7 @@ echo "compiled coffeescript to javascript"
 # move everything to a temp folder to avoid infinite recursion errors
 rm -fr ../.plugin
 mkdir -p ../.plugin
-cp -r ../src ../plugin.xml ../www ../.plugin
+cp -r ../scripts ../src ../plugin.xml ../package.json ../www ../.plugin
 
 # update the plugin, run the test app
 cordova platform add $platform

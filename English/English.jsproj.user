@@ -5,6 +5,6 @@
     <AndroidEmulatorID>AndroidEmulator;Google Android Emulator</AndroidEmulatorID>
   </PropertyGroup>
   <PropertyGroup>
-    <ReferenceCachePath>C:\Users\local-adm\AppData\Local\Temp\BlankCordovaApp1_refcache</ReferenceCachePath>
+    <ReferenceCachePath>C:\Users\local-adm\AppData\Local\Temp\English_refcache</ReferenceCachePath>
   </PropertyGroup>
 </Project>
