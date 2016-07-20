@@ -17,8 +17,17 @@ function checkedValue(val) {
         return "";
 }
 
-function addStrValue(value_text, id, isChecked) {
-    var str = "<tr><td style='text-align:center'><input type='checkbox' style='zoom:4' onclick='onClickCheckBox(this);' value ='" + id + "' " + checkedValue(isChecked) + " ></td><td>" + value_text + "</td></tr>";
+function addStrValue(value_text, value_text2, id, isChecked) {
+
+    var value_t = "";
+    if (value_text && value_text != "undefined")
+        value_t = value_text;
+
+    if (value_text2 && value_text2 != "undefined")
+        value_t += (" - " + value_text2);
+
+
+    var str = "<tr><td style='text-align:center'><input type='checkbox' style='zoom:4' onclick='onClickCheckBox(this);' value ='" + id + "' " + checkedValue(isChecked) + " ></td><td>" + value_t + "</td></tr>";
     $("#gridWords > tbody:last").after(str);
 }
 
@@ -35,19 +44,11 @@ function setGridWordsBody(wordType) {
     currentWordType = wordType;
     var db = openDatabase();
     db.transaction(function (tx) {
-        if (wordType == ALL) {
-            //tx.executeSql("select * from vrows order by value_w desc;", [], function (tx, res) {
-            //    var cnt = res.rows.length;
-            //    for (i = 0; i < cnt; i++) {
-            //        addStrValue(res.rows.item(i).value_w, res.rows.item(i).id, res.rows.item(i).is_checked);
-            //    }
-            //    getToastCountItems(cnt);
-            //});
-        } else if (wordType == NEW) {
+        if (wordType == NEW) {
             tx.executeSql("select * from vrows where code = " + NEW + " order by id desc;", [], function (tx, res) {
                 var cnt = res.rows.length;
                 for (i = 0; i < cnt; i++) {
-                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).id, res.rows.item(i).is_checked);
+                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
                 }
                 getToastCountItems(cnt);
             },function(tx, error) {
@@ -57,7 +58,7 @@ function setGridWordsBody(wordType) {
             tx.executeSql("select * from vrows where is_checked = 1 order by id desc;", [], function (tx, res) {
                 var cnt = res.rows.length;
                 for (i = 0; i < cnt; i++) {
-                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).id, res.rows.item(i).is_checked);
+                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
                 }
                 getToastCountItems(cnt);
             }, function (tx, error) {
@@ -67,7 +68,7 @@ function setGridWordsBody(wordType) {
             tx.executeSql("select * from vrows where code = " + wordType + " order by value_w desc;", [], function (tx, res) {
                 var cnt = res.rows.length;
                 for (i = 0; i < cnt; i++) {
-                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).id, res.rows.item(i).is_checked);
+                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
                 }
                 getToastCountItems(cnt);
             }, function (tx, error) {
@@ -174,10 +175,9 @@ function showCurrentForm(index) {
             $("#frmList").show();
             break;
         case BTN_CHK_WORDS:
+            setGridWordsBody(CHK);
             $("#frmList").show();
             break;
-            setGridWordsBody(CHK);
-
         default:
     }
 }
@@ -217,40 +217,40 @@ function onClickButtonFind() {
     var db = openDatabase();
     db.transaction(function (tx) {
         if (currentWordType == ALL) {
-            tx.executeSql("select * from vrows where value_w like'%" + str + "%' order by value_w desc;", [], function (tx, res) {
+            tx.executeSql("select * from vrows where (value_w like'%" + str + "%' or value_w2 like'%" + str + "%') order by value_w desc;", [], function (tx, res) {
                 var cnt = res.rows.length;
                 for (i = 0; i < cnt; i++) {
-                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).id, res.rows.item(i).is_checked);
+                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
                 }
                 getToastCountItems(cnt);
             }, function (tx, error) {
                 console.log('SELECT error: ' + error.message);
             });
         } else if (currentWordType == NEW) {
-            tx.executeSql("select * from vrows where code = " + NEW + " and value_w like'%" + str + "%' order by id desc;", [], function (tx, res) {
+            tx.executeSql("select * from vrows where code = " + NEW + " and (value_w like'%" + str + "%' or value_w2 like'%" + str + "%') order by id desc;", [], function (tx, res) {
                 var cnt = res.rows.length;
                 for (i = 0; i < cnt; i++) {
-                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).id, res.rows.item(i).is_checked);
+                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
                 }
                 getToastCountItems(cnt);
             }, function (tx, error) {
                 console.log('SELECT error: ' + error.message);
             });
         } else if (currentWordType == CHK) {
-            tx.executeSql("select * from vrows where is_checked = 1 and value_w like'%" + str + "%' order by id desc;", [], function (tx, res) {
+            tx.executeSql("select * from vrows where is_checked = 1 and (value_w like'%" + str + "%' or value_w2 like'%" + str + "%') order by id desc;", [], function (tx, res) {
                 var cnt = res.rows.length;
                 for (i = 0; i < cnt; i++) {
-                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).id, res.rows.item(i).is_checked);
+                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
                 }
                 getToastCountItems(cnt);
             }, function (tx, error) {
                 console.log('SELECT error: ' + error.message);
             });
         } else {
-            tx.executeSql("select * from vrows where code = " + currentWordType + " and value_w like'%" + str + "%' order by value_w desc;", [], function (tx, res) {
+            tx.executeSql("select * from vrows where code = " + currentWordType + " and (value_w like'%" + str + "%' or value_w2 like'%" + str + "%') order by value_w desc;", [], function (tx, res) {
                 var cnt = res.rows.length;
                 for (i = 0; i < cnt; i++) {
-                    addStrValue(res.rows.item(i).value_w, i);
+                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
                 }
                 getToastCountItems(cnt);
             }, function (tx, error) {
