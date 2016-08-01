@@ -129,12 +129,17 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("foreign", "иностранный"));
+                tx.executeSql(strInsertWords("tribe", "племя"));
+                tx.executeSql(strInsertWords("inervitable", "неизбежно"));
+                tx.executeSql(strInsertWords("we did it", "получилось"));
+                tx.executeSql(strInsertWords("we made it", "успели"));
+                //-    
                 tx.executeSql(strInsertWords("a high achiever", "человек многого достиг"));
                 tx.executeSql(strInsertWords("apprenticeship", "практическое обучение"));
                 tx.executeSql(strInsertWords("emerge", "проявилось"));
                 tx.executeSql(strInsertWords("rural", "сельский"));
                 tx.executeSql(strInsertWords("survey", "исследоваение"));
-                tx.executeSql(strInsertWords("reveal", "показывать, обнаруживать"));
                 tx.executeSql(strInsertWords("climb", "возрастать"));
                 tx.executeSql(strInsertWords("turnout", "оказывается"));
                 tx.executeSql(strInsertWords("plenty of", "много"));
@@ -1140,7 +1145,7 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("to promise", "обещать"));
                 tx.executeSql(strInsertWords("to posses", "владеть"));
                 tx.executeSql(strInsertWords("to hide", "прятать"));
-                tx.executeSql(strInsertWords("to reveal", "раскрывать"));
+                tx.executeSql(strInsertWords("to reveal", "раскрывать, показывать, обнаруживать"));
                 tx.executeSql(strInsertWords("to obtain", "завладеть"));
                 tx.executeSql(strInsertWords("to procrastinate", "откладывать на потом"));
                 tx.executeSql(strInsertWords("to persuade", "убеждать"));
