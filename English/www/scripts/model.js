@@ -129,6 +129,14 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("decade", "декада, десятилетие"));
+                tx.executeSql(strInsertWords("appeal", "аппелировать к, нацеливаться на, удовлетворить интересы"));
+                tx.executeSql(strInsertWords("safe to say", "безопасно сказать"));
+                tx.executeSql(strInsertWords("what''s more, moreover", "более того"));
+                tx.executeSql(strInsertWords("bless you got", "будте здоровы"));
+                tx.executeSql(strInsertWords("unstable", "не стабильный"));
+                tx.executeSql(strInsertWords("jorney", "морское путешествие"));
+                //-
                 tx.executeSql(strInsertWords("revolution", "революция"));
                 tx.executeSql(strInsertWords("turning point", "поворотный пункт"));
                 tx.executeSql(strInsertWords("development", "развитие, разработка"));
@@ -1204,6 +1212,7 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("to admire", "восхищаться"));
                 tx.executeSql(strInsertWords("to rescue", "спасать, выручать"));
                 tx.executeSql(strInsertWords("to climb", "возрастать"));
+                tx.executeSql(strInsertWords("to farm", "культивировать землю"));
                 tx.executeSql(strInsertRelation("VERB"));
                 //VERB_IRREG///////////////////////////////////////////////////////////////////////////////////////////////////////////
                 tx.executeSql(strInsertWords("to be-was-were-been", "быть"));
