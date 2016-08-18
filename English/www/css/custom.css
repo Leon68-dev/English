@@ -5,3 +5,17 @@
 thead {
     border-bottom: 2pt solid #ddd !important;
 }
+
+body {
+    background: silver;
+    font-size: 24px;
+}
+
+[class*="col-"] {
+    padding: 2pt;
+}
+
+[class*="row"] {
+    margin-left: 5pt;
+    margin-right: 5pt;
+}
