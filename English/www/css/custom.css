@@ -57,3 +57,7 @@ dd {
     float: right;
     margin: 0 2em 1em 0;
 }
+
+#frmListBody{
+    font-size: 24px;
+}
