@@ -178,6 +178,10 @@ function showCurrentForm(index) {
             setGridWordsBody(CHK);
             $("#frmList").show();
             break;
+        case BTN_TONGUE_TWISTER:
+            setGridWordsBody(TONGUE_TWISTER);
+            $("#frmList").show();
+            break;
         default:
     }
 }
@@ -206,7 +210,7 @@ function clearTBody() {
     //$("#tbodyid").empty();
 
     var table = document.getElementById("gridWords");
-    for (var i = table.rows.length - 1; i > 0; i--) {
+    for (var i = table.rows.length - 1; i >= 0; i--) {
         table.deleteRow(i);
     }
 }

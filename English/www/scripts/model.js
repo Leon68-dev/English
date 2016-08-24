@@ -4,6 +4,7 @@ var itemsFound = 0;
 
 var model_dbname = "english31.db";
 
+var CHK = 1000;
 var ALL = 0;
 var ANY = 1;
 var ADJECTIVE = 2;
@@ -25,7 +26,7 @@ var VERB_IRREG = 18;
 var PHRASES = 19;
 var COLLOCATION = 20;
 var IDIOM = 21;
-var CHK = 22;
+var TONGUE_TWISTER = 22;
 
 var BTN_WORDS_PHRASES = 1;
 var BTN_NEW_WORDS = 2;
@@ -51,7 +52,7 @@ var BTN_MEDICAL = 114;
 var BTN_IDIOM = 115;
 var BTN_CRIME_PUNISHMENT = 116;
 var BTN_PERSON_FAMILY = 117;
-
+var BTN_TONGUE_TWISTER = 118;
 
 function confirmCreateTables() {
     if (confirm('Are you sure you want to reload data?')) {
@@ -120,6 +121,7 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertType("PHRASES"));
                 tx.executeSql(strInsertType("COLLOCATION"));
                 tx.executeSql(strInsertType("IDIOM"));
+                tx.executeSql(strInsertType("TONGUE_TWISTER"));
                 tx.executeSql("delete from types where name = '---';");
                 tx.executeSql("CREATE UNIQUE INDEX 'ix_name' on types ('name' ASC);");
                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -129,18 +131,24 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("quiz", "проверка"));
+                tx.executeSql(strInsertWords("fencing", "фехтование"));
+                tx.executeSql(strInsertWords("exemplary", "уникальный"));
+                //-
                 tx.executeSql(strInsertWords("smooth", "гладкий, плавный"));
                 tx.executeSql(strInsertWords("cave", "пещера"));
                 tx.executeSql(strInsertWords("mess", "беспорядок"));
                 //-
                 tx.executeSql(strInsertWords("decade", "декада, десятилетие"));
                 tx.executeSql(strInsertWords("appeal", "аппелировать к, нацеливаться на, удовлетворить интересы"));
-                tx.executeSql(strInsertWords("safe to say", "безопасно сказать"));
                 tx.executeSql(strInsertWords("what''s more, moreover", "более того"));
-                tx.executeSql(strInsertWords("bless you got", "будте здоровы"));
                 tx.executeSql(strInsertWords("unstable", "не стабильный"));
-                tx.executeSql(strInsertWords("jorney", "морское путешествие"));
                 //-
+                tx.executeSql(strInsertRelation("NEW"));
+                //ANY//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("foreign", "иностранный"));
+                tx.executeSql(strInsertWords("tribe", "племя"));
+                tx.executeSql(strInsertWords("inervitable", "неизбежно"));
                 tx.executeSql(strInsertWords("revolution", "революция"));
                 tx.executeSql(strInsertWords("turning point", "поворотный пункт"));
                 tx.executeSql(strInsertWords("development", "развитие, разработка"));
@@ -150,24 +158,11 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("foundation", "фундамент, основа"));
                 tx.executeSql(strInsertWords("discovery", "открытие"));
                 tx.executeSql(strInsertWords("progress", "прогресс"));
-                //-    
-                tx.executeSql(strInsertWords("foreign", "иностранный"));
-                tx.executeSql(strInsertWords("tribe", "племя"));
-                tx.executeSql(strInsertWords("inervitable", "неизбежно"));
-                tx.executeSql(strInsertWords("we did it", "получилось"));
-                tx.executeSql(strInsertWords("we made it", "успели"));
-                //-    
                 tx.executeSql(strInsertWords("a high achiever", "человек многого достиг"));
                 tx.executeSql(strInsertWords("apprenticeship", "практическое обучение"));
                 tx.executeSql(strInsertWords("emerge", "проявилось"));
                 tx.executeSql(strInsertWords("rural", "сельский"));
                 tx.executeSql(strInsertWords("survey", "исследоваение"));
-                //-
-                tx.executeSql(strInsertRelation("NEW"));
-                //ANY//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                tx.executeSql(strInsertWords("1. I think that this is the theme that we thought of together with You on Thursday"));
-                tx.executeSql(strInsertWords("2. We were very very worried where thought of were You were on Wednsday"));
-                //--
                 tx.executeSql(strInsertWords("turnout", "оказывается"));
                 tx.executeSql(strInsertWords("plenty of", "много"));
                 tx.executeSql(strInsertWords("caught fire", "загораться"));
@@ -889,6 +884,7 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("a large screen", "большой экран"));
                 tx.executeSql(strInsertRelation("HOUSE"));
                 //MEDICAL//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("bless you got", "будте здоровы"));
                 tx.executeSql(strInsertWords("medicine", "лекарство"));
                 tx.executeSql(strInsertWords("dicease", "заболевание"));
                 tx.executeSql(strInsertWords("detoxify", "детоксикация"));
@@ -1085,6 +1081,7 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("roots", "семейные корни"));
                 tx.executeSql(strInsertRelation("PERSON_FAMILY"));
                 //REST/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("jorney", "морское путешествие"));
                 tx.executeSql(strInsertWords("theatre", "театр"));
                 tx.executeSql(strInsertWords("mountains", "горы"));
                 tx.executeSql(strInsertWords("sailing", "парусный спорт"));
@@ -1358,6 +1355,21 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("Would you like me to find a good restaurant?", ""));
                 tx.executeSql(strInsertRelation("PHRASES"));
                 //COLLOCATION//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("give instractions", ""));
+                tx.executeSql(strInsertWords("give a call", ""));
+                tx.executeSql(strInsertWords("give diretions", ""));
+                tx.executeSql(strInsertWords("give a talk", ""));
+                tx.executeSql(strInsertWords("have a fun (a good time)", ""));
+                tx.executeSql(strInsertWords("have an idea", ""));
+                tx.executeSql(strInsertWords("have a trouble", ""));
+                tx.executeSql(strInsertWords("have a rest (a break)", ""));
+                tx.executeSql(strInsertWords("make a choice", ""));
+                tx.executeSql(strInsertWords("make a mess", ""));
+                tx.executeSql(strInsertWords("make an implrovement (progress)", ""));
+                tx.executeSql(strInsertWords("make a profit", ""));
+                tx.executeSql(strInsertWords("we did it", "получилось"));
+                tx.executeSql(strInsertWords("we made it", "успели"));
+                tx.executeSql(strInsertWords("safe to say", "безопасно сказать"));
                 tx.executeSql(strInsertWords("tried on", "примерил"));
                 tx.executeSql(strInsertWords("take off", "снимать"));
                 tx.executeSql(strInsertWords("log off", "выйти"));
@@ -1511,7 +1523,7 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("Re... - With regard to... (With reference to) -- Что касается ... (со ссылкой на)"));
                 tx.executeSql(strInsertWords("See you next week. - I look forward to meeting you next week. -- Увидимся на следующей неделе. - Я с нетерпением жду встречи с вами на следующей неделе."));
                 tx.executeSql(strInsertRelation("COLLOCATION"));
-                //IDIOM////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                //IDIOM////////////////////////////////////////////////////////////////////////////////////////////////////////
                 tx.executeSql(strInsertWords("spill the beans", "выдавать секрет"));
                 tx.executeSql(strInsertWords("top dog", "хозяин положения"));
                 tx.executeSql(strInsertWords("small talk", "..."));
@@ -1533,9 +1545,15 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("To get a sinking feeling (To start to tell unhappy about something)"));
                 tx.executeSql(strInsertWords("To get into hiding (When someone goes to hidden place for a period of time)"));
                 tx.executeSql(strInsertWords("To lay someone off (To dismiss someone from their job, usually for financial reasons)"));
+                //-------------------------------------------------------------------------------------------------------------
                 tx.executeSql(strInsertRelation("IDIOM"));
+                //TONGUE_TWISTER///////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("1 - I think that this is the theme that we thought of together with them on Thursday"));
+                tx.executeSql(strInsertWords("2 - We were very very worried where thought of were You were on Wednsday"));
+                tx.executeSql(strInsertWords("3 - A very very great rock drowned in a very very rapid river on Friday"));
+                tx.executeSql(strInsertRelation("TONGUE_TWISTER"));
+                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 tx.executeSql("CREATE INDEX 'ix_value_w' on words ('value_w' ASC);");
-
                 tx.executeSql("DROP VIEW IF EXISTS vRows;");
                 tx.executeSql("CREATE VIEW IF NOT EXISTS vRows AS select w.value_w, w.value_w2, t.id as code, t.name, w.id, w.is_checked from words w join relations r on w.id = r.id_words join types t on t.id = r.id_type order by w.value_w;");
 
