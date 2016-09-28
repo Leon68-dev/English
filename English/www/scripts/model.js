@@ -131,6 +131,12 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("ethical", "этичный"));
+                tx.executeSql(strInsertWords("aerosol cans", "аэрозольные флаконы"));
+                tx.executeSql(strInsertWords("industial waste", "промышленные отходы"));
+                tx.executeSql(strInsertWords("hamful", "вредный")); 
+                tx.executeSql(strInsertWords("car exhaust fumes", "автомобильные выхлопные газы"));
+                //-
                 tx.executeSql(strInsertWords("unique", "уникальный"));
                 tx.executeSql(strInsertWords("divine", "божественный"));
                 tx.executeSql(strInsertWords("extraordinary", "необычайный"));
@@ -1222,8 +1228,14 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("to cure", "лечить"));
                 tx.executeSql(strInsertWords("to admire", "восхищаться"));
                 tx.executeSql(strInsertWords("to rescue", "спасать, выручать"));
-                tx.executeSql(strInsertWords("to climb", "возрастать"));
+                tx.executeSql(strInsertWords("to climb", "возрастать, карабкаться"));
                 tx.executeSql(strInsertWords("to farm", "культивировать землю"));
+                tx.executeSql(strInsertWords("to assassinate", "убить"));
+                tx.executeSql(strInsertWords("to declare", "объявить"));
+                tx.executeSql(strInsertWords("to destroy", "разрушать"));
+                tx.executeSql(strInsertWords("to elect", "выбирать"));
+                tx.executeSql(strInsertWords("to release", "освободить"));
+                tx.executeSql(strInsertWords("to identify", "идентифицировать"));
                 tx.executeSql(strInsertRelation("VERB"));
                 //VERB_IRREG///////////////////////////////////////////////////////////////////////////////////////////////////////////
                 tx.executeSql(strInsertWords("to be-was-were-been", "быть"));
