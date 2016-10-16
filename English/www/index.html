@@ -22,7 +22,9 @@
         function onDeviceReady() {
             document.addEventListener("backbutton", onBackKeyDown, false);
             hideAll();
-            $("#frmStart").show();
+            //$("#frmStart").show();
+            setGridWordsBody(ALL);
+            $("#frmList").show();
             createTablesWithCheck(0);
         }
 
@@ -44,7 +46,7 @@
 </head>
 <body onload="onLoad();">
 
-    <div data-role="page" id="eng-page" data-url="eng-page" data-theme="b">
+    <div data-role="page" id="eng-page" data-theme="b">
         
         <div data-role="header" data-theme="b">
             <a href="#left-panel" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-nodisc-icon">Open panel</a>
@@ -54,11 +56,11 @@
         
         <div role="main" class="ui-content" >
 
-            <form id="frmStart" >
+            <!--<form id="frmStart" >
                 <div data-role="content" id="content">
                     <img id="my_image" src="../www/images/icon-96-xhdpi.png" alt="image" style="width:250px; height:250px; position: absolute; top: 50%; left: 50%; margin-left: -125px; margin-top: -65px"/>
                 </div>
-            </form>
+            </form>-->
 
             <form id="frmWords">
                 <div class="panel-body">
@@ -193,16 +195,14 @@
 
         </div>
 
-        <div data-role="panel" id="left-panel" data-theme="b">
-            <div class="panel-body">
-                <div class="form-group">
-                    <div>
-                        <button class="ui-btn ui-corner-all" data-rel="close" onclick="onClickButton(BTN_WORDS_PHRASES)">Words + Phrases</button>
-                        <button class="ui-btn ui-corner-all" data-rel="close" onclick="onClickButton(BTN_NEW_WORDS)">New Words</button>
-                        <button class="ui-btn ui-corner-all" data-rel="close" onclick="onClickButton(BTN_ALL_WORDS)">All Words(find)</button>
-                        <button class="ui-btn ui-corner-all" data-rel="close" onclick="onClickButton(BTN_CHK_WORDS)">Words Checked</button>
-                        <button class="ui-btn ui-corner-all" data-rel="close" onclick="confirmCreateTables()">Reload All</button>
-                    </div>
+        <div data-role="panel" id="left-panel" data-display="overlay" data-theme="b">
+            <div class="form-group">
+                <div>
+                    <button class="ui-btn ui-corner-all" data-rel="close" onclick="onClickButton(BTN_WORDS_PHRASES)">Words + Phrases</button>
+                    <button class="ui-btn ui-corner-all" data-rel="close" onclick="onClickButton(BTN_NEW_WORDS)">New Words</button>
+                    <button class="ui-btn ui-corner-all" data-rel="close" onclick="onClickButton(BTN_ALL_WORDS)">All Words(find)</button>
+                    <button class="ui-btn ui-corner-all" data-rel="close" onclick="onClickButton(BTN_CHK_WORDS)">Words Checked</button>
+                    <button class="ui-btn ui-corner-all" data-rel="close" onclick="confirmCreateTables()">Reload All</button>
                 </div>
             </div>
         </div>

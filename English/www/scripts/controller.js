@@ -3,7 +3,7 @@
 }
 
 function hideAll() {
-    $("#frmStart").hide();
+    //$("#frmStart").hide();
     $("#frmVerbs").hide();
     $("#frmWords").hide();
     $("#frmVerbs").hide();
@@ -31,10 +31,12 @@ function addStrValue(value_text, value_text2, id, isChecked) {
 }
 
 function getToastCountItems(itemsFound) {
-    if (itemsFound > 0)
-        window.plugins.toast.showShortBottom("There are " + itemsFound + " items");
-    else
-        window.plugins.toast.showShortBottom("Data didn't find");
+    if (getSearchText() != "") {
+        if (itemsFound > 0)
+            window.plugins.toast.showShortBottom("There are " + itemsFound + " items");
+        else
+            window.plugins.toast.showShortBottom("Data didn't find");
+    }
 }
 
 function setGridWordsBody(wordType) {
@@ -80,9 +82,9 @@ function setGridWordsBody(wordType) {
 function showCurrentForm(index) {
     hideAll();
     switch (index) {
-        case 0:
-            $("#frmStart").show();
-            break;
+        //case 0:
+        //    $("#frmStart").show();
+        //    break;
         case BTN_WORDS_PHRASES:
             $("#frmWords").show();
             break;
@@ -90,6 +92,7 @@ function showCurrentForm(index) {
             setGridWordsBody(NEW);
             $("#frmList").show();
             break;
+        case 0:
         case BTN_ALL_WORDS:
             setGridWordsBody(ALL);
             $("#frmList").show();
@@ -214,13 +217,18 @@ function clearTBody() {
     }
 }
 
-function onClickButtonFind() {
+
+function getSearchText() {
     var str = $("#searchText").val().toLowerCase();
+    return str;
+}
+
+function onClickButtonFind() {
     clearTBody();
     var db = openDatabase();
     db.transaction(function (tx) {
         if (currentWordType == ALL) {
-            tx.executeSql("select * from vrows where (value_w like'%" + str + "%' or value_w2 like'%" + str + "%') order by value_w desc;", [], function (tx, res) {
+            tx.executeSql("select * from vrows where (value_w like'%" + getSearchText() + "%' or value_w2 like'%" + getSearchText() + "%') order by value_w desc;", [], function (tx, res) {
                 var cnt = res.rows.length;
                 for (i = 0; i < cnt; i++) {
                     addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
@@ -230,7 +238,7 @@ function onClickButtonFind() {
                 console.log('SELECT error: ' + error.message);
             });
         } else if (currentWordType == NEW) {
-            tx.executeSql("select * from vrows where code = " + NEW + " and (value_w like'%" + str + "%' or value_w2 like'%" + str + "%') order by id desc;", [], function (tx, res) {
+            tx.executeSql("select * from vrows where code = " + NEW + " and (value_w like'%" + getSearchText() + "%' or value_w2 like'%" + getSearchText() + "%') order by id desc;", [], function (tx, res) {
                 var cnt = res.rows.length;
                 for (i = 0; i < cnt; i++) {
                     addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
@@ -240,7 +248,7 @@ function onClickButtonFind() {
                 console.log('SELECT error: ' + error.message);
             });
         } else if (currentWordType == CHK) {
-            tx.executeSql("select * from vrows where is_checked = 1 and (value_w like'%" + str + "%' or value_w2 like'%" + str + "%') order by id desc;", [], function (tx, res) {
+            tx.executeSql("select * from vrows where is_checked = 1 and (value_w like'%" + getSearchText() + "%' or value_w2 like'%" + getSearchText() + "%') order by id desc;", [], function (tx, res) {
                 var cnt = res.rows.length;
                 for (i = 0; i < cnt; i++) {
                     addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
@@ -250,7 +258,7 @@ function onClickButtonFind() {
                 console.log('SELECT error: ' + error.message);
             });
         } else {
-            tx.executeSql("select * from vrows where code = " + currentWordType + " and (value_w like'%" + str + "%' or value_w2 like'%" + str + "%') order by value_w desc;", [], function (tx, res) {
+            tx.executeSql("select * from vrows where code = " + currentWordType + " and (value_w like'%" + getSearchText() + "%' or value_w2 like'%" + getSearchText() + "%') order by value_w desc;", [], function (tx, res) {
                 var cnt = res.rows.length;
                 for (i = 0; i < cnt; i++) {
                     addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
