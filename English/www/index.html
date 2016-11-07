@@ -64,85 +64,30 @@
 
             <form id="frmWords">
                 <div class="panel-body">
-
                     <div class="form-group">
-                        <div class="row">
-                            <div class="col-xs-4 col-sm-4">
-                                <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_TONGUE_TWISTER);">Tongue-Twister</button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-4 col-sm-4">
-                                <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_PHRASES);">Phrases</button>
-                            </div>
-                            <div class="col-xs-4 col-sm-4">
-                                <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_ANY);">Other</button>
-                            </div>
-                            <div class="col-xs-4 col-sm-4">
-                                <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_VERB);">Verbs</button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-4 col-sm-4">
-                                <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_HOUSE);">House</button>
-                            </div>
-                            <div class="col-xs-4 col-sm-4">
-                                <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_CLOTHING);">Clothing</button>
-                            </div>
-                            <div class="col-xs-4 col-sm-4">
-                                <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_FOOD);">Food</button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-6 col-sm-6">
-                                <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_ADJECTIVE);">Adjective</button>
-                            </div>
-                            <div class="col-xs-6 col-sm-6">
-                                <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_OFFICE);">Office</button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-6 col-sm-6">
-                                <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_COLLOCATION);">Collocation</button>
-                            </div>
-                            <div class="col-xs-6 col-sm-6">
-                                <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_TRANSPORT);">Transport</button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-4 col-sm-4">
-                                <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_MONEY);">Money</button>
-                            </div>
-                            <div class="col-xs-4 col-sm-4">
-                                <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_NATURAL);">Natural</button>
-                            </div>
-                            <div class="col-xs-4 col-sm-4">
-                                <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_ANIMALS);">Animals</button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-4 col-sm-4">
-                                <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_REST);">Rest-Sport</button>
-                            </div>
-                            <div class="col-xs-4 col-sm-4">
-                                <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_MEDICAL);">Medical</button>
-                            </div>
-                            <div class="col-xs-4 col-sm-4">
-                                <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_IDIOM);">Idiom</button>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-7 col-sm-7">
-                                <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_CRIME_PUNISHMENT);">Crime+Punishment</button>
-                            </div>
-                            <div class="col-xs-5 col-sm-5">
-                                <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_PERSON_FAMILY);">Person+Family</button>
-                            </div>
-                        </div>
+                        <ul data-role="listview" data-inset="true">
+                            <li onclick="onClickButton(BTN_TONGUE_TWISTER);">Tongue-Twister</li>
+                            <li onclick="onClickButton(BTN_PHRASES);">Phrases</li>
+                            <li onclick="onClickButton(BTN_ANY);">Other</li>
+                            <li onclick="onClickButton(BTN_VERB);">Verbs</li>
+                            <li onclick="onClickButton(BTN_HOUSE);">House</li>
+                            <li onclick="onClickButton(BTN_CLOTHING);">Clothing</li>
+                            <li onclick="onClickButton(BTN_FOOD);">Food</li>
+                            <li onclick="onClickButton(BTN_ADJECTIVE);">Adjective</li>
+                            <li onclick="onClickButton(BTN_OFFICE);">Office</li>
+                            <li onclick="onClickButton(BTN_COLLOCATION);">Collocation</li>
+                            <li onclick="onClickButton(BTN_TRANSPORT);">Transport</li>
+                            <li onclick="onClickButton(BTN_MONEY);">Money</li>
+                            <li onclick="onClickButton(BTN_NATURAL);">Natural</li>
+                            <li onclick="onClickButton(BTN_ANIMALS);">Animals</li>
+                            <li onclick="onClickButton(BTN_REST);">Rest-Sport</li>
+                            <li onclick="onClickButton(BTN_MEDICAL);">Medical</li>
+                            <li onclick="onClickButton(BTN_IDIOM);">Idiom</li>
+                            <li onclick="onClickButton(BTN_CRIME_PUNISHMENT);">Crime+Punishment</li>
+                            <li onclick="onClickButton(BTN_PERSON_FAMILY);">Person+Family</li>
+                        </ul>
                     </div>
-
                 </div>
-
             </form>
 
             <form id="frmList">
@@ -181,14 +126,10 @@
             <form id="frmVerbs">
                 <div class="panel-body">
                     <div class="form-group">
-                        <div class="row">
-                            <div class="col-xs-6 col-sm-6">
-                                <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_VERBS);">Verbs</button>
-                            </div>
-                            <div class="col-xs-6 col-sm-6">
-                                <button type="button" class="btn btn-default btn-block" onclick="onClickButton(BTN_VERBS_IRREG);">Verbs Irregular</button>
-                            </div>
-                        </div>
+                        <ul data-role="listview" data-inset="true">
+                            <li onclick="onClickButton(BTN_VERBS);">Verbs</li>
+                            <li onclick="onClickButton(BTN_VERBS_IRREG);">Verbs Irregular</li>
+                        </ul>
                     </div>
                 </div>
             </form>
@@ -197,13 +138,13 @@
 
         <div data-role="panel" id="left-panel" data-display="overlay" data-theme="b">
             <div class="form-group">
-                <div>
-                    <button class="ui-btn ui-corner-all" data-rel="close" onclick="onClickButton(BTN_WORDS_PHRASES)">Words + Phrases</button>
-                    <button class="ui-btn ui-corner-all" data-rel="close" onclick="onClickButton(BTN_NEW_WORDS)">New Words</button>
-                    <button class="ui-btn ui-corner-all" data-rel="close" onclick="onClickButton(BTN_ALL_WORDS)">All Words(find)</button>
-                    <button class="ui-btn ui-corner-all" data-rel="close" onclick="onClickButton(BTN_CHK_WORDS)">Words Checked</button>
-                    <button class="ui-btn ui-corner-all" data-rel="close" onclick="confirmCreateTables()">Reload All</button>
-                </div>
+                <ul data-role="listview" data-inset="true" >
+                    <li data-rel="close" onclick="onClickButton(BTN_WORDS_PHRASES)">Words + Phrases</li>
+                    <li data-rel="close" onclick="onClickButton(BTN_NEW_WORDS)">New Words</li>
+                    <li data-rel="close" onclick="onClickButton(BTN_ALL_WORDS)">All Words(find)</li>
+                    <li data-rel="close" onclick="onClickButton(BTN_CHK_WORDS)">Words Checked</li>
+                    <li data-rel="close" onclick="confirmCreateTables()">Reload All</li>
+                </ul>
             </div>
         </div>
     </div>
