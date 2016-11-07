@@ -131,6 +131,18 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("pure water", "чистая вода"));
+                tx.executeSql(strInsertWords("unpurified water", "неочищенная вода"));
+                tx.executeSql(strInsertWords("to purify", "очистить"));
+                tx.executeSql(strInsertWords("get on the bus/plane/train", "попасть на автобусе / поезде / самолете"));
+                tx.executeSql(strInsertWords("get into a car", "сесть в машину"));
+                tx.executeSql(strInsertWords("plenty", "много (несчисляемые) "));
+                tx.executeSql(strInsertWords("on the whole", "в целом"));
+                tx.executeSql(strInsertWords("supposed", "предполагаемый"));
+                tx.executeSql(strInsertWords("careful", "осторожный"));
+                tx.executeSql(strInsertWords("pretty", "симпатичная"));
+                tx.executeSql(strInsertWords("complain", "жаловаться"));
+                //--
                 tx.executeSql(strInsertWords("check-in desk", "стойка регистрации"));
                 tx.executeSql(strInsertWords("get there", "достичь цели"));
                 tx.executeSql(strInsertWords("Where do you want me to drop you off?", "Где вы хотите, чтобы я высадил вас?"));
