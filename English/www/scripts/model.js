@@ -131,6 +131,16 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("to melt", "плавиться"));
+                tx.executeSql(strInsertWords("to starve", "голодать"));
+                tx.executeSql(strInsertWords("seals", "морские котики"));
+                tx.executeSql(strInsertWords("to surround", "окружить"));
+                tx.executeSql(strInsertWords("to cover", "покрывать"));
+                tx.executeSql(strInsertWords("worse", "хуже"));
+                tx.executeSql(strInsertWords("global warming", "глобальное потепление"));
+                tx.executeSql(strInsertWords("insulated", "изолированный"));
+                tx.executeSql(strInsertWords("processed food", "обработанная пища"));
+                //--
                 tx.executeSql(strInsertWords("definitely", "определенно"));
                 //--
                 tx.executeSql(strInsertWords("melted", "плавленый"));
