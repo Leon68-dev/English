@@ -131,6 +131,16 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("disappointed", "разочарованный"));
+                tx.executeSql(strInsertWords("wonderful", "замечательный"));
+                tx.executeSql(strInsertWords("slower pace", "медленный темп"));
+                tx.executeSql(strInsertWords("realised", "реализованный, осуществленный"));
+                tx.executeSql(strInsertWords("being", "являющийся"));
+                tx.executeSql(strInsertWords("impressed", "впечатленный"));
+                tx.executeSql(strInsertWords("educational", "образовательный"));
+                tx.executeSql(strInsertWords("admit", "признавать"));
+                tx.executeSql(strInsertWords("pedestrian", "пешеход"));
+                //-
                 tx.executeSql(strInsertWords("outstanding", "выдающийся"));
                 tx.executeSql(strInsertWords("worth", "стоимость"));
                 tx.executeSql(strInsertWords("apology", "извинение"));
@@ -505,7 +515,6 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("rushed", "бросился"));
                 tx.executeSql(strInsertWords("survive", "выживать"));
                 tx.executeSql(strInsertWords("insist", "настаивать"));
-                tx.executeSql(strInsertWords("still", "еще"));
                 tx.executeSql(strInsertWords("immensely", "очень"));
                 tx.executeSql(strInsertWords("mention", "упомянуть"));
                 tx.executeSql(strInsertWords("loneliness", "одиночество"));
@@ -610,7 +619,7 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("mentor and pupil", "наставник и ученик"));
                 tx.executeSql(strInsertWords("fiancee and fiance", "невеста и жених"));
                 tx.executeSql(strInsertWords("follow", "следовать"));
-                tx.executeSql(strInsertWords("still", "по прежнему"));
+                tx.executeSql(strInsertWords("still", "по прежнему, еще"));
                 tx.executeSql(strInsertWords("together", "вместе"));
                 tx.executeSql(strInsertWords("flow", "поток"));
                 tx.executeSql(strInsertWords("slowly", "медленно"));
