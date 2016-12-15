@@ -131,6 +131,22 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("pass on", "передавать"));
+                tx.executeSql(strInsertWords("make up (story)", "придумать историю"));
+                tx.executeSql(strInsertWords("turned out", "оказаться"));
+                tx.executeSql(strInsertWords("ran over", "переехать (сбить)"));
+                tx.executeSql(strInsertWords("gone off", "взрываться"));
+                tx.executeSql(strInsertWords("running away", "убегать"));
+                tx.executeSql(strInsertWords("work out", "вычислить, выяснить, понять, врубиться, упражняться,разрабатывать план, оказаться в результате подсчета, срабатывать, удаваться, получаться"));
+                tx.executeSql(strInsertWords("takes off", "взлетать"));
+                tx.executeSql(strInsertWords("knocked off", "выбить, сбить"));
+                tx.executeSql(strInsertWords("come round", "прийти в себя"));
+                tx.executeSql(strInsertWords("get rid of", "избавиться"));
+                //-
+                tx.executeSql(strInsertWords("used to", "раньше ..."));
+                tx.executeSql(strInsertWords("be used to", "быть привыкший"));
+                tx.executeSql(strInsertWords("get used to", "привыкАющий"));
+                //-
                 tx.executeSql(strInsertWords("disappointed", "разочарованный"));
                 tx.executeSql(strInsertWords("wonderful", "замечательный"));
                 tx.executeSql(strInsertWords("slower pace", "медленный темп"));
