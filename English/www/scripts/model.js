@@ -131,6 +131,24 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("for date", "за дату"));
+                tx.executeSql(strInsertWords("as usual","как обычно, как всегда"));
+                tx.executeSql(strInsertWords("to wait in a queue","ждат в очереди"));
+                tx.executeSql(strInsertWords("to wait for somebody''s turn","ждать своей очереди"));
+                tx.executeSql(strInsertWords("take turns","сделайте по очереди"));
+                tx.executeSql(strInsertWords("lose consciousness","терять сознание"));
+                tx.executeSql(strInsertWords("out of fear","от страха"));
+                tx.executeSql(strInsertWords("bench","скамейка"));
+                tx.executeSql(strInsertWords("make mistace","ошибиться"));
+                tx.executeSql(strInsertWords("to do washing-up","мыть посуду"));
+                tx.executeSql(strInsertWords("make a noise","шуметь"));
+                tx.executeSql(strInsertWords("make dinner","готовить ужин"));
+                tx.executeSql(strInsertWords("to master a language","овладеть языком")); 
+                tx.executeSql(strInsertWords("to make an excuse","отговариваться"));
+                tx.executeSql(strInsertWords("to make somebody laugh","заставить смеяться"));
+                tx.executeSql(strInsertWords("make up your mind","принять решение"));
+                tx.executeSql(strInsertWords("to do someone a favour","сделать одолжение"));
+                //-
                 tx.executeSql(strInsertWords("nearby","рядом, поблизости"));
                 tx.executeSql(strInsertWords("ledge","уступ"));
                 //-
@@ -140,7 +158,7 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("ran over", "переехать (сбить)"));
                 tx.executeSql(strInsertWords("gone off", "взрываться"));
                 tx.executeSql(strInsertWords("running away", "убегать"));
-                tx.executeSql(strInsertWords("work out", "вычислить, выяснить, понять, врубиться, упражняться,разрабатывать план, оказаться в результате подсчета, срабатывать, удаваться, получаться"));
+                tx.executeSql(strInsertWords("work out", "вычислить,выяснить,понять,врубиться,упражняться,разрабатывать план,оказаться в результате подсчета,срабатывать,удаваться,получаться"));
                 tx.executeSql(strInsertWords("takes off", "взлетать"));
                 tx.executeSql(strInsertWords("knocked off", "выбить, сбить"));
                 tx.executeSql(strInsertWords("come round", "прийти в себя"));
