@@ -131,6 +131,8 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("serious", "серьезный"));
+                //-
                 tx.executeSql(strInsertWords("an industrial city", "промышленный город"));
                 tx.executeSql(strInsertWords("an industrilised country", "промышленно развитая страна"));
                 tx.executeSql(strInsertWords("a developer", "разработчик"));
@@ -192,7 +194,6 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("outstanding", "выдающийся"));
                 tx.executeSql(strInsertWords("worth", "стоимость"));
                 tx.executeSql(strInsertWords("apology", "извинение"));
-                tx.executeSql(strInsertWords("fear", "страх"));
                 tx.executeSql(strInsertWords("attitude", "отношение"));
                 tx.executeSql(strInsertWords("proceed", "продолжить"));
                 tx.executeSql(strInsertWords("obviously", "очевидно, явно"));
@@ -238,7 +239,6 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("such", "такие"));
                 tx.executeSql(strInsertWords("unless", "если не"));
                 tx.executeSql(strInsertWords("impress = if not", "произвести впечатление = если не"));
-                tx.executeSql(strInsertWords("although", "хотя"));
                 tx.executeSql(strInsertWords("appalling", "ужасающий"));
                 //-
                 tx.executeSql(strInsertWords("to melt", "плавиться"));
@@ -343,7 +343,6 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("apprenticeship", "практическое обучение"));
                 tx.executeSql(strInsertWords("emerge", "проявилось"));
                 tx.executeSql(strInsertWords("rural", "сельский"));
-                tx.executeSql(strInsertWords("survey", "исследоваение"));
                 tx.executeSql(strInsertWords("turnout", "оказывается"));
                 tx.executeSql(strInsertWords("plenty of", "много"));
                 tx.executeSql(strInsertWords("caught fire", "загораться"));
@@ -412,7 +411,6 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("laughter", "смех"));
                 tx.executeSql(strInsertWords("thousand", "тысяча"));
                 tx.executeSql(strInsertWords("meditation", "размышление"));
-                tx.executeSql(strInsertWords("fear", "страх"));
                 tx.executeSql(strInsertWords("anger", "гнев"));
                 tx.executeSql(strInsertWords("distress", "скорбь"));
                 tx.executeSql(strInsertWords("promts", "проворство"));
@@ -442,16 +440,15 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("reply/to reply", "ответ, отвечать"));
                 tx.executeSql(strInsertWords("miller", "мельник"));
                 tx.executeSql(strInsertWords("Dutch", "голандец"));
-                tx.executeSql(strInsertWords("attitude", "отношение"));
                 tx.executeSql(strInsertWords("find out", "выяснить"));
                 tx.executeSql(strInsertWords("tidal wave", "приливная волна"));
                 tx.executeSql(strInsertWords("wrestler", "борец"));
                 tx.executeSql(strInsertWords("heavier", "тяжелее"));
                 tx.executeSql(strInsertWords("constellation of stars", "созвездия"));
                 tx.executeSql(strInsertWords("unconscious", "без сознания"));
-                tx.executeSql(strInsertWords("although", "несмотря на то что"));
+                tx.executeSql(strInsertWords("although", "несмотря на то что, хотя"));
                 tx.executeSql(strInsertWords("eyebrows", "брови"));
-                tx.executeSql(strInsertWords("chest", "грудная клетка"));
+                tx.executeSql(strInsertWords("chest", "грудь, грудная клетка"));
                 tx.executeSql(strInsertWords("arm", "рука"));
                 tx.executeSql(strInsertWords("leg", "нога"));
                 tx.executeSql(strInsertWords("mouth", "рот"));
@@ -464,7 +461,7 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("to get fit", "прийти в форму"));
                 tx.executeSql(strInsertWords("hut", "хижина"));
                 tx.executeSql(strInsertWords("wanted", "розыскивается"));
-                tx.executeSql(strInsertWords("caretaker", "хранитель"));
+                tx.executeSql(strInsertWords("caretaker", "хранитель, смотритель, лицо, присматривающее за домом"));
                 tx.executeSql(strInsertWords("luxury", "роскошь"));
                 tx.executeSql(strInsertWords("election", "выборы"));
                 tx.executeSql(strInsertWords("pass by", "проходить мимо"));
@@ -537,7 +534,6 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("eventually", "в конце концов"));
                 tx.executeSql(strInsertWords("motto", "девиз"));
                 tx.executeSql(strInsertWords("parcel", "пакет, посылка"));
-                tx.executeSql(strInsertWords("caretaker", "смотритель, лицо, присматривающее за домом"));
                 tx.executeSql(strInsertWords("outline", "наметить в общих чертах"));
                 tx.executeSql(strInsertWords("requirement", "требование"));
                 tx.executeSql(strInsertWords("convenience", "удобство"));
@@ -559,7 +555,6 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("climbed", "поднялись"));
                 tx.executeSql(strInsertWords("venom", "яд"));
                 tx.executeSql(strInsertWords("headache", "головная боль"));
-                tx.executeSql(strInsertWords("chest", "грудь"));
                 tx.executeSql(strInsertWords("rushed", "бросился"));
                 tx.executeSql(strInsertWords("survive", "выживать"));
                 tx.executeSql(strInsertWords("insist", "настаивать"));
@@ -589,7 +584,6 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("to most straightforward way", "целенаправленный, наиболее простым способом"));
                 tx.executeSql(strInsertWords("tend to use", "как правило, используют"));
                 tx.executeSql(strInsertWords("through", "через"));
-                tx.executeSql(strInsertWords("appearance", "внешность"));
                 tx.executeSql(strInsertWords("apologize", "извиняться"));
                 tx.executeSql(strInsertWords("warn", "предупреждать"));
                 tx.executeSql(strInsertWords("argue", "сориться"));
@@ -618,7 +612,6 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("conclude", "делать вывод"));
                 tx.executeSql(strInsertWords("mind", "ум"));
                 tx.executeSql(strInsertWords("close", "близко"));
-                tx.executeSql(strInsertWords("award", "награда"));
                 tx.executeSql(strInsertWords("wealth", "богатство"));
                 tx.executeSql(strInsertWords("challenge authority", "ставить под вопрос"));
                 tx.executeSql(strInsertWords("realm", "сфера"));
@@ -645,7 +638,7 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("apparently", "явно"));
                 tx.executeSql(strInsertWords("doubts", "сомнения"));
                 tx.executeSql(strInsertWords("leap", "прыжок"));
-                tx.executeSql(strInsertWords("arrangement", "условие, расположение"));
+                tx.executeSql(strInsertWords("arrangement", "условие, расположение, приведение в порядок"));
                 tx.executeSql(strInsertWords("an attempt", "попытка"));
                 tx.executeSql(strInsertWords("therefore", "в последствии, поэтому"));
                 tx.executeSql(strInsertWords("imagination", "воображение, представление"));
@@ -741,7 +734,6 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("commitment", "приверженность, обязанность, долг"));
                 tx.executeSql(strInsertWords("mascot", "талисман"));
                 tx.executeSql(strInsertWords("glory, fame", "известность"));
-                tx.executeSql(strInsertWords("arrangement", "приведение в порядок"));
                 tx.executeSql(strInsertWords("plot", "сюжет"));
                 tx.executeSql(strInsertWords("by far", "намного"));
                 tx.executeSql(strInsertWords("enquiry (inquiry)", "вопрос; запрос; расспрашивание; наведение справок"));
@@ -749,7 +741,6 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("behavior", "поведение"));
                 tx.executeSql(strInsertWords("failed to", "провалить (экзамен), не удалось"));
                 tx.executeSql(strInsertWords("failure to", "не способность"));
-                tx.executeSql(strInsertWords("competition", "соревнование"));
                 tx.executeSql(strInsertWords("turn over", "переключить"));
                 tx.executeSql(strInsertWords("ever", "когда-либо"));
                 tx.executeSql(strInsertWords("cut-throat", "ожесточенной"));
@@ -1082,7 +1073,6 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("medicine", "лекарство"));
                 tx.executeSql(strInsertWords("dicease", "заболевание"));
                 tx.executeSql(strInsertWords("detoxify", "детоксикация"));
-                tx.executeSql(strInsertWords("survey", "обследование"));
                 tx.executeSql(strInsertWords("pill (painkiller)", "таблетка"));
                 tx.executeSql(strInsertWords("to have a headache", "головная боль"));
                 tx.executeSql(strInsertWords("to catch cold", "простудиться"));
@@ -1165,7 +1155,7 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("candidate, applicant", "кандидат, претендент"));
                 tx.executeSql(strInsertWords("career ladder", "служебная лестница, продвижение по службе"));
                 tx.executeSql(strInsertWords("CV (Curriculum Vitae)", "биография"));
-                tx.executeSql(strInsertWords("competition", "конкуренция;  конкурсный экзамен "));
+                tx.executeSql(strInsertWords("competition", "конкуренция, конкурсный экзамен, соревнование"));
                 tx.executeSql(strInsertWords("develop a flair (for sth.)", "развить (в себе) талант (умение)"));
                 tx.executeSql(strInsertWords("graduate (s.) (e. g. graduated engineer)", "выпускник (университета) (дипломированный инженер)"));
                 tx.executeSql(strInsertWords("to graduate", "оканчивать (высшее учебное заведение)"));
