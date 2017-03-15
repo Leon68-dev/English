@@ -131,6 +131,16 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("hoax", "обман, развод"));
+                tx.executeSql(strInsertWords("apart from one thing", "кроме одного"));
+                tx.executeSql(strInsertWords("instead of", "вместо того"));
+                tx.executeSql(strInsertWords("despite", "несмотря на = inspite of"));
+                tx.executeSql(strInsertWords("whereas", "хотя, а"));
+                tx.executeSql(strInsertWords("due to", "из-за = because of"));
+                tx.executeSql(strInsertWords("as", "так как (в начале фразы) = since"));
+                tx.executeSql(strInsertWords("ever though", "даже хотя"));
+                tx.executeSql(strInsertWords("nevertheless", "темнеменее"));
+                //-
                 tx.executeSql(strInsertWords("serious", "серьезный"));
                 //-
                 tx.executeSql(strInsertWords("an industrial city", "промышленный город"));
