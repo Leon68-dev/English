@@ -24,7 +24,7 @@ function addStrValue(value_text, value_text2, id, isChecked) {
         value_t = value_text;
 
     if (value_text2 && value_text2 != "undefined")
-        value_t += (" - " + value_text2);
+        value_t += ("<br> - " + value_text2);
 
     var str = "<tr><td style='text-align:center'><input type='checkbox' style='zoom:4' onclick='onClickCheckBox(this);' value ='" + id + "' " + checkedValue(isChecked) + " ></td><td>" + value_t + "</td></tr>";
     $("#gridWords > tbody:last").after(str);
