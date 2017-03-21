@@ -131,14 +131,24 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("take for granted", "принимать кого то (что то) само сабой разумеющееся"));
+                tx.executeSql(strInsertWords("take advantage", "воспользоваться в угоду себе (ситуацией или кем то)"));
+                tx.executeSql(strInsertWords("take any notice of", "обращать на кого то внимание"));
+                tx.executeSql(strInsertWords("take time", "не спешить, не торопиться, дать себе время"));
+                tx.executeSql(strInsertWords("take side", "принимать (занимать) сторону"));
+                tx.executeSql(strInsertWords("engage in conversation", "вовлекаться в разговор"));
+                tx.executeSql(strInsertWords("chilly", "прохладный"));
+                tx.executeSql(strInsertWords("tricky", "запутанно"));
+                tx.executeSql(strInsertWords("indeed", "конечно"));
+                //-
                 tx.executeSql(strInsertWords("hoax", "обман, развод"));
                 tx.executeSql(strInsertWords("apart from one thing", "кроме одного"));
                 tx.executeSql(strInsertWords("instead of", "вместо того"));
-                tx.executeSql(strInsertWords("despite (inspite of)", "несмотря на"));
+                tx.executeSql(strInsertWords("despite (in spite of)", "несмотря на"));
                 tx.executeSql(strInsertWords("whereas", "хотя, а"));
                 tx.executeSql(strInsertWords("due to (because of)", "из-за"));
                 tx.executeSql(strInsertWords("as (since)", "так как (в начале фразы)"));
-                tx.executeSql(strInsertWords("ever though", "даже хотя"));
+                tx.executeSql(strInsertWords("even though", "даже хотя"));
                 tx.executeSql(strInsertWords("nevertheless", "тем не менее"));
                 //-------------------------------------------------------------------------------------------------------------
                 tx.executeSql(strInsertRelation("NEW"));
