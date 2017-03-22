@@ -131,9 +131,9 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
-                tx.executeSql(strInsertWords("take for granted", "принимать кого то (что то) само собой разумеющееся"));
-                tx.executeSql(strInsertWords("take advantage", "воспользоваться в угоду себе (ситуацией или кем то)"));
-                tx.executeSql(strInsertWords("take any notice of", "обращать на кого то внимание"));
+                tx.executeSql(strInsertWords("take for granted", "принимать кого-то (что-то) само собой разумеющееся"));
+                tx.executeSql(strInsertWords("take advantage", "воспользоваться в угоду себе (ситуацией или кем-то)"));
+                tx.executeSql(strInsertWords("take any notice of", "обращать на кого-то внимание"));
                 tx.executeSql(strInsertWords("take time", "не спешить, не торопиться, дать себе время"));
                 tx.executeSql(strInsertWords("take side", "принимать (занимать) сторону"));
                 tx.executeSql(strInsertWords("engage in conversation", "вовлекаться в разговор"));
