@@ -144,6 +144,7 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("hoax", "обман, развод"));
                 tx.executeSql(strInsertWords("apart from one thing", "кроме одного"));
                 tx.executeSql(strInsertWords("instead of", "вместо того"));
+                tx.executeSql(strInsertWords("spite", "злоба, делать назло, досаждать"));
                 tx.executeSql(strInsertWords("despite (in spite of)", "несмотря на"));
                 tx.executeSql(strInsertWords("whereas", "хотя, а"));
                 tx.executeSql(strInsertWords("due to (because of)", "из-за"));
@@ -544,7 +545,6 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("quote", "ссылка"));
                 tx.executeSql(strInsertWords("anyway", "в любом случае"));
                 tx.executeSql(strInsertWords("pipeline", "трубопровод"));
-                tx.executeSql(strInsertWords("despite", "несмотря на"));
                 tx.executeSql(strInsertWords("absence", "отсутствие"));
                 tx.executeSql(strInsertWords("pleasant", "приятно"));
                 tx.executeSql(strInsertWords("surprisingly", "поразительно, удивительно"));
