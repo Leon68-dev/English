@@ -131,6 +131,16 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("to iron clothes", "гладить одежду утюгом"));
+                tx.executeSql(strInsertWords("an iron", "утюг"));
+                tx.executeSql(strInsertWords("to make stupid jokes"));
+                tx.executeSql(strInsertWords("besides", "помимо"));
+                tx.executeSql(strInsertWords("to get to know", "узнать"));
+                tx.executeSql(strInsertWords("to achieve", "достигать"));
+                tx.executeSql(strInsertWords("to scold", "ругать, вычитывать, отчитывать"));
+                tx.executeSql(strInsertWords("to be used by someone", "быть кем то использованым"));
+                tx.executeSql(strInsertWords("to keep the word", "сдержать слово"));
+                //-
                 tx.executeSql(strInsertWords("to interrupt a conversation", "прервать разговор"));
                 tx.executeSql(strInsertWords("I am sorry for interrupting your conversation", "извините за прерывание разговора"));
                 tx.executeSql(strInsertWords("to deserve", "заслуживать"));
