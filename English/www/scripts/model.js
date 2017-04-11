@@ -131,6 +131,32 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("steganography", "стеганография"));
+                tx.executeSql(strInsertWords("reached", "достигнуто"));
+                tx.executeSql(strInsertWords("ancient", "древний"));
+                tx.executeSql(strInsertWords("silk", "шелк"));
+                tx.executeSql(strInsertWords("scrunch", "хрустеть"));
+                tx.executeSql(strInsertWords("tiny", "крошечный"));
+                tx.executeSql(strInsertWords("wax", "воск"));
+                tx.executeSql(strInsertWords("swallow", "глотать"));
+                tx.executeSql(strInsertWords("stomach", "желудок"));
+                tx.executeSql(strInsertWords("described", "описанный"));
+                tx.executeSql(strInsertWords("conceal", "скрывать"));
+                tx.executeSql(strInsertWords("ink", "чернила"));
+                tx.executeSql(strInsertWords("vinegar", "уксус"));
+                tx.executeSql(strInsertWords("alum", "квасцы"));
+                tx.executeSql(strInsertWords("porous", "пористый"));
+                tx.executeSql(strInsertWords("through", "через"));
+                tx.executeSql(strInsertWords("weakness", "слабое место"));
+                tx.executeSql(strInsertWords("rearrange", "перестраивать"));
+                tx.executeSql(strInsertWords("reveal", "раскрывать"));
+                tx.executeSql(strInsertWords("scytale", "scytale"));
+                tx.executeSql(strInsertWords("leather", "кожа"));
+                tx.executeSql(strInsertWords("wood", "дерево"));
+                tx.executeSql(strInsertWords("strip", "полоса"));
+                tx.executeSql(strInsertWords("wind", "ветер"));
+                tx.executeSql(strInsertWords("invented", "изобрел"));
+                //--
                 tx.executeSql(strInsertWords("to iron clothes", "гладить одежду утюгом"));
                 tx.executeSql(strInsertWords("an iron", "утюг"));
                 tx.executeSql(strInsertWords("to make stupid jokes"));
