@@ -131,6 +131,15 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("rather", "скорее"));
+                tx.executeSql(strInsertWords("sophisticated", "изощренных"));
+                tx.executeSql(strInsertWords("decipher", "расшифровывать"));
+                tx.executeSql(strInsertWords("strip", "полоса"));
+                tx.executeSql(strInsertWords("stick", "палка"));
+                tx.executeSql(strInsertWords("at the table", "за столом")); 
+                tx.executeSql(strInsertWords("прохожий", "passer-by"));
+                tx.executeSql(strInsertWords("disappointed", "разочарован"));
+                //-
                 tx.executeSql(strInsertWords("steganography", "стеганография"));
                 tx.executeSql(strInsertWords("reached", "достигнуто"));
                 tx.executeSql(strInsertWords("ancient", "древний"));
@@ -150,7 +159,6 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("weakness", "слабое место"));
                 tx.executeSql(strInsertWords("rearrange", "перестраивать"));
                 tx.executeSql(strInsertWords("reveal", "раскрывать"));
-                tx.executeSql(strInsertWords("scytale", "scytale"));
                 tx.executeSql(strInsertWords("leather", "кожа"));
                 tx.executeSql(strInsertWords("wood", "дерево"));
                 tx.executeSql(strInsertWords("strip", "полоса"));
