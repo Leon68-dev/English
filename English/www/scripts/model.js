@@ -131,13 +131,22 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("undervalued", "недооцененный"));
+                tx.executeSql(strInsertWords("anti-nuclear", "антиядерный"));
+                tx.executeSql(strInsertWords("overestimate", "переоценивать"));
+                tx.executeSql(strInsertWords("postgraduate", "аспирантский"));
+                tx.executeSql(strInsertWords("ex-vice", "бывший вице"));
+                tx.executeSql(strInsertWords("multinational", "многофункциональные"));
+                tx.executeSql(strInsertWords("self-reliant", "самостоятельный"));
+                tx.executeSql(strInsertWords("pro-hunting", "про-охота"));
+                //-
                 tx.executeSql(strInsertWords("rather", "скорее"));
                 tx.executeSql(strInsertWords("sophisticated", "изощренных"));
                 tx.executeSql(strInsertWords("decipher", "расшифровывать"));
                 tx.executeSql(strInsertWords("strip", "полоса"));
                 tx.executeSql(strInsertWords("stick", "палка"));
                 tx.executeSql(strInsertWords("at the table", "за столом")); 
-                tx.executeSql(strInsertWords("прохожий", "passer-by"));
+                tx.executeSql(strInsertWords("passer-by", "прохожий"));
                 tx.executeSql(strInsertWords("disappointed", "разочарован"));
                 //-
                 tx.executeSql(strInsertWords("steganography", "стеганография"));
