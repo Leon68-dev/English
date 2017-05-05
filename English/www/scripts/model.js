@@ -143,6 +143,7 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("conduct", "поведение"));
                 //-
                 tx.executeSql(strInsertWords("undervalued", "недооцененный"));
+                tx.executeSql(strInsertWords("misused", "неправильно употребленный"));
                 tx.executeSql(strInsertWords("anti-nuclear", "антиядерный"));
                 tx.executeSql(strInsertWords("overestimate", "переоценивать"));
                 tx.executeSql(strInsertWords("postgraduate", "аспирантский"));
@@ -150,6 +151,8 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("multinational", "многофункциональные"));
                 tx.executeSql(strInsertWords("self-reliant", "самостоятельный"));
                 tx.executeSql(strInsertWords("pro-hunting", "про-охота"));
+                tx.executeSql(strInsertWords("redefined", "переопределенный"));
+                tx.executeSql(strInsertWords("preview", "предварительный просмотр"));
                 //-
                 tx.executeSql(strInsertWords("rather", "скорее"));
                 tx.executeSql(strInsertWords("sophisticated", "изощренных"));
@@ -414,7 +417,6 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql(strInsertWords("disgust", "отвращение"));
                 tx.executeSql(strInsertWords("smell", "запах"));
                 tx.executeSql(strInsertWords("to bear a name", "носить имя"));
-                tx.executeSql(strInsertWords("decipeher", "расшифровывать"));
                 tx.executeSql(strInsertWords("speak up", "говорить громко"));
                 tx.executeSql(strInsertWords("further", "далее"));
                 tx.executeSql(strInsertWords("a flair for tracking down inconsistencies", "чутье для отслеживания несоответствий"));
