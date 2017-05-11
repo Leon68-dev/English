@@ -3,6 +3,7 @@ var currentWordType = 0;
 var itemsFound = 0;
 
 var model_dbname = "english31.db";
+var model_dbname_backup = "english31_bak.db";
 
 var CHK = 1000;
 var ALL = 0;
@@ -32,6 +33,8 @@ var BTN_WORDS_PHRASES = 1;
 var BTN_NEW_WORDS = 2;
 var BTN_ALL_WORDS = 3;
 var BTN_CHK_WORDS = 4;
+var BTN_ADD_WORD = 5;
+var BTN_BACKUP = 6;
 var BTN_PHRASES = 100;
 var BTN_ANY = 101;
 var BTN_VERB = 102;
@@ -53,6 +56,8 @@ var BTN_IDIOM = 115;
 var BTN_CRIME_PUNISHMENT = 116;
 var BTN_PERSON_FAMILY = 117;
 var BTN_TONGUE_TWISTER = 118;
+var BTN_BACKUP_EXPORT = 200;
+var BTN_BACKUP_IMPORT = 201;
 
 function confirmCreateTables() {
     if (confirm('Are you sure you want to reload data?')) {

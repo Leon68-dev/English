@@ -8,6 +8,8 @@ function hideAll() {
     $("#frmWords").hide();
     $("#frmVerbs").hide();
     $("#frmList").hide();
+    $("#frmBackup").hide();
+    
 }
 
 function checkedValue(val) {
@@ -79,22 +81,177 @@ function setGridWordsBody(wordType) {
     });
 }
 
+function onClickCheckBox(param) {
+    var id = param.value;
+    var isChecked = param.checked;
+
+    var db = openDatabase();
+    db.transaction(function (tx) {
+        var chk = 0;
+        if(isChecked == true)
+            chk = 1;
+        tx.executeSql("update words set is_checked = " + chk + " where id = " + id);
+    });
+}
+
+function onClickButton(index) {
+    currentForm = index;
+    showCurrentForm(currentForm);
+}
+
+function clearTBody() {
+    var table = document.getElementById("gridWords");
+    for (var i = table.rows.length - 1; i >= 0; i--) {
+        table.deleteRow(i);
+    }
+}
+
+function getSearchText() {
+    var str = $("#searchText").val().toLowerCase();
+    return str;
+}
+
+function onClickButtonFind() {
+    clearTBody();
+    var db = openDatabase();
+    db.transaction(function (tx) {
+        if (currentWordType == ALL) {
+            tx.executeSql("select * from vrows where (value_w like'%" + getSearchText() + "%' or value_w2 like'%" + getSearchText() + "%') order by value_w desc;", [], function (tx, res) {
+                var cnt = res.rows.length;
+                for (i = 0; i < cnt; i++) {
+                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
+                }
+                getToastCountItems(cnt);
+            }, function (tx, error) {
+                console.log('SELECT error: ' + error.message);
+            });
+        } else if (currentWordType == NEW) {
+            tx.executeSql("select * from vrows where code = " + NEW + " and (value_w like'%" + getSearchText() + "%' or value_w2 like'%" + getSearchText() + "%') order by id desc;", [], function (tx, res) {
+                var cnt = res.rows.length;
+                for (i = 0; i < cnt; i++) {
+                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
+                }
+                getToastCountItems(cnt);
+            }, function (tx, error) {
+                console.log('SELECT error: ' + error.message);
+            });
+        } else if (currentWordType == CHK) {
+            tx.executeSql("select * from vrows where is_checked = 1 and (value_w like'%" + getSearchText() + "%' or value_w2 like'%" + getSearchText() + "%') order by id desc;", [], function (tx, res) {
+                var cnt = res.rows.length;
+                for (i = 0; i < cnt; i++) {
+                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
+                }
+                getToastCountItems(cnt);
+            }, function (tx, error) {
+                console.log('SELECT error: ' + error.message);
+            });
+        } else {
+            tx.executeSql("select * from vrows where code = " + currentWordType + " and (value_w like'%" + getSearchText() + "%' or value_w2 like'%" + getSearchText() + "%') order by value_w desc;", [], function (tx, res) {
+                var cnt = res.rows.length;
+                for (i = 0; i < cnt; i++) {
+                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
+                }
+                getToastCountItems(cnt);
+            }, function (tx, error) {
+                console.log('SELECT error: ' + error.message);
+            });
+        }
+    });
+}
+
+function addZerro(param) {
+    if (param < 10)
+        return ('0' + param);
+    return param;
+}
+
+function dateFormat() {
+    var today = new Date();
+    var dt = today.getFullYear()
+        + '-'
+        + addZerro(today.getMonth() + 1)
+        + '-'
+        + addZerro(today.getDate())
+        + '_'
+        + addZerro(today.getHours())
+        + '-'
+        + addZerro(today.getMinutes())
+        + '-'
+        + addZerro(today.getSeconds())
+        + '-'
+        + today.getMilliseconds();
+    return dt;
+}
+
+function failFiles(error) {
+    if (error.code == FileError.NOT_FOUND_ERR) alert("Message : NOT_FOUND_ERR")
+    else if (error.code == FileError.SECURITY_ERR) alert("Message : SECURITY_ERR")
+    else if (error.code == FileError.ABORT_ERR) alert("Message : ABORT_ERR")
+    else if (error.code == FileError.NOT_READABLE_ERR) alert("Message : NOT_READABLE_ERR")
+    else if (error.code == FileError.ENCODING_ERR) alert("Message : ENCODING_ERR")
+    else if (error.code == FileError.NO_MODIFICATION_ALLOWED_ERR) alert("Message : NO_MODIFICATION_ALLOWED_ERR")
+    else if (error.code == FileError.INVALID_STATE_ERR) alert("Message : INVALID_STATE_ERR")
+    else if (error.code == FileError.SYNTAX_ERR) alert("Message : SYNTAX_ERR")
+    else if (error.code == FileError.INVALID_MODIFICATION_ERR) alert("Message :  INVALID_MODIFICATION_ERR")
+    else if (error.code == FileError.QUOTA_EXCEEDED_ERR) alert("Message : QUOTA_EXCEEDED_ERR")
+    else if (error.code == FileError.PATH_EXISTS_ERR) alert("Message : PATH_EXISTS_ERR")
+
+    showCurrentForm(BTN_BACKUP);
+}
+
+function exportDatabase() {
+    var r = confirm('Would you like to export data?');
+    if (r == true) {
+        var source = cordova.file.dataDirectory + "";
+        source = source.replace("/files/", "/databases/") + model_dbname;
+        var destination = cordova.file.externalRootDirectory;
+        window.resolveLocalFileSystemURL(source, function (fs) {
+            window.resolveLocalFileSystemURL(destination, function (directoryEntry) {
+                var filename = 'english_' + dateFormat() + '.db';
+                fs.copyTo(directoryEntry, filename, function () { }, failFiles);
+                fs.copyTo(directoryEntry, model_dbname_backup, function () {
+                    showCurrentForm(BTN_ALL_WORDS);
+                    alert("Export ok");
+                }, failFiles);
+            }, failFiles);
+        }, failFiles);
+    } else {
+        showCurrentForm(BTN_BACKUP);
+    }
+}
+
+function importDatabase() {
+    var r = confirm('Would you like to import data?');
+    if (r == true) {
+        var source = cordova.file.externalRootDirectory + model_dbname_backup;
+        var destination = cordova.file.dataDirectory + "";
+        destination = destination.replace("/files/", "/databases/");
+        window.resolveLocalFileSystemURL(source, function (fs) {
+            window.resolveLocalFileSystemURL(destination, function (directoryEntry) {
+                fs.copyTo(directoryEntry, model_dbname, function () {
+                    showCurrentForm(BTN_ALL_WORDS);
+                    alert("Import ok");
+                }, failFiles);
+            }, failFiles);
+        }, failFiles);
+    } else {
+        showCurrentForm(BTN_BACKUP);
+    }
+}
+
 function showCurrentForm(index) {
     hideAll();
     switch (index) {
-        //case 0:
-        //    $("#frmStart").show();
-        //    break;
+        case 0:
+        case BTN_ALL_WORDS:
+            setGridWordsBody(ALL);
+            $("#frmList").show();
+            break;
         case BTN_WORDS_PHRASES:
             $("#frmWords").show();
             break;
         case BTN_NEW_WORDS:
             setGridWordsBody(NEW);
-            $("#frmList").show();
-            break;
-        case 0:
-        case BTN_ALL_WORDS:
-            setGridWordsBody(ALL);
             $("#frmList").show();
             break;
         case BTN_PHRASES:
@@ -184,91 +341,17 @@ function showCurrentForm(index) {
             setGridWordsBody(TONGUE_TWISTER);
             $("#frmList").show();
             break;
+        case BTN_BACKUP:
+            $("#frmBackup").show();
+            break;
+        case BTN_BACKUP_EXPORT:
+            exportDatabase();
+            break;
+        case BTN_BACKUP_IMPORT:
+            importDatabase();
+            break;
         default:
     }
-}
-
-function onClickCheckBox(param) {
-    var id = param.value;
-    var isChecked = param.checked;
-
-    var db = openDatabase();
-    db.transaction(function (tx) {
-        var chk = 0;
-        if(isChecked == true)
-            chk = 1;
-        tx.executeSql("update words set is_checked = " + chk + " where id = " + id);
-    });
-}
-
-function onClickButton(index) {
-    currentForm = index;
-    showCurrentForm(currentForm);
-}
-
-function clearTBody() {
-    //$("#gridWords tbody tr").remove();
-    //$("#gridWords").find("tr.body_caption, tr.body_caption_top").remove();
-    //$("#tbodyid").empty();
-
-    var table = document.getElementById("gridWords");
-    for (var i = table.rows.length - 1; i >= 0; i--) {
-        table.deleteRow(i);
-    }
-}
-
-
-function getSearchText() {
-    var str = $("#searchText").val().toLowerCase();
-    return str;
-}
-
-function onClickButtonFind() {
-    clearTBody();
-    var db = openDatabase();
-    db.transaction(function (tx) {
-        if (currentWordType == ALL) {
-            tx.executeSql("select * from vrows where (value_w like'%" + getSearchText() + "%' or value_w2 like'%" + getSearchText() + "%') order by value_w desc;", [], function (tx, res) {
-                var cnt = res.rows.length;
-                for (i = 0; i < cnt; i++) {
-                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
-                }
-                getToastCountItems(cnt);
-            }, function (tx, error) {
-                console.log('SELECT error: ' + error.message);
-            });
-        } else if (currentWordType == NEW) {
-            tx.executeSql("select * from vrows where code = " + NEW + " and (value_w like'%" + getSearchText() + "%' or value_w2 like'%" + getSearchText() + "%') order by id desc;", [], function (tx, res) {
-                var cnt = res.rows.length;
-                for (i = 0; i < cnt; i++) {
-                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
-                }
-                getToastCountItems(cnt);
-            }, function (tx, error) {
-                console.log('SELECT error: ' + error.message);
-            });
-        } else if (currentWordType == CHK) {
-            tx.executeSql("select * from vrows where is_checked = 1 and (value_w like'%" + getSearchText() + "%' or value_w2 like'%" + getSearchText() + "%') order by id desc;", [], function (tx, res) {
-                var cnt = res.rows.length;
-                for (i = 0; i < cnt; i++) {
-                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
-                }
-                getToastCountItems(cnt);
-            }, function (tx, error) {
-                console.log('SELECT error: ' + error.message);
-            });
-        } else {
-            tx.executeSql("select * from vrows where code = " + currentWordType + " and (value_w like'%" + getSearchText() + "%' or value_w2 like'%" + getSearchText() + "%') order by value_w desc;", [], function (tx, res) {
-                var cnt = res.rows.length;
-                for (i = 0; i < cnt; i++) {
-                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
-                }
-                getToastCountItems(cnt);
-            }, function (tx, error) {
-                console.log('SELECT error: ' + error.message);
-            });
-        }
-    });
 }
 
 function onClickBack() {
@@ -277,6 +360,9 @@ function onClickBack() {
         case BTN_NEW_WORDS:
         case BTN_ALL_WORDS:
         case BTN_CHK_WORDS:
+        case BTN_BACKUP:
+        case BTN_BACKUP_EXPORT:
+        case BTN_BACKUP_IMPORT:
             currentForm = 0;
             showCurrentForm(currentForm);
             break;

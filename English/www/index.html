@@ -134,6 +134,18 @@
                 </div>
             </form>
 
+            <form id="frmBackup">
+                <h2>Backup</h2>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <ul data-role="listview" data-inset="true">
+                            <li style="text-align:center;" onclick="onClickButton(BTN_BACKUP_EXPORT);">Export</li>
+                            <li style="text-align:center;" onclick="onClickButton(BTN_BACKUP_IMPORT);">Import</li>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+
         </div>
 
         <div data-role="panel" id="left-panel" data-display="overlay" data-theme="b">
@@ -144,9 +156,12 @@
                     <li data-rel="close" onclick="onClickButton(BTN_ALL_WORDS)">All Words(find)</li>
                     <li data-rel="close" onclick="onClickButton(BTN_CHK_WORDS)">Words Checked</li>
                     <li data-rel="close" onclick="confirmCreateTables()">Reload All</li>
+                    <li data-rel="close" onclick="onClickButton(BTN_ADD_WORD)">Add Word</li>
+                    <li data-rel="close" onclick="onClickButton(BTN_BACKUP)">Backup</li>
                 </ul>
             </div>
         </div>
+
     </div>
 
     <script type="text/javascript" src="cordova.js"></script>
