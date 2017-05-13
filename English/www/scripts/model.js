@@ -58,6 +58,8 @@ var BTN_PERSON_FAMILY = 117;
 var BTN_TONGUE_TWISTER = 118;
 var BTN_BACKUP_EXPORT = 200;
 var BTN_BACKUP_IMPORT = 201;
+var BTN_ADD_WORD_SAVE = 202;
+var BTN_ADD_WORD_CANCEL = 203;
 
 function confirmCreateTables() {
     if (confirm('Are you sure you want to reload data?')) {
@@ -65,6 +67,61 @@ function confirmCreateTables() {
     } else {
         // Do nothing!
     }
+}
+
+function updateWordById(id, value_w, value_w2, is_checked, callBack) {
+    var db = openDatabase();
+    db.transaction(function (tx) {
+        var strSQL = '';
+        if (id > 0) {
+            strSQL = "UPDATE words SET value_w=?, value_w2=?, is_checked=? WHERE id=?;";
+            tx.executeSql(strSQL, [value_w, value_w2, is_checked, id], function (res) {
+                callBack(0);
+            });
+        } else {
+            strSQL = "INSERT INTO words(value_w, value_w2, is_checked) VALUES(?,?,?);";
+            tx.executeSql(strSQL, [value_w, value_w2, is_checked], function (res) {
+                callBack(0);
+            });
+        }
+    }, function (tx, error) {
+        console.log('Transaction error: ' + error.message);
+    });
+}
+
+function insertRelation(id_words, id_type, callBack) {
+    var db = openDatabase();
+    db.transaction(function (tx) {
+        var strSQL = '';
+        strSQL = "INSERT INTO relations(id_words, id_type) VALUES(?,?);";
+        tx.executeSql(strSQL, [id_words, id_type], function (res) {
+            callBack(0);
+        });
+    }, function (tx, error) {
+        console.log('Transaction error: ' + error.message);
+    });
+}
+
+function selectMaxWordsID(callBack) {
+    var db = openDatabase();
+    db.transaction(function (tx) {
+        tx.executeSql("select max(ID) as maxID from words", [], function (tx, res) {
+            callBack(res);
+        }, function (tx, error) {
+            console.log('SELECT error: ' + error.message);
+        });
+    });
+}
+
+function selectTypes(callBack) {
+    var db = openDatabase();
+    db.transaction(function (tx) {
+        tx.executeSql("select * from types order by name;", [], function (tx, res) {
+            callBack(res);
+        }, function (tx, error) {
+            console.log('SELECT error: ' + error.message);
+        });
+    });
 }
 
 function strInsertType(sqlValue) {

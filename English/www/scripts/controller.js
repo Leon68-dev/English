@@ -262,38 +262,50 @@ function importDatabase() {
 }
 
 function setDataToSelect() {
-    //Sample
-    //$('#Goal_WeightVar').live('change', function () {
-    //    var weightVar = 0; // for testing only
-    //    var goalWeightVar = $('#Goal_WeightVar').val();
-
-    //    if (goalWeightVar > 0) {
-    //        Goal_WtVar = Math.abs(weightVar - goalWeightVar);
-    //        Min_DurationVar = Math.round(Goal_WtVar * 2.2);
-    //        for (var i = 0; i < 10; i++) {
-    //            $('#Goal_Time').append('<option value=' + Min_DurationVar + '>' + Min_DurationVar + '</option>');
-    //        }
-    //        $('#Goal_Time').listview('refresh');
-    //    }
-    //});
-
     $('#selectedGroups').empty();
-
-    var db = openDatabase();
-    db.transaction(function (tx) {
-        tx.executeSql("select * from types order by name;", [], function (tx, res) {
-            var cnt = res.rows.length;
-            if (cnt > 0) {
-                for (var i = 0; i < cnt; i++) {
-                    $('#selectedGroups').append('<option value=' + res.rows.item(i).id + '>' + res.rows.item(i).name + '</option>');
-                }
-                $('#selectedGroups').val(res.rows.item(0).id).selectmenu("refresh");
+    selectTypes(function (res) {
+        var cnt = res.rows.length;
+        if (cnt > 0) {
+            for (var i = 0; i < cnt; i++) {
+                $('#selectedGroups').append('<option value=' + res.rows.item(i).id + '>' + res.rows.item(i).name + '</option>');
             }
-        }, function (tx, error) {
-            console.log('SELECT error: ' + error.message);
-        });
+            $('#selectedGroups').val(res.rows.item(0).id).selectmenu("refresh");
+        }
     });
+}
 
+function saveNewWord() {
+    var value_w = $("#inputEnglishWord").val();
+    var value_w2 = $("#inputRussianWord").val();
+    var id_type = $("#selectedGroups").val();
+
+    if (value_w && value_w2) {
+        updateWordById(0, value_w, value_w2, 0, function (res) {
+            selectMaxWordsID(function (res) {
+                if (res && res.rows && res.rows.length) {
+                    var id_words = res.rows.item(i).maxID;
+                    insertRelation(id_words, id_type, function (res3) {
+                        $("#inputEnglishWord").val('');
+                        $("#inputRussianWord").val('');
+                        showCurrentForm(BTN_ADD_WORD);
+                        window.plugins.toast.showShortBottom("Data was saved");
+                    });
+                }
+            });
+        })
+    } else {
+        $("#inputEnglishWord").val('');
+        $("#inputRussianWord").val('');
+        showCurrentForm(BTN_ADD_WORD);
+        window.plugins.toast.showShortBottom("Data was not saved");
+    }
+}
+
+function cancelNewWord() {
+    $("#inputEnglishWord").val('');
+    $("#inputRussianWord").val('');
+    showCurrentForm(BTN_ADD_WORD);
+    window.plugins.toast.showShortBottom("Data was canceled");
 }
 
 function showCurrentForm(index) {
@@ -411,6 +423,13 @@ function showCurrentForm(index) {
             setDataToSelect();
             $("#frmAddWord").show();
             break;
+        case BTN_ADD_WORD_SAVE:
+            saveNewWord();
+            break;
+        case BTN_ADD_WORD_CANCEL:
+            cancelNewWord()
+            break;
+
         default:
     }
 }
