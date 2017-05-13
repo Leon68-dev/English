@@ -12,8 +12,10 @@
 
     <script src="scripts/jquery-1.11.1.min.js"></script>
     <script src="scripts/jquery.mobile-1.4.5.js"></script>
+
     <script src="scripts/model.js"></script>
     <script src="scripts/controller.js"></script>
+    
     <script type="text/javascript" charset="utf-8">
         function onLoad() {
             document.addEventListener("deviceready", onDeviceReady, false);
@@ -22,10 +24,10 @@
         function onDeviceReady() {
             document.addEventListener("backbutton", onBackKeyDown, false);
             hideAll();
-            //$("#frmStart").show();
             setGridWordsBody(ALL);
             $("#frmList").show();
             createTablesWithCheck(0);
+            
         }
 
         function onBackKeyDown() {
@@ -42,10 +44,10 @@
             });
         });
 
+
     </script>
 </head>
 <body onload="onLoad();">
-
     <div data-role="page" id="eng-page" data-theme="b">
         
         <div data-role="header" data-theme="b">
@@ -144,6 +146,64 @@
                         </ul>
                     </div>
                 </div>
+            </form>
+
+            <form id="frmAddWord">
+                <!--<h2>Add Word</h2>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <ul data-role="listview" data-inset="true">
+
+                        </ul>
+                    </div>
+                </div>-->
+
+                <div data-role="main" class="ui-content">
+                    <div class="ui-field-contain">
+                        <label for="inputEnglishWord">English</label>
+                        <input type="text" name="EnglishWord" id="inputEnglishWord">
+                        <label for="inputRussianhWord">Russian</label>
+                        <input type="text" name="RussianhWord" id="inputRussianhWord">
+                        <label for="inputEnglishWord">Group</label>
+                        <fieldset data-role="controlgroup">
+                            <label for="selectedMonths">Select A</label>
+                            <select name="selectedGroups" id="selectedGroups" onchange="setGridPayment();">
+                                <!-- <option value="1">Name</option> -->
+                            </select>
+                        </fieldset>
+
+                        <!--  
+                            Sample
+                        <div data-role="page" id="Goal_Time_Page">
+                            <div data-role="content">
+                                <label for="Goal_WeightVar">Goal Weight:</label>
+                                <input type="text" name="Goal_WeightVar" id="Goal_WeightVar" value="" />
+                                <label for="Goal_Time" class="select">Goal Time:</label>
+                                <select name="Goal_Time" id="Goal_Time">
+            
+                                </select>
+                            </div>
+                        </div>    
+                        -->
+
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                <div class="button-wrap">
+                                    <button class="ui-btn ui-corner-all" onclick="onClickButton(BTN_ALL_WORDS);">Save</button>
+                                </div>
+                            </div>
+
+                            <div class="ui-block-b">
+                                <div class="button-wrap">
+                                    <button class="ui-btn ui-corner-all" onclick="onClickButton(BTN_ALL_WORDS);">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
             </form>
 
         </div>

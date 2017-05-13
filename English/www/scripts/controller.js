@@ -3,13 +3,35 @@
 }
 
 function hideAll() {
-    //$("#frmStart").hide();
     $("#frmVerbs").hide();
+    $("#frmVerbs").submit(function () {
+        return false;
+    });
+
     $("#frmWords").hide();
+    $("#frmWords").submit(function () {
+        return false;
+    });
+
     $("#frmVerbs").hide();
+    $("#frmVerbs").submit(function () {
+        return false;
+    });
+
     $("#frmList").hide();
+    $("#frmList").submit(function () {
+        return false;
+    });
+
     $("#frmBackup").hide();
-    
+    $("#frmBackup").submit(function () {
+        return false;
+    });
+
+    $("#frmAddWord").hide();
+    $("#frmAddWord").submit(function () {
+        return false;
+    });
 }
 
 function checkedValue(val) {
@@ -239,6 +261,41 @@ function importDatabase() {
     }
 }
 
+function setDataToSelect() {
+    //Sample
+    //$('#Goal_WeightVar').live('change', function () {
+    //    var weightVar = 0; // for testing only
+    //    var goalWeightVar = $('#Goal_WeightVar').val();
+
+    //    if (goalWeightVar > 0) {
+    //        Goal_WtVar = Math.abs(weightVar - goalWeightVar);
+    //        Min_DurationVar = Math.round(Goal_WtVar * 2.2);
+    //        for (var i = 0; i < 10; i++) {
+    //            $('#Goal_Time').append('<option value=' + Min_DurationVar + '>' + Min_DurationVar + '</option>');
+    //        }
+    //        $('#Goal_Time').listview('refresh');
+    //    }
+    //});
+
+    $('#selectedGroups').empty();
+
+    var db = openDatabase();
+    db.transaction(function (tx) {
+        tx.executeSql("select * from types order by name;", [], function (tx, res) {
+            var cnt = res.rows.length;
+            if (cnt > 0) {
+                for (var i = 0; i < cnt; i++) {
+                    $('#selectedGroups').append('<option value=' + res.rows.item(i).id + '>' + res.rows.item(i).name + '</option>');
+                }
+                $('#selectedGroups').val(res.rows.item(0).id).selectmenu("refresh");
+            }
+        }, function (tx, error) {
+            console.log('SELECT error: ' + error.message);
+        });
+    });
+
+}
+
 function showCurrentForm(index) {
     hideAll();
     switch (index) {
@@ -350,12 +407,17 @@ function showCurrentForm(index) {
         case BTN_BACKUP_IMPORT:
             importDatabase();
             break;
+        case BTN_ADD_WORD:
+            setDataToSelect();
+            $("#frmAddWord").show();
+            break;
         default:
     }
 }
 
 function onClickBack() {
     switch (currentForm) {
+        case BTN_ADD_WORD:
         case BTN_WORDS_PHRASES:
         case BTN_NEW_WORDS:
         case BTN_ALL_WORDS:
