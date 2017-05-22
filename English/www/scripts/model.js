@@ -193,6 +193,32 @@ function createTablesWithCheck(isReload) {
                 tx.executeSql("DROP TABLE IF EXISTS relations;");
                 tx.executeSql("CREATE TABLE IF NOT EXISTS relations (id integer primary key, id_words integer, id_type text);");
                 //NEW//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                tx.executeSql(strInsertWords("to postpone", "отложить"));
+                tx.executeSql(strInsertWords("wedding", "свадьба"));
+                tx.executeSql(strInsertWords("funeral", "похороны"));
+                tx.executeSql(strInsertWords("tulip", "тюльпан"));
+                tx.executeSql(strInsertWords("to spread", "распространять"));
+                tx.executeSql(strInsertWords("to be proud of", "гордиться"));
+                tx.executeSql(strInsertWords("the tulip bulb", "луковица тюльпана"));
+                tx.executeSql(strInsertWords("though", "хоть"));
+                tx.executeSql(strInsertWords("even though", "хотя"));
+                tx.executeSql(strInsertWords("treasure", "сокровище"));
+                tx.executeSql(strInsertWords("to smash", "громить"));
+                tx.executeSql(strInsertWords("twice as much", "в два раза больше"));
+                tx.executeSql(strInsertWords("to go mad", "сойти с ума"));
+                //-
+                tx.executeSql(strInsertWords("look through", "просматривать"));
+                tx.executeSql(strInsertWords("honestly speaking, actually", "честно говоря, на самом деле"));
+                tx.executeSql(strInsertWords("It seems to me", "мне кажется"));
+                tx.executeSql(strInsertWords("pocket", "карман"));
+                tx.executeSql(strInsertWords("It happens like this", "это происходит так"));
+                tx.executeSql(strInsertWords("a banquet", "банкет"));
+                tx.executeSql(strInsertWords("murder", "убийство"));
+                tx.executeSql(strInsertWords("recall", "вспомнить"));
+                tx.executeSql(strInsertWords("scytale", "скитала"));
+                tx.executeSql(strInsertWords("to achieve a goal", "достигнуть цель"));
+                tx.executeSql(strInsertWords("out-going", "исходящий"));
+                //-
                 tx.executeSql(strInsertWords("diary", "дневник"));
                 tx.executeSql(strInsertWords("honest", "честный"));//-
                 tx.executeSql(strInsertWords("peak", "вершина"));
