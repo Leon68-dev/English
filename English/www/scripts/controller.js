@@ -42,7 +42,6 @@ function checkedValue(val) {
 }
 
 function addStrValue(value_text, value_text2, id, isChecked) {
-
     var value_t = "";
     if (value_text && value_text != "undefined")
         value_t = value_text;
@@ -50,7 +49,12 @@ function addStrValue(value_text, value_text2, id, isChecked) {
     if (value_text2 && value_text2 != "undefined")
         value_t += ("<br> - " + value_text2);
 
-    var str = "<tr><td style='text-align:center'><input type='checkbox' style='zoom:4' onclick='onClickCheckBox(this);' value ='" + id + "' " + checkedValue(isChecked) + " ></td><td>" + value_t + "</td></tr>";
+    var str = "<tr ><td width='20%' style='text-align:center'><input type='checkbox' style='zoom:3' onclick='onClickCheckBox(this);' value ='"
+        + id + "' " + checkedValue(isChecked)
+        + "></td><td style='word-wrap:break-word'>" + value_t
+        //+ "</td><td width='10%'><a href='#' class='ui-btn ui-corner-all ui-icon-edit ui-btn-icon-notext ui-btn-inline' onclick='editPaymentType(" + 0 + ");'>Edit</a>"
+        //+ "<a href='#' class='ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-inline' onclick='delPaymentType(" + 0 + ");'>Delete</a>"
+        + "</td></tr>";
     $("#gridWords > tbody:last").after(str);
 }
 
