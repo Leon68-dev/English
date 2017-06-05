@@ -171,7 +171,6 @@
                                 <!-- <option value="1">Name</option> -->
                             </select>
                         </fieldset>
-                       
 
                         <div class="ui-grid-a">
                             <div class="ui-block-a">
@@ -188,9 +187,39 @@
                         </div>
                     </div>
                 </div>
+            </form>
+
+            <form id="frmEditWord">
+                <div data-role="main" class="ui-content">
+                    <div class="ui-field-contain">
+                        <label for="inputEnglishWord">English</label>
+                        <input type="text" name="EnglishWord" id="inputEnglishWord">
+                        <label for="inputRussianhWord">Russian</label>
+                        <input type="text" name="RussianWord" id="inputRussianWord">
+                        <label for="inputEnglishWord">Group</label>
+                        <fieldset data-role="controlgroup">
+                            <label for="selectedMonths">Select A</label>
+                            <select name="selectedGroups" id="selectedGroups" onchange="setGridPayment();">
+                                <!-- <option value="1">Name</option> -->
+                            </select>
+                        </fieldset>
 
 
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                <div class="button-wrap">
+                                    <button class="ui-btn ui-corner-all" onclick="onClickButton(BTN_EDT_WORD_SAVE);">Save</button>
+                                </div>
+                            </div>
 
+                            <div class="ui-block-b">
+                                <div class="button-wrap">
+                                    <button class="ui-btn ui-corner-all" onclick="onClickButton(BTN_EDT_WORD_CANCEL);">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
 
         </div>

@@ -1,4 +1,5 @@
-﻿var currentForm = 0;
+﻿var prevEditForm = 0;
+var currentForm = 0;
 var currentWordType = 0;
 var itemsFound = 0;
 
@@ -35,6 +36,7 @@ var BTN_ALL_WORDS = 3;
 var BTN_CHK_WORDS = 4;
 var BTN_ADD_WORD = 5;
 var BTN_BACKUP = 6;
+var BTN_EDT_WORD = 7;
 var BTN_PHRASES = 100;
 var BTN_ANY = 101;
 var BTN_VERB = 102;
@@ -60,6 +62,9 @@ var BTN_BACKUP_EXPORT = 200;
 var BTN_BACKUP_IMPORT = 201;
 var BTN_ADD_WORD_SAVE = 202;
 var BTN_ADD_WORD_CANCEL = 203;
+var BTN_EDT_WORD_SAVE = 210;
+var BTN_EDT_WORD_CANCEL = 211;
+
 
 function confirmCreateTables() {
     if (confirm('Are you sure you want to reload data?')) {

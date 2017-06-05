@@ -32,6 +32,12 @@ function hideAll() {
     $("#frmAddWord").submit(function () {
         return false;
     });
+    
+    $("#frmEditWord").hide();
+    $("#frmEditWord").submit(function () {
+        return false;
+    });
+
 }
 
 function checkedValue(val) {
@@ -52,10 +58,21 @@ function addStrValue(value_text, value_text2, id, isChecked) {
     var str = "<tr ><td width='20%' style='text-align:center'><input type='checkbox' style='zoom:3' onclick='onClickCheckBox(this);' value ='"
         + id + "' " + checkedValue(isChecked)
         + "></td><td style='word-wrap:break-word'>" + value_t
-        //+ "</td><td width='10%'><a href='#' class='ui-btn ui-corner-all ui-icon-edit ui-btn-icon-notext ui-btn-inline' onclick='editPaymentType(" + 0 + ");'>Edit</a>"
-        //+ "<a href='#' class='ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-inline' onclick='delPaymentType(" + 0 + ");'>Delete</a>"
+        + "</td><td width='10%'><a href='#' class='ui-btn ui-corner-all ui-icon-edit ui-btn-icon-notext ui-btn-inline' onclick='editWord(" + id + ");'>Edit</a>"
+        + "<a href='#' class='ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-inline' onclick='delWord(" + id + ");'>Delete</a>"
         + "</td></tr>";
     $("#gridWords > tbody:last").after(str);
+}
+
+function editWord(idWord) {
+    onClickButton(BTN_EDT_WORD);
+}
+
+function delWord(idWord) {
+    var r = confirm('Would you like to delete data?');
+    if (r == true) {
+        return;
+    }
 }
 
 function getToastCountItems(itemsFound) {
@@ -312,6 +329,21 @@ function cancelNewWord() {
     window.plugins.toast.showShortBottom("Data was canceled");
 }
 
+
+function saveEditWord() {
+    var value_w = $("#inputEnglishWord").val();
+    var value_w2 = $("#inputRussianWord").val();
+    var id_type = $("#selectedGroups").val();
+    showCurrentForm(prevEditForm);
+    return;
+}
+
+function cancelEditWord() {
+
+    showCurrentForm(prevEditForm);
+    return;
+}
+
 function showCurrentForm(index) {
     hideAll();
     switch (index) {
@@ -324,6 +356,7 @@ function showCurrentForm(index) {
             $("#frmWords").show();
             break;
         case BTN_NEW_WORDS:
+            prevEditForm = BTN_NEW_WORDS;
             setGridWordsBody(NEW);
             $("#frmList").show();
             break;
@@ -433,13 +466,22 @@ function showCurrentForm(index) {
         case BTN_ADD_WORD_CANCEL:
             cancelNewWord()
             break;
-
+        case BTN_EDT_WORD:
+            $("#frmEditWord").show();
+            break;
+        case BTN_EDT_WORD_SAVE:
+            saveEditWord();
+            break;
+        case BTN_EDT_WORD_CANCEL:
+            cancelEditWord();
+            break;
         default:
     }
 }
 
 function onClickBack() {
     switch (currentForm) {
+        case BTN_EDT_WORD:
         case BTN_ADD_WORD:
         case BTN_WORDS_PHRASES:
         case BTN_NEW_WORDS:
@@ -483,6 +525,10 @@ function onClickBack() {
             currentForm = BTN_WORDS_PHRASES;
             showCurrentForm(currentForm);
             break;
+        //case BTN_EDT_WORD:
+        //    currentForm = BTN_EDT_WORD;
+        //    showCurrentForm(prevEditForm);
+        //    break;
         default:
             navigator.app.exitApp();
     }
