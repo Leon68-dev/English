@@ -56,16 +56,23 @@ function addStrValue(value_text, value_text2, id, isChecked) {
         value_t += ("<br> - " + value_text2);
 
     var str = "<tr ><td width='20%' style='text-align:center'><input type='checkbox' style='zoom:3' onclick='onClickCheckBox(this);' value ='"
-        + id + "' " + checkedValue(isChecked)
-        + "></td><td style='word-wrap:break-word'>" + value_t
-        + "</td><td width='10%'><a href='#' class='ui-btn ui-corner-all ui-icon-edit ui-btn-icon-notext ui-btn-inline' onclick='editWord(" + id + ");'>Edit</a>"
-        + "<a href='#' class='ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-inline' onclick='delWord(" + id + ");'>Delete</a>"
-        + "</td></tr>";
+            + id + "' " + checkedValue(isChecked)
+            + "></td><td style='word-wrap:break-word'>" + value_t
+            + "</td><td width='10%'><a href='#' class='ui-btn ui-corner-all ui-icon-edit ui-btn-icon-notext ui-btn-inline' onclick='editWord(" + id + ");'>Edit</a>"
+            + "<a href='#' class='ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-inline' onclick='delWord(" + id + ");'>Delete</a>"
+            + "</td></tr>";
     $("#gridWords > tbody:last").after(str);
 }
 
 function editWord(idWord) {
-    onClickButton(BTN_EDT_WORD);
+    selectWordById(idWord, function (res) {
+        setDataToSelect('selectedGroupsEdit', res.rows.item(0).code);
+        $("#inputEnglishWordEdit").val(res.rows.item(0).value_w);
+        $("#inputRussianWordEdit").val(res.rows.item(0).value_w2);
+        editWordID = idWord;
+        onClickButton(BTN_EDT_WORD);
+    });
+
 }
 
 function delWord(idWord) {
@@ -282,15 +289,18 @@ function importDatabase() {
     }
 }
 
-function setDataToSelect() {
-    $('#selectedGroups').empty();
+function setDataToSelect(nameSelector, selectID) {
+    $('#' + nameSelector).empty();
     selectTypes(function (res) {
         var cnt = res.rows.length;
         if (cnt > 0) {
             for (var i = 0; i < cnt; i++) {
-                $('#selectedGroups').append('<option value=' + res.rows.item(i).id + '>' + res.rows.item(i).name + '</option>');
+                $('#' + nameSelector).append('<option value=' + res.rows.item(i).id + '>' + res.rows.item(i).name + '</option>');
             }
-            $('#selectedGroups').val(res.rows.item(0).id).selectmenu("refresh");
+            if (selectID > 0)
+                $('#' + nameSelector).val(selectID).selectmenu("refresh");
+            else
+                $('#' + nameSelector).val(res.rows.item(0).id).selectmenu("refresh");
         }
     });
 }
@@ -301,7 +311,7 @@ function saveNewWord() {
     var id_type = $("#selectedGroups").val();
 
     if (value_w && value_w2) {
-        updateWordById(0, value_w, value_w2, 0, function (res) {
+        insertWordById(0, value_w, value_w2, 0, function (res) {
             selectMaxWordsID(function (res) {
                 if (res && res.rows && res.rows.length) {
                     var id_words = res.rows.item(i).maxID;
@@ -329,19 +339,29 @@ function cancelNewWord() {
     window.plugins.toast.showShortBottom("Data was canceled");
 }
 
-
 function saveEditWord() {
-    var value_w = $("#inputEnglishWord").val();
-    var value_w2 = $("#inputRussianWord").val();
-    var id_type = $("#selectedGroups").val();
-    showCurrentForm(prevEditForm);
-    return;
+    var value_w = $("#inputEnglishWordEdit").val();
+    var value_w2 = $("#inputRussianWordEdit").val();
+    var id_type = $("#selectedGroupsEdit").val();
+    if (value_w && value_w2 && id_type) {
+        updateWordById(editWordID, value_w, value_w2, function (res) {
+            updateRelation(editWordID, id_type, function (res) {
+                showCurrentForm(prevEditForm);
+                currentForm = BTN_ALL_WORDS;
+                window.plugins.toast.showShortBottom("Data was saved");
+            });
+        });
+    } else {
+        showCurrentForm(prevEditForm);
+        currentForm = BTN_ALL_WORDS;
+        window.plugins.toast.showShortBottom("Data was not saved");
+    }
 }
 
 function cancelEditWord() {
-
     showCurrentForm(prevEditForm);
-    return;
+    currentForm = BTN_ALL_WORDS;
+    window.plugins.toast.showShortBottom("Data was canceled");
 }
 
 function showCurrentForm(index) {
@@ -349,6 +369,7 @@ function showCurrentForm(index) {
     switch (index) {
         case 0:
         case BTN_ALL_WORDS:
+            prevEditForm = BTN_ALL_WORDS;
             setGridWordsBody(ALL);
             $("#frmList").show();
             break;
@@ -356,15 +377,17 @@ function showCurrentForm(index) {
             $("#frmWords").show();
             break;
         case BTN_NEW_WORDS:
-            prevEditForm = BTN_NEW_WORDS;
+            prevEditForm = index;
             setGridWordsBody(NEW);
             $("#frmList").show();
             break;
         case BTN_PHRASES:
+            prevEditForm = index;
             setGridWordsBody(PHRASES);
             $("#frmList").show();
             break;
         case BTN_ANY:
+            prevEditForm = index;
             setGridWordsBody(ANY);
             $("#frmList").show();
             break;
@@ -372,22 +395,27 @@ function showCurrentForm(index) {
             $("#frmVerbs").show();
             break;
         case BTN_VERBS:
+            prevEditForm = index;
             setGridWordsBody(VERB);
             $("#frmList").show();
             break;
         case BTN_VERBS_IRREG:
+            prevEditForm = index;
             setGridWordsBody(VERB_IRREG);
             $("#frmList").show();
             break;
         case BTN_HOUSE:
+            prevEditForm = index;
             setGridWordsBody(HOUSE);
             $("#frmList").show();
             break;
         case BTN_CLOTHING:
+            prevEditForm = index;
             setGridWordsBody(CLOTHING);
             $("#frmList").show();
             break;
         case BTN_FOOD:
+            prevEditForm = index;
             setGridWordsBody(FOOD);
             $("#frmList").show();
             break;
@@ -396,46 +424,57 @@ function showCurrentForm(index) {
             $("#frmList").show();
             break;
         case BTN_OFFICE:
+            prevEditForm = index;
             setGridWordsBody(OFFICE);
             $("#frmList").show();
             break;
         case BTN_COLLOCATION:
+            prevEditForm = index;
             setGridWordsBody(COLLOCATION);
             $("#frmList").show();
             break;
         case BTN_TRANSPORT:
+            prevEditForm = index;
             setGridWordsBody(TRANSPORT);
             $("#frmList").show();
             break;
         case BTN_MONEY:
+            prevEditForm = index;
             setGridWordsBody(MONEY);
             $("#frmList").show();
             break;
         case BTN_NATURAL:
+            prevEditForm = index;
             setGridWordsBody(NATURAL);
             $("#frmList").show();
             break;
         case BTN_ANIMALS:
+            prevEditForm = index;
             setGridWordsBody(ANIMALS);
             $("#frmList").show();
             break;
         case BTN_REST:
+            prevEditForm = index;
             setGridWordsBody(REST);
             $("#frmList").show();
             break;
         case BTN_MEDICAL:
+            prevEditForm = index;
             setGridWordsBody(MEDICAL);
             $("#frmList").show();
             break;
         case BTN_IDIOM:
+            prevEditForm = index;
             setGridWordsBody(IDIOM);
             $("#frmList").show();
             break;
         case BTN_CRIME_PUNISHMENT:
+            prevEditForm = index;
             setGridWordsBody(CRIME_PUNISHMENT);
             $("#frmList").show();
             break;
         case BTN_PERSON_FAMILY:
+            prevEditForm = index;
             setGridWordsBody(PERSON_FAMILY);
             $("#frmList").show();
             break;
@@ -444,6 +483,7 @@ function showCurrentForm(index) {
             $("#frmList").show();
             break;
         case BTN_TONGUE_TWISTER:
+            prevEditForm = index;
             setGridWordsBody(TONGUE_TWISTER);
             $("#frmList").show();
             break;
@@ -457,7 +497,7 @@ function showCurrentForm(index) {
             importDatabase();
             break;
         case BTN_ADD_WORD:
-            setDataToSelect();
+            setDataToSelect('selectedGroups', 0);
             $("#frmAddWord").show();
             break;
         case BTN_ADD_WORD_SAVE:
@@ -525,10 +565,10 @@ function onClickBack() {
             currentForm = BTN_WORDS_PHRASES;
             showCurrentForm(currentForm);
             break;
-        //case BTN_EDT_WORD:
-        //    currentForm = BTN_EDT_WORD;
-        //    showCurrentForm(prevEditForm);
-        //    break;
+        case BTN_EDT_WORD:
+            currentForm = BTN_EDT_WORD;
+            showCurrentForm(prevEditForm);
+            break;
         default:
             navigator.app.exitApp();
     }

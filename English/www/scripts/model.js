@@ -1,4 +1,5 @@
-﻿var prevEditForm = 0;
+﻿var editWordID = -1;
+var prevEditForm = 0;
 var currentForm = 0;
 var currentWordType = 0;
 var itemsFound = 0;
@@ -74,25 +75,43 @@ function confirmCreateTables() {
     }
 }
 
-function updateWordById(id, value_w, value_w2, is_checked, callBack) {
+function insertWordById(id, value_w, value_w2, is_checked, callBack) {
     var db = openDatabase();
     db.transaction(function (tx) {
         var strSQL = '';
-        if (id > 0) {
-            strSQL = "UPDATE words SET value_w=?, value_w2=?, is_checked=? WHERE id=?;";
-            tx.executeSql(strSQL, [value_w, value_w2, is_checked, id], function (res) {
-                callBack(0);
-            });
-        } else {
-            strSQL = "INSERT INTO words(value_w, value_w2, is_checked) VALUES(?,?,?);";
-            tx.executeSql(strSQL, [value_w, value_w2, is_checked], function (res) {
-                callBack(0);
-            });
-        }
+        strSQL = "INSERT INTO words(value_w, value_w2, is_checked) VALUES(?,?,?);";
+        tx.executeSql(strSQL, [value_w, value_w2, is_checked], function (res) {
+            callBack(0);
+        });
     }, function (tx, error) {
         console.log('Transaction error: ' + error.message);
     });
 }
+
+function updateWordById(id, value_w, value_w2, callBack) {
+    var db = openDatabase();
+    db.transaction(function (tx) {
+        var strSQL = '';
+        strSQL = "UPDATE words SET value_w=?, value_w2=? WHERE id=?;";
+        tx.executeSql(strSQL, [value_w, value_w2, id], function (res) {
+            callBack(0);
+        });
+    }, function (tx, error) {
+        console.log('Transaction error: ' + error.message);
+    });
+}
+
+function selectWordById(id_words, callBack) {
+    var db = openDatabase();
+    db.transaction(function (tx) {
+        tx.executeSql("select * from vrows where id=? order by value_w, value_w2;", [id_words], function (tx, res) {
+            callBack(res);
+        }, function (tx, error) {
+            console.log('SELECT error: ' + error.message);
+        });
+    });
+}
+
 
 function insertRelation(id_words, id_type, callBack) {
     var db = openDatabase();
@@ -100,6 +119,19 @@ function insertRelation(id_words, id_type, callBack) {
         var strSQL = '';
         strSQL = "INSERT INTO relations(id_words, id_type) VALUES(?,?);";
         tx.executeSql(strSQL, [id_words, id_type], function (res) {
+            callBack(0);
+        });
+    }, function (tx, error) {
+        console.log('Transaction error: ' + error.message);
+    });
+}
+
+function updateRelation(id_words, id_type, callBack) {
+    var db = openDatabase();
+    db.transaction(function (tx) {
+        var strSQL = '';
+        strSQL = "UPDATE relations SET id_type=? WHERE id_words=?;";
+        tx.executeSql(strSQL, [id_type, id_words], function (res) {
             callBack(0);
         });
     }, function (tx, error) {
@@ -146,7 +178,9 @@ function strInsertWords(sqlValue, sqlValue2) {
 
 
 function strInsertRelation(sqlValue) {
-    var strSql = "INSERT INTO relations (id_words, id_type) select w.id, (select id from types where name = '" + sqlValue + "') from words w where w.id between (select min(t.id) from words t where t.id not in (select id_words from relations)) and (select max(t.id) from words t where t.id not in (select id_words from relations));";
+    var strSql = "INSERT INTO relations (id_words, id_type) select w.id, (select id from types where name = '" + sqlValue + "')"
+        + " from words w where w.id between (select min(t.id) from words t where t.id not in "
+        + "(select id_words from relations)) and (select max(t.id) from words t where t.id not in (select id_words from relations));";
     return strSql;
 }
 

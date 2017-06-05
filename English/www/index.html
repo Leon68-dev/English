@@ -164,10 +164,11 @@
                         <input type="text" name="EnglishWord" id="inputEnglishWord">
                         <label for="inputRussianhWord">Russian</label>
                         <input type="text" name="RussianWord" id="inputRussianWord">
-                        <label for="inputEnglishWord">Group</label>
+                        <label for="selectedGroups">Group</label>
                         <fieldset data-role="controlgroup">
-                            <label for="selectedMonths">Select A</label>
-                            <select name="selectedGroups" id="selectedGroups" onchange="setGridPayment();">
+                            <!-- <label for="selectedGroups">Select A</label> -->
+                            <!--  onchange="setGridPayment();" -->
+                            <select name="selectedGroups" id="selectedGroups" >
                                 <!-- <option value="1">Name</option> -->
                             </select>
                         </fieldset>
@@ -192,14 +193,15 @@
             <form id="frmEditWord">
                 <div data-role="main" class="ui-content">
                     <div class="ui-field-contain">
-                        <label for="inputEnglishWord">English</label>
-                        <input type="text" name="EnglishWord" id="inputEnglishWord">
-                        <label for="inputRussianhWord">Russian</label>
-                        <input type="text" name="RussianWord" id="inputRussianWord">
-                        <label for="inputEnglishWord">Group</label>
+                        <label for="inputEnglishWordEdit">English</label>
+                        <input type="text" name="EnglishWord" id="inputEnglishWordEdit">
+                        <label for="inputRussianWordEdit">Russian</label>
+                        <input type="text" name="RussianWord" id="inputRussianWordEdit">
+                        <label for="selectedGroupsEdit">Group</label>
                         <fieldset data-role="controlgroup">
-                            <label for="selectedMonths">Select A</label>
-                            <select name="selectedGroups" id="selectedGroups" onchange="setGridPayment();">
+                            <!-- <label for="selectedGroupsEdit">Select A</label> -->
+                            <!-- onchange="setGridPayment();" -->
+                            <select name="selectedGroupsEdit" id="selectedGroupsEdit" >
                                 <!-- <option value="1">Name</option> -->
                             </select>
                         </fieldset>
