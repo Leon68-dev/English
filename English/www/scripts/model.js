@@ -104,7 +104,7 @@ function updateWordById(id, value_w, value_w2, callBack) {
 function selectWordById(id_words, callBack) {
     var db = openDatabase();
     db.transaction(function (tx) {
-        tx.executeSql("select * from vrows where id=? order by value_w, value_w2;", [id_words], function (tx, res) {
+        tx.executeSql("SELECT * FROM vrows WHERE id=? ORDER BY value_w, value_w2;", [id_words], function (tx, res) {
             callBack(res);
         }, function (tx, error) {
             console.log('SELECT error: ' + error.message);
@@ -112,6 +112,18 @@ function selectWordById(id_words, callBack) {
     });
 }
 
+function deleteWordById(id, callBack) {
+    var db = openDatabase();
+    db.transaction(function (tx) {
+        var strSQL = '';
+        strSQL = "DELETE FROM words WHERE id=?;";
+        tx.executeSql(strSQL, [id], function (res) {
+            callBack(0);
+        });
+    }, function (tx, error) {
+        console.log('Transaction error: ' + error.message);
+    });
+}
 
 function insertRelation(id_words, id_type, callBack) {
     var db = openDatabase();
@@ -132,6 +144,19 @@ function updateRelation(id_words, id_type, callBack) {
         var strSQL = '';
         strSQL = "UPDATE relations SET id_type=? WHERE id_words=?;";
         tx.executeSql(strSQL, [id_type, id_words], function (res) {
+            callBack(0);
+        });
+    }, function (tx, error) {
+        console.log('Transaction error: ' + error.message);
+    });
+}
+
+function deleteRelation(id_words, id_type, callBack) {
+    var db = openDatabase();
+    db.transaction(function (tx) {
+        var strSQL = '';
+        strSQL = "DELETE FROM relations WHERE id_words=? AND id_type=?;";
+        tx.executeSql(strSQL, [id_words, id_type], function (res) {
             callBack(0);
         });
     }, function (tx, error) {

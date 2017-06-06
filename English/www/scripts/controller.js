@@ -78,7 +78,15 @@ function editWord(idWord) {
 function delWord(idWord) {
     var r = confirm('Would you like to delete data?');
     if (r == true) {
-        return;
+        selectWordById(idWord, function (res) {
+            var idType = res.rows.item(0).code;
+            deleteRelation(idWord, idType, function (res2) {
+                deleteWordById(idWord, function (res3) {
+                    setGridWordsBody(currentWordType);
+                    window.plugins.toast.showShortBottom("Data was deleted");
+                });
+            });
+        });
     }
 }
 
@@ -314,7 +322,7 @@ function saveNewWord() {
         insertWordById(0, value_w, value_w2, 0, function (res) {
             selectMaxWordsID(function (res) {
                 if (res && res.rows && res.rows.length) {
-                    var id_words = res.rows.item(i).maxID;
+                    var id_words = res.rows.item(0).maxID;
                     insertRelation(id_words, id_type, function (res3) {
                         $("#inputEnglishWord").val('');
                         $("#inputRussianWord").val('');
