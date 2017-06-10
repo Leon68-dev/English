@@ -224,17 +224,91 @@
                 </div>
             </form>
 
+            <form id="frmCategories">
+                <div class="panel-body" id="frmListBody">
+                    <div class="form-group">
+                        <ul data-role="listview" data-inset="true">
+                            <li style="text-align:center;" onclick="onClickButton(BTN_ADD_CATEG);">Add categories</li>
+                        </ul>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12">
+                            <!--<table class="table table-condensed" id="gridWords" border="1px" >-->
+                            <table style="table-layout:fixed" width="100%" id="gridCategories">
+                                <thead>
+                                    <!--<tr>
+                                <th>
+                                </th>
+                                <th>
+                                    Value
+                                </th>
+                            </tr>-->
+                                </thead>
+                                <tbody id="tbodycategoriesid"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <form id="frmAddCategories">
+                <div data-role="main" class="ui-content">
+                    <div class="ui-field-contain">
+                        <label for="inputCategorie">Categorie</label>
+                        <input type="text" name="inputCategorie" id="inputCategorie">
+
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                <div class="button-wrap">
+                                    <button class="ui-btn ui-corner-all" onclick="onClickButton(BTN_ADD_CATEG_SAVE);">Save</button>
+                                </div>
+                            </div>
+
+                            <div class="ui-block-b">
+                                <div class="button-wrap">
+                                    <button class="ui-btn ui-corner-all" onclick="onClickButton(BTN_ADD_CATEG_CANCEL);">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <form id="frmEditCategories">
+                <div data-role="main" class="ui-content">
+                    <div class="ui-field-contain">
+                        <label for="inputCategorieEdit">Categorie</label>
+                        <input type="text" name="inputCategorieEdit" id="inputCategorieEdit">
+
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                <div class="button-wrap">
+                                    <button class="ui-btn ui-corner-all" onclick="onClickButton(BTN_EDT_CATEG_SAVE);">Save</button>
+                                </div>
+                            </div>
+
+                            <div class="ui-block-b">
+                                <div class="button-wrap">
+                                    <button class="ui-btn ui-corner-all" onclick="onClickButton(BTN_EDT_CATEG_CANCEL);">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
 
         <div data-role="panel" id="left-panel" data-display="overlay" data-theme="b">
             <div class="form-group">
                 <ul data-role="listview" data-inset="true" >
                     <li data-rel="close" onclick="onClickButton(BTN_WORDS_PHRASES)">Words + Phrases</li>
+                    <li data-rel="close" onclick="onClickButton(BTN_ADD_WORD)">Add Word</li>
+                    <li data-rel="close" onclick="onClickButton(BTN_CATEG)">Categories words</li>
                     <li data-rel="close" onclick="onClickButton(BTN_NEW_WORDS)">New Words</li>
                     <li data-rel="close" onclick="onClickButton(BTN_ALL_WORDS)">All Words(find)</li>
                     <li data-rel="close" onclick="onClickButton(BTN_CHK_WORDS)">Words Checked</li>
                     <li data-rel="close" onclick="confirmCreateTables()">Reload All</li>
-                    <li data-rel="close" onclick="onClickButton(BTN_ADD_WORD)">Add Word</li>
                     <li data-rel="close" onclick="onClickButton(BTN_BACKUP)">Backup</li>
                 </ul>
             </div>

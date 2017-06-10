@@ -38,6 +38,21 @@ function hideAll() {
         return false;
     });
 
+    $("#frmCategories").hide();
+    $("#frmCategories").submit(function () {
+        return false;
+    });
+    
+    $("#frmAddCategories").hide();
+    $("#frmAddCategories").submit(function () {
+        return false;
+    });
+    
+    $("#frmEditCategories").hide();
+    $("#frmEditCategories").submit(function () {
+        return false;
+    });
+
 }
 
 function checkedValue(val) {
@@ -64,6 +79,15 @@ function addStrValue(value_text, value_text2, id, isChecked) {
     $("#gridWords > tbody:last").after(str);
 }
 
+function addStrValueCategories(id, name) {
+    var value_t = name  /* ("<br> - " + name) */;
+    var str = "<tr ><td style='word-wrap:break-word'>" + value_t
+            + "</td><td width='10%'><a href='#' class='ui-btn ui-corner-all ui-icon-edit ui-btn-icon-notext ui-btn-inline' onclick='editCategorie(" + id + ");'>Edit</a>"
+            + "<a href='#' class='ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-inline' onclick='delCategorie(" + id + ");'>Delete</a>"
+            + "</td></tr>";
+    $("#gridCategories > tbody:last").after(str);
+}
+
 function editWord(idWord) {
     selectWordById(idWord, function (res) {
         setDataToSelect('selectedGroupsEdit', res.rows.item(0).code);
@@ -72,7 +96,6 @@ function editWord(idWord) {
         editWordID = idWord;
         onClickButton(BTN_EDT_WORD);
     });
-
 }
 
 function delWord(idWord) {
@@ -159,6 +182,13 @@ function onClickButton(index) {
 
 function clearTBody() {
     var table = document.getElementById("gridWords");
+    for (var i = table.rows.length - 1; i >= 0; i--) {
+        table.deleteRow(i);
+    }
+}
+
+function clearTBodyCategories() {
+    var table = document.getElementById("gridCategories");
     for (var i = table.rows.length - 1; i >= 0; i--) {
         table.deleteRow(i);
     }
@@ -372,6 +402,78 @@ function cancelEditWord() {
     window.plugins.toast.showShortBottom("Data was canceled");
 }
 
+function setGridCategoriesBody() {
+    clearTBodyCategories();
+    selectCategories(function (res) {
+        var cnt = res.rows.length;
+        for (i = 0; i < cnt; i++) {
+            addStrValueCategories(res.rows.item(i).id, res.rows.item(i).name);
+        }
+        getToastCountItems(cnt);
+    });
+}
+
+function saveNewCategorie() {
+    var name = $("#inputCategorie").val();
+    if (name) {
+        insertCategorie(name.trim().toLocaleUpperCase(), function (res) {
+            $("#inputCategorie").val('');
+            showCurrentForm(BTN_CATEG);
+            window.plugins.toast.showShortBottom("Data was saved");
+        });
+    } else {
+        $("#inputCategorie").val('');
+        showCurrentForm(BTN_CATEG);
+        window.plugins.toast.showShortBottom("Data was not saved");
+    }
+}
+
+function cancelCategorie() {
+    $("#inputCategorie").val('');
+    $("#inputCategorieEdit").val('');
+    showCurrentForm(BTN_CATEG);
+    window.plugins.toast.showShortBottom("Data was canceled");
+}
+
+function editCategorie(idCategorie) {
+    selectCategorieById(idCategorie, function (res) {
+        $("#inputCategorieEdit").val(res.rows.item(0).name);
+        editCategorieID = idCategorie;
+        onClickButton(BTN_EDT_CATEG);
+    });
+}
+
+function delCategorie(id) {
+    var r = confirm('Would you like to delete data?');
+    if (r == true) {
+        checkCategoriesInRelations(id, function (res) {
+            if (res == 0) {
+                deleteCategorieById(id, function (res) {
+                    setGridCategoriesBody();
+                    window.plugins.toast.showShortBottom("Data was deleted");
+                });
+            } else {
+                window.plugins.toast.showShortBottom("Data cannot be deleted");
+            }
+        });
+    }
+}
+
+function saveEditCategorie() {
+    var name = $("#inputCategorieEdit").val();
+    if (name) {
+        updateCategorie(editCategorieID, name.trim().toUpperCase(), function (res) {
+            $("#inputCategorieEdit").val('');
+            showCurrentForm(BTN_CATEG);
+            window.plugins.toast.showShortBottom("Data was saved");
+        });
+    } else {
+        $("#inputCategorieEdit").val('');
+        showCurrentForm(BTN_CATEG);
+        window.plugins.toast.showShortBottom("Data was not saved");
+    }
+}
+
 function showCurrentForm(index) {
     hideAll();
     switch (index) {
@@ -523,12 +625,34 @@ function showCurrentForm(index) {
         case BTN_EDT_WORD_CANCEL:
             cancelEditWord();
             break;
+        case BTN_CATEG:
+            setGridCategoriesBody();
+            $("#frmCategories").show();
+            break;
+        case BTN_ADD_CATEG:
+            $("#frmAddCategories").show();
+            break;
+        case BTN_ADD_CATEG_SAVE:
+            saveNewCategorie();
+            break;
+        case BTN_EDT_CATEG:
+            $("#frmEditCategories").show();
+            break;
+        case BTN_EDT_CATEG_SAVE:
+            saveEditCategorie();
+            break;
+        case BTN_ADD_CATEG_CANCEL:
+        case BTN_EDT_CATEG_CANCEL:
+            cancelCategorie();
+            break;
+
         default:
     }
 }
 
 function onClickBack() {
     switch (currentForm) {
+        case BTN_CATEG:
         case BTN_EDT_WORD:
         case BTN_ADD_WORD:
         case BTN_WORDS_PHRASES:
@@ -577,6 +701,12 @@ function onClickBack() {
             currentForm = BTN_EDT_WORD;
             showCurrentForm(prevEditForm);
             break;
+        case BTN_ADD_CATEG:
+        case BTN_EDT_CATEG:
+            currentForm = BTN_CATEG;
+            showCurrentForm(prevEditForm);
+            break;
+
         default:
             navigator.app.exitApp();
     }
