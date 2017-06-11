@@ -53,6 +53,11 @@ function hideAll() {
         return false;
     });
 
+    $("#frmCategoriesButtons").hide();
+    $("#frmCategoriesButtons").submit(function () {
+        return false;
+    });
+
 }
 
 function checkedValue(val) {
@@ -128,17 +133,19 @@ function setGridWordsBody(wordType) {
     currentWordType = wordType;
     var db = openDatabase();
     db.transaction(function (tx) {
-        if (wordType == NEW) {
-            tx.executeSql("select * from vrows where code = " + NEW + " order by id desc;", [], function (tx, res) {
-                var cnt = res.rows.length;
-                for (i = 0; i < cnt; i++) {
-                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
-                }
-                getToastCountItems(cnt);
-            },function(tx, error) {
-                console.log('SELECT error: ' + error.message);
-            });
-        } else if (wordType == CHK) {
+        //if (wordType == NEW) {
+        //    tx.executeSql("select * from vrows where code = " + NEW + " order by id desc;", [], function (tx, res) {
+        //        var cnt = res.rows.length;
+        //        for (i = 0; i < cnt; i++) {
+        //            addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
+        //        }
+        //        getToastCountItems(cnt);
+        //    },function(tx, error) {
+        //        console.log('SELECT error: ' + error.message);
+        //    });
+        //} else
+
+        if (wordType == CHK) {
             tx.executeSql("select * from vrows where is_checked = 1 order by id desc;", [], function (tx, res) {
                 var cnt = res.rows.length;
                 for (i = 0; i < cnt; i++) {
@@ -213,16 +220,16 @@ function onClickButtonFind() {
             }, function (tx, error) {
                 console.log('SELECT error: ' + error.message);
             });
-        } else if (currentWordType == NEW) {
-            tx.executeSql("select * from vrows where code = " + NEW + " and (value_w like'%" + getSearchText() + "%' or value_w2 like'%" + getSearchText() + "%') order by id desc;", [], function (tx, res) {
-                var cnt = res.rows.length;
-                for (i = 0; i < cnt; i++) {
-                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
-                }
-                getToastCountItems(cnt);
-            }, function (tx, error) {
-                console.log('SELECT error: ' + error.message);
-            });
+        //} else if (currentWordType == NEW) {
+        //    tx.executeSql("select * from vrows where code = " + NEW + " and (value_w like'%" + getSearchText() + "%' or value_w2 like'%" + getSearchText() + "%') order by id desc;", [], function (tx, res) {
+        //        var cnt = res.rows.length;
+        //        for (i = 0; i < cnt; i++) {
+        //            addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
+        //        }
+        //        getToastCountItems(cnt);
+        //    }, function (tx, error) {
+        //        console.log('SELECT error: ' + error.message);
+        //    });
         } else if (currentWordType == CHK) {
             tx.executeSql("select * from vrows where is_checked = 1 and (value_w like'%" + getSearchText() + "%' or value_w2 like'%" + getSearchText() + "%') order by id desc;", [], function (tx, res) {
                 var cnt = res.rows.length;
@@ -474,6 +481,25 @@ function saveEditCategorie() {
     }
 }
 
+function setCategoriesButtons() {
+    $("#categoriesButtons").empty();
+    selectCategoriesButtons(function (res) {
+        var cnt = res.rows.length;
+        for (i = 0; i < cnt; i++) {
+            var li = '<li style="text-align:center;"><button class="ui-btn ui-corner-all" onclick="onClickCategorieButton(' + res.rows.item(i).id + ');">' + res.rows.item(i).name + '</button></li>';
+            $("#categoriesButtons").append(li);
+        }
+    });
+}
+
+function onClickCategorieButton(id) {
+    hideAll();
+    currentForm = BTN_CATEG_VIEW_DETAIL;
+    prevEditForm = BTN_CATEG_VIEW;
+    setGridWordsBody(id);
+    $("#frmList").show();
+}
+
 function showCurrentForm(index) {
     hideAll();
     switch (index) {
@@ -483,118 +509,118 @@ function showCurrentForm(index) {
             setGridWordsBody(ALL);
             $("#frmList").show();
             break;
-        case BTN_WORDS_PHRASES:
-            $("#frmWords").show();
-            break;
-        case BTN_NEW_WORDS:
-            prevEditForm = index;
-            setGridWordsBody(NEW);
-            $("#frmList").show();
-            break;
-        case BTN_PHRASES:
-            prevEditForm = index;
-            setGridWordsBody(PHRASES);
-            $("#frmList").show();
-            break;
-        case BTN_ANY:
-            prevEditForm = index;
-            setGridWordsBody(ANY);
-            $("#frmList").show();
-            break;
-        case BTN_VERB:
-            $("#frmVerbs").show();
-            break;
-        case BTN_VERBS:
-            prevEditForm = index;
-            setGridWordsBody(VERB);
-            $("#frmList").show();
-            break;
-        case BTN_VERBS_IRREG:
-            prevEditForm = index;
-            setGridWordsBody(VERB_IRREG);
-            $("#frmList").show();
-            break;
-        case BTN_HOUSE:
-            prevEditForm = index;
-            setGridWordsBody(HOUSE);
-            $("#frmList").show();
-            break;
-        case BTN_CLOTHING:
-            prevEditForm = index;
-            setGridWordsBody(CLOTHING);
-            $("#frmList").show();
-            break;
-        case BTN_FOOD:
-            prevEditForm = index;
-            setGridWordsBody(FOOD);
-            $("#frmList").show();
-            break;
-        case BTN_ADJECTIVE:
-            setGridWordsBody(ADJECTIVE);
-            $("#frmList").show();
-            break;
-        case BTN_OFFICE:
-            prevEditForm = index;
-            setGridWordsBody(OFFICE);
-            $("#frmList").show();
-            break;
-        case BTN_COLLOCATION:
-            prevEditForm = index;
-            setGridWordsBody(COLLOCATION);
-            $("#frmList").show();
-            break;
-        case BTN_TRANSPORT:
-            prevEditForm = index;
-            setGridWordsBody(TRANSPORT);
-            $("#frmList").show();
-            break;
-        case BTN_MONEY:
-            prevEditForm = index;
-            setGridWordsBody(MONEY);
-            $("#frmList").show();
-            break;
-        case BTN_NATURAL:
-            prevEditForm = index;
-            setGridWordsBody(NATURAL);
-            $("#frmList").show();
-            break;
-        case BTN_ANIMALS:
-            prevEditForm = index;
-            setGridWordsBody(ANIMALS);
-            $("#frmList").show();
-            break;
-        case BTN_REST:
-            prevEditForm = index;
-            setGridWordsBody(REST);
-            $("#frmList").show();
-            break;
-        case BTN_MEDICAL:
-            prevEditForm = index;
-            setGridWordsBody(MEDICAL);
-            $("#frmList").show();
-            break;
-        case BTN_IDIOM:
-            prevEditForm = index;
-            setGridWordsBody(IDIOM);
-            $("#frmList").show();
-            break;
-        case BTN_CRIME_PUNISHMENT:
-            prevEditForm = index;
-            setGridWordsBody(CRIME_PUNISHMENT);
-            $("#frmList").show();
-            break;
-        case BTN_PERSON_FAMILY:
-            prevEditForm = index;
-            setGridWordsBody(PERSON_FAMILY);
-            $("#frmList").show();
-            break;
+        //case BTN_WORDS_PHRASES:
+        //    $("#frmWords").show();
+        //    break;
+        //case BTN_NEW_WORDS:
+        //    prevEditForm = index;
+        //    setGridWordsBody(NEW);
+        //    $("#frmList").show();
+        //    break;
+        //case BTN_PHRASES:
+        //    prevEditForm = index;
+        //    setGridWordsBody(PHRASES);
+        //    $("#frmList").show();
+        //    break;
+        //case BTN_ANY:
+        //    prevEditForm = index;
+        //    setGridWordsBody(ANY);
+        //    $("#frmList").show();
+        //    break;
+        //case BTN_VERB:
+        //    $("#frmVerbs").show();
+        //    break;
+        //case BTN_VERBS:
+        //    prevEditForm = index;
+        //    setGridWordsBody(VERB);
+        //    $("#frmList").show();
+        //    break;
+        //case BTN_VERBS_IRREG:
+        //    prevEditForm = index;
+        //    setGridWordsBody(VERB_IRREG);
+        //    $("#frmList").show();
+        //    break;
+        //case BTN_HOUSE:
+        //    prevEditForm = index;
+        //    setGridWordsBody(HOUSE);
+        //    $("#frmList").show();
+        //    break;
+        //case BTN_CLOTHING:
+        //    prevEditForm = index;
+        //    setGridWordsBody(CLOTHING);
+        //    $("#frmList").show();
+        //    break;
+        //case BTN_FOOD:
+        //    prevEditForm = index;
+        //    setGridWordsBody(FOOD);
+        //    $("#frmList").show();
+        //    break;
+        //case BTN_ADJECTIVE:
+        //    setGridWordsBody(ADJECTIVE);
+        //    $("#frmList").show();
+        //    break;
+        //case BTN_OFFICE:
+        //    prevEditForm = index;
+        //    setGridWordsBody(OFFICE);
+        //    $("#frmList").show();
+        //    break;
+        //case BTN_COLLOCATION:
+        //    prevEditForm = index;
+        //    setGridWordsBody(COLLOCATION);
+        //    $("#frmList").show();
+        //    break;
+        //case BTN_TRANSPORT:
+        //    prevEditForm = index;
+        //    setGridWordsBody(TRANSPORT);
+        //    $("#frmList").show();
+        //    break;
+        //case BTN_MONEY:
+        //    prevEditForm = index;
+        //    setGridWordsBody(MONEY);
+        //    $("#frmList").show();
+        //    break;
+        //case BTN_NATURAL:
+        //    prevEditForm = index;
+        //    setGridWordsBody(NATURAL);
+        //    $("#frmList").show();
+        //    break;
+        //case BTN_ANIMALS:
+        //    prevEditForm = index;
+        //    setGridWordsBody(ANIMALS);
+        //    $("#frmList").show();
+        //    break;
+        //case BTN_REST:
+        //    prevEditForm = index;
+        //    setGridWordsBody(REST);
+        //    $("#frmList").show();
+        //    break;
+        //case BTN_MEDICAL:
+        //    prevEditForm = index;
+        //    setGridWordsBody(MEDICAL);
+        //    $("#frmList").show();
+        //    break;
+        //case BTN_IDIOM:
+        //    prevEditForm = index;
+        //    setGridWordsBody(IDIOM);
+        //    $("#frmList").show();
+        //    break;
+        //case BTN_CRIME_PUNISHMENT:
+        //    prevEditForm = index;
+        //    setGridWordsBody(CRIME_PUNISHMENT);
+        //    $("#frmList").show();
+        //    break;
+        //case BTN_PERSON_FAMILY:
+        //    prevEditForm = index;
+        //    setGridWordsBody(PERSON_FAMILY);
+        //    $("#frmList").show();
+        //    break;
+        //case BTN_TONGUE_TWISTER:
+        //    prevEditForm = index;
+        //    setGridWordsBody(TONGUE_TWISTER);
+        //    $("#frmList").show();
+        //    break;
         case BTN_CHK_WORDS:
             setGridWordsBody(CHK);
-            $("#frmList").show();
-            break;
-        case BTN_TONGUE_TWISTER:
-            prevEditForm = index;
-            setGridWordsBody(TONGUE_TWISTER);
             $("#frmList").show();
             break;
         case BTN_BACKUP:
@@ -645,6 +671,10 @@ function showCurrentForm(index) {
         case BTN_EDT_CATEG_CANCEL:
             cancelCategorie();
             break;
+        case BTN_CATEG_VIEW:
+            setCategoriesButtons();
+            $("#frmCategoriesButtons").show();
+            break;
 
         default:
     }
@@ -652,11 +682,12 @@ function showCurrentForm(index) {
 
 function onClickBack() {
     switch (currentForm) {
+        case BTN_CATEG_VIEW:
         case BTN_CATEG:
         case BTN_EDT_WORD:
         case BTN_ADD_WORD:
-        case BTN_WORDS_PHRASES:
-        case BTN_NEW_WORDS:
+        //case BTN_WORDS_PHRASES:
+        //case BTN_NEW_WORDS:
         case BTN_ALL_WORDS:
         case BTN_CHK_WORDS:
         case BTN_BACKUP:
@@ -665,38 +696,38 @@ function onClickBack() {
             currentForm = 0;
             showCurrentForm(currentForm);
             break;
-        case BTN_PHRASES:
-        case BTN_ANY:
-        case BTN_VERB:
-            currentForm = BTN_WORDS_PHRASES;
-            showCurrentForm(currentForm);
-            break;
-        case BTN_VERBS:
-            currentForm = BTN_VERB;
-            showCurrentForm(currentForm);
-            break;
-        case BTN_VERBS_IRREG:
-            currentForm = BTN_VERB;
-            showCurrentForm(currentForm);
-            break;
-        case BTN_HOUSE:
-        case BTN_CLOTHING:
-        case BTN_FOOD:
-        case BTN_ADJECTIVE:
-        case BTN_OFFICE:
-        case BTN_COLLOCATION:
-        case BTN_TRANSPORT:
-        case BTN_MONEY:
-        case BTN_NATURAL:
-        case BTN_ANIMALS:
-        case BTN_REST:
-        case BTN_MEDICAL:
-        case BTN_IDIOM:
-        case BTN_CRIME_PUNISHMENT:
-        case BTN_PERSON_FAMILY:
-            currentForm = BTN_WORDS_PHRASES;
-            showCurrentForm(currentForm);
-            break;
+        //case BTN_PHRASES:
+        //case BTN_ANY:
+        //case BTN_VERB:
+        //    currentForm = BTN_WORDS_PHRASES;
+        //    showCurrentForm(currentForm);
+        //    break;
+        //case BTN_VERBS:
+        //    currentForm = BTN_VERB;
+        //    showCurrentForm(currentForm);
+        //    break;
+        //case BTN_VERBS_IRREG:
+        //    currentForm = BTN_VERB;
+        //    showCurrentForm(currentForm);
+        //    break;
+        //case BTN_HOUSE:
+        //case BTN_CLOTHING:
+        //case BTN_FOOD:
+        //case BTN_ADJECTIVE:
+        //case BTN_OFFICE:
+        //case BTN_COLLOCATION:
+        //case BTN_TRANSPORT:
+        //case BTN_MONEY:
+        //case BTN_NATURAL:
+        //case BTN_ANIMALS:
+        //case BTN_REST:
+        //case BTN_MEDICAL:
+        //case BTN_IDIOM:
+        //case BTN_CRIME_PUNISHMENT:
+        //case BTN_PERSON_FAMILY:
+        //    currentForm = BTN_WORDS_PHRASES;
+        //    showCurrentForm(currentForm);
+        //    break;
         case BTN_EDT_WORD:
             currentForm = BTN_EDT_WORD;
             showCurrentForm(prevEditForm);
@@ -706,7 +737,10 @@ function onClickBack() {
             currentForm = BTN_CATEG;
             showCurrentForm(prevEditForm);
             break;
-
+        case BTN_CATEG_VIEW_DETAIL:
+            currentForm = BTN_CATEG_VIEW;
+            showCurrentForm(BTN_CATEG_VIEW);
+            break;
         default:
             navigator.app.exitApp();
     }

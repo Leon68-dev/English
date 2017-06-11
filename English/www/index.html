@@ -58,13 +58,7 @@
         
         <div role="main" class="ui-content" >
 
-            <!--<form id="frmStart" >
-                <div data-role="content" id="content">
-                    <img id="my_image" src="../www/images/icon-96-xhdpi.png" alt="image" style="width:250px; height:250px; position: absolute; top: 50%; left: 50%; margin-left: -125px; margin-top: -65px"/>
-                </div>
-            </form>-->
-
-            <form id="frmWords">
+            <!--<form id="frmWords">
                 <div class="panel-body">
                     <div class="form-group">
                         <ul data-role="listview" data-inset="true">
@@ -90,7 +84,7 @@
                         </ul>
                     </div>
                 </div>
-            </form>
+            </form>-->
 
             <form id="frmList">
                 <div class="panel-body" id="frmListBody">
@@ -125,7 +119,7 @@
                 </div>
             </form>
 
-            <form id="frmVerbs">
+            <!--<form id="frmVerbs">
                 <div class="panel-body">
                     <div class="form-group">
                         <ul data-role="listview" data-inset="true">
@@ -134,7 +128,7 @@
                         </ul>
                     </div>
                 </div>
-            </form>
+            </form>-->
 
             <form id="frmBackup">
                 <h2>Backup</h2>
@@ -257,7 +251,6 @@
                     <div class="ui-field-contain">
                         <label for="inputCategorie">Categorie</label>
                         <input type="text" name="inputCategorie" id="inputCategorie">
-
                         <div class="ui-grid-a">
                             <div class="ui-block-a">
                                 <div class="button-wrap">
@@ -297,18 +290,30 @@
                     </div>
                 </div>
             </form>
+
+            <form id="frmCategoriesButtons">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <ul id="categoriesButtons" data-role="listview" data-inset="true">
+                            <li/>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+
         </div>
 
         <div data-role="panel" id="left-panel" data-display="overlay" data-theme="b">
             <div class="form-group">
                 <ul data-role="listview" data-inset="true" >
-                    <li data-rel="close" onclick="onClickButton(BTN_WORDS_PHRASES)">Words + Phrases</li>
+                    <!-- <li data-rel="close" onclick="onClickButton(BTN_WORDS_PHRASES)">Words + Phrases</li> -->
                     <li data-rel="close" onclick="onClickButton(BTN_ADD_WORD)">Add Word</li>
-                    <li data-rel="close" onclick="onClickButton(BTN_CATEG)">Categories words</li>
-                    <li data-rel="close" onclick="onClickButton(BTN_NEW_WORDS)">New Words</li>
+                    <li data-rel="close" onclick="onClickButton(BTN_CATEG_VIEW)">Categories</li>
+                    <li data-rel="close" onclick="onClickButton(BTN_CATEG)">Categories (ref)</li>
+                    <!-- <li data-rel="close" onclick="onClickButton(BTN_NEW_WORDS)">New Words</li> -->
                     <li data-rel="close" onclick="onClickButton(BTN_ALL_WORDS)">All Words(find)</li>
                     <li data-rel="close" onclick="onClickButton(BTN_CHK_WORDS)">Words Checked</li>
-                    <li data-rel="close" onclick="confirmCreateTables()">Reload All</li>
+                    <!-- <li data-rel="close" onclick="confirmCreateTables()">Reload All</li> -->
                     <li data-rel="close" onclick="onClickButton(BTN_BACKUP)">Backup</li>
                 </ul>
             </div>

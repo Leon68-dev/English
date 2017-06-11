@@ -11,30 +11,30 @@ var model_dbname_backup = "english31_bak.db";
 
 var CHK = 1000;
 var ALL = 0;
-var ANY = 1;
-var ADJECTIVE = 2;
-var ANIMALS = 3;
-var CLOTHING = 4;
-var CRIME_PUNISHMENT = 5;
-var FOOD = 6;
-var HOUSE = 7;
-var MEDICAL = 8;
-var MONEY = 9;
-var NATURAL = 10;
-var NEW = 11;
-var OFFICE = 12;
-var PERSON_FAMILY = 14;
-var REST = 15;
-var TRANSPORT = 16;
-var VERB = 17;
-var VERB_IRREG = 18;
-var PHRASES = 19;
-var COLLOCATION = 20;
-var IDIOM = 21;
-var TONGUE_TWISTER = 22;
+//var ANY = 1;
+//var ADJECTIVE = 2;
+//var ANIMALS = 3;
+//var CLOTHING = 4;
+//var CRIME_PUNISHMENT = 5;
+//var FOOD = 6;
+//var HOUSE = 7;
+//var MEDICAL = 8;
+//var MONEY = 9;
+//var NATURAL = 10;
+//var NEW = 11;
+//var OFFICE = 12;
+//var PERSON_FAMILY = 14;
+//var REST = 15;
+//var TRANSPORT = 16;
+//var VERB = 17;
+//var VERB_IRREG = 18;
+//var PHRASES = 19;
+//var COLLOCATION = 20;
+//var IDIOM = 21;
+//var TONGUE_TWISTER = 22;
 
-var BTN_WORDS_PHRASES = 100;
-var BTN_NEW_WORDS = 101;
+//var BTN_WORDS_PHRASES = 100;
+//var BTN_NEW_WORDS = 101;
 var BTN_ALL_WORDS = 102;
 var BTN_CHK_WORDS = 103;
 var BTN_ADD_WORD = 104;
@@ -43,6 +43,8 @@ var BTN_EDT_WORD = 106;
 var BTN_CATEG = 107;
 var BTN_ADD_CATEG = 108;
 var BTN_EDT_CATEG = 109;
+var BTN_CATEG_VIEW = 110;
+var BTN_CATEG_VIEW_DETAIL = 111;
 
 var BTN_BACKUP_EXPORT = 1000;
 var BTN_BACKUP_IMPORT = 1001;
@@ -57,27 +59,27 @@ var BTN_ADD_CATEG_CANCEL = 3001;
 var BTN_EDT_CATEG_SAVE = 3100;
 var BTN_EDT_CATEG_CANCEL = 3101;
 
-var BTN_PHRASES = 11100;
-var BTN_ANY = 11101;
-var BTN_VERB = 11102;
-var BTN_VERBS = 111020;
-var BTN_VERBS_IRREG = 111021;
-var BTN_HOUSE = 11103;
-var BTN_CLOTHING = 11104;
-var BTN_FOOD = 11105;
-var BTN_ADJECTIVE = 11106;
-var BTN_OFFICE = 11107;
-var BTN_COLLOCATION = 11108;
-var BTN_TRANSPORT = 11109;
-var BTN_MONEY = 11110;
-var BTN_NATURAL = 11111;
-var BTN_ANIMALS = 11112;
-var BTN_REST = 11113;
-var BTN_MEDICAL = 11114;
-var BTN_IDIOM = 11115;
-var BTN_CRIME_PUNISHMENT = 11116;
-var BTN_PERSON_FAMILY = 11117;
-var BTN_TONGUE_TWISTER = 11118;
+//var BTN_PHRASES = 11100;
+//var BTN_ANY = 11101;
+//var BTN_VERB = 11102;
+//var BTN_VERBS = 111020;
+//var BTN_VERBS_IRREG = 111021;
+//var BTN_HOUSE = 11103;
+//var BTN_CLOTHING = 11104;
+//var BTN_FOOD = 11105;
+//var BTN_ADJECTIVE = 11106;
+//var BTN_OFFICE = 11107;
+//var BTN_COLLOCATION = 11108;
+//var BTN_TRANSPORT = 11109;
+//var BTN_MONEY = 11110;
+//var BTN_NATURAL = 11111;
+//var BTN_ANIMALS = 11112;
+//var BTN_REST = 11113;
+//var BTN_MEDICAL = 11114;
+//var BTN_IDIOM = 11115;
+//var BTN_CRIME_PUNISHMENT = 11116;
+//var BTN_PERSON_FAMILY = 11117;
+//var BTN_TONGUE_TWISTER = 11118;
 
 
 function confirmCreateTables() {
@@ -91,8 +93,7 @@ function confirmCreateTables() {
 function insertWordById(id, value_w, value_w2, is_checked, callBack) {
     var db = openDatabase();
     db.transaction(function (tx) {
-        var strSQL = "INSERT INTO words(value_w, value_w2, is_checked) VALUES(?,?,?);";
-        tx.executeSql(strSQL, [value_w, value_w2, is_checked], function (res) {
+        tx.executeSql("INSERT INTO words(value_w, value_w2, is_checked) VALUES(?,?,?);", [value_w, value_w2, is_checked], function (res) {
             callBack(0);
         });
     }, function (tx, error) {
@@ -103,8 +104,7 @@ function insertWordById(id, value_w, value_w2, is_checked, callBack) {
 function updateWordById(id, value_w, value_w2, callBack) {
     var db = openDatabase();
     db.transaction(function (tx) {
-        var strSQL = "UPDATE words SET value_w=?, value_w2=? WHERE id=?;";
-        tx.executeSql(strSQL, [value_w, value_w2, id], function (res) {
+        tx.executeSql("UPDATE words SET value_w=?, value_w2=? WHERE id=?;", [value_w, value_w2, id], function (res) {
             callBack(0);
         });
     }, function (tx, error) {
@@ -126,9 +126,7 @@ function selectWordById(id, callBack) {
 function deleteWordById(id, callBack) {
     var db = openDatabase();
     db.transaction(function (tx) {
-        var strSQL = '';
-        strSQL = "DELETE FROM words WHERE id=?;";
-        tx.executeSql(strSQL, [id], function (res) {
+        tx.executeSql("DELETE FROM words WHERE id=?;", [id], function (res) {
             callBack(0);
         });
     }, function (tx, error) {
@@ -139,9 +137,7 @@ function deleteWordById(id, callBack) {
 function insertRelation(id_words, id_type, callBack) {
     var db = openDatabase();
     db.transaction(function (tx) {
-        var strSQL = '';
-        strSQL = "INSERT INTO relations(id_words, id_type) VALUES(?,?);";
-        tx.executeSql(strSQL, [id_words, id_type], function (res) {
+        tx.executeSql("INSERT INTO relations(id_words, id_type) VALUES(?,?);", [id_words, id_type], function (res) {
             callBack(0);
         });
     }, function (tx, error) {
@@ -152,9 +148,7 @@ function insertRelation(id_words, id_type, callBack) {
 function updateRelation(id_words, id_type, callBack) {
     var db = openDatabase();
     db.transaction(function (tx) {
-        var strSQL = '';
-        strSQL = "UPDATE relations SET id_type=? WHERE id_words=?;";
-        tx.executeSql(strSQL, [id_type, id_words], function (res) {
+        tx.executeSql("UPDATE relations SET id_type=? WHERE id_words=?;", [id_type, id_words], function (res) {
             callBack(0);
         });
     }, function (tx, error) {
@@ -165,9 +159,7 @@ function updateRelation(id_words, id_type, callBack) {
 function deleteRelation(id_words, id_type, callBack) {
     var db = openDatabase();
     db.transaction(function (tx) {
-        var strSQL = '';
-        strSQL = "DELETE FROM relations WHERE id_words=? AND id_type=?;";
-        tx.executeSql(strSQL, [id_words, id_type], function (res) {
+        tx.executeSql("DELETE FROM relations WHERE id_words=? AND id_type=?;", [id_words, id_type], function (res) {
             callBack(0);
         });
     }, function (tx, error) {
@@ -219,7 +211,6 @@ function strInsertRelation(sqlValue) {
     return strSql;
 }
 
-
 function selectCategories(callBack) {
     var db = openDatabase();
     db.transaction(function (tx) {
@@ -231,11 +222,21 @@ function selectCategories(callBack) {
     });
 }
 
+function selectCategoriesButtons(callBack) {
+    var db = openDatabase();
+    db.transaction(function (tx) {
+        tx.executeSql("SELECT * FROM types ORDER BY name;", [], function (tx, res) {
+            callBack(res);
+        }, function (tx, error) {
+            console.log('SELECT error: ' + error.message);
+        });
+    });
+}
+
 function insertCategorie(name, callBack) {
     var db = openDatabase();
     db.transaction(function (tx) {
-        var strSQL = "INSERT INTO types(name) VALUES(?);";
-        tx.executeSql(strSQL, [name], function (res) {
+        tx.executeSql("INSERT INTO types(name) VALUES(?);", [name], function (res) {
             callBack(0);
         });
     }, function (tx, error) {
@@ -246,8 +247,7 @@ function insertCategorie(name, callBack) {
 function updateCategorie(id, name, callBack) {
     var db = openDatabase();
     db.transaction(function (tx) {
-        var strSQL = "UPDATE types SET name=? WHERE id=?;";
-        tx.executeSql(strSQL, [name, id], function (res) {
+        tx.executeSql("UPDATE types SET name=? WHERE id=?;", [name, id], function (res) {
             callBack(0);
         });
     }, function (tx, error) {
@@ -281,8 +281,7 @@ function checkCategoriesInRelations(id_categ, callBack) {
 function deleteCategorieById(id, callBack) {
     var db = openDatabase();
     db.transaction(function (tx) {
-        var strSQL = "DELETE FROM types WHERE id=?;";
-        tx.executeSql(strSQL, [id], function (res) {
+        tx.executeSql("DELETE FROM types WHERE id=?;", [id], function (res) {
             callBack(0);
         });
     }, function (tx, error) {
