@@ -183,6 +183,11 @@ function onClickCheckBox(param) {
 }
 
 function onClickButton(index) {
+
+    if (index == BTN_ADD_WORD || index == BTN_CHK_WORDS || index == BTN_ALL_WORDS || index == BTN_CATEG_VIEW) {
+        typeOpen = index;
+    }
+
     currentForm = index;
     showCurrentForm(currentForm);
 }
@@ -363,6 +368,7 @@ function saveNewWord() {
                     insertRelation(id_words, id_type, function (res3) {
                         $("#inputEnglishWord").val('');
                         $("#inputRussianWord").val('');
+                        currentForm = BTN_ADD_WORD;
                         showCurrentForm(BTN_ADD_WORD);
                         window.plugins.toast.showShortBottom("Data was saved");
                     });
@@ -372,6 +378,7 @@ function saveNewWord() {
     } else {
         $("#inputEnglishWord").val('');
         $("#inputRussianWord").val('');
+        currentForm = BTN_ADD_WORD;
         showCurrentForm(BTN_ADD_WORD);
         window.plugins.toast.showShortBottom("Data was not saved");
     }
@@ -391,8 +398,18 @@ function saveEditWord() {
     if (value_w && value_w2 && id_type) {
         updateWordById(editWordID, value_w, value_w2, function (res) {
             updateRelation(editWordID, id_type, function (res) {
-                showCurrentForm(prevEditForm);
-                currentForm = BTN_ALL_WORDS;
+                if (typeOpen == BTN_ALL_WORDS) {
+                    currentForm = BTN_ALL_WORDS;
+                    showCurrentForm(BTN_ALL_WORDS);
+                } else if (typeOpen == BTN_CHK_WORDS) {
+                    currentForm = BTN_CHK_WORDS;
+                    showCurrentForm(BTN_CHK_WORDS);
+                } else if (typeOpen == BTN_CATEG_VIEW) {
+                    onClickCategorieButton(currentCategorieID);
+                } else {
+                    showCurrentForm(prevEditForm);
+                    currentForm = BTN_ALL_WORDS;
+                }
                 window.plugins.toast.showShortBottom("Data was saved");
             });
         });
@@ -404,8 +421,18 @@ function saveEditWord() {
 }
 
 function cancelEditWord() {
-    showCurrentForm(prevEditForm);
-    currentForm = BTN_ALL_WORDS;
+    if (typeOpen == BTN_ALL_WORDS) {
+        currentForm = BTN_ALL_WORDS;
+        showCurrentForm(BTN_ALL_WORDS);
+    } else if (typeOpen == BTN_CHK_WORDS) {
+        currentForm = BTN_CHK_WORDS;
+        showCurrentForm(BTN_CHK_WORDS);
+    } else if (typeOpen == BTN_CATEG_VIEW) {
+        onClickCategorieButton(currentCategorieID);
+    } else {
+        showCurrentForm(prevEditForm);
+        currentForm = BTN_ALL_WORDS;
+    }
     window.plugins.toast.showShortBottom("Data was canceled");
 }
 
@@ -493,6 +520,7 @@ function setCategoriesButtons() {
 }
 
 function onClickCategorieButton(id) {
+    currentCategorieID = id;
     hideAll();
     currentForm = BTN_CATEG_VIEW_DETAIL;
     prevEditForm = BTN_CATEG_VIEW;
@@ -633,6 +661,7 @@ function showCurrentForm(index) {
             importDatabase();
             break;
         case BTN_ADD_WORD:
+            currentForm = BTN_ADD_WORD;
             setDataToSelect('selectedGroups', 0);
             $("#frmAddWord").show();
             break;
@@ -684,12 +713,9 @@ function onClickBack() {
     switch (currentForm) {
         case BTN_CATEG_VIEW:
         case BTN_CATEG:
-        case BTN_EDT_WORD:
         case BTN_ADD_WORD:
         //case BTN_WORDS_PHRASES:
         //case BTN_NEW_WORDS:
-        case BTN_ALL_WORDS:
-        case BTN_CHK_WORDS:
         case BTN_BACKUP:
         case BTN_BACKUP_EXPORT:
         case BTN_BACKUP_IMPORT:
@@ -728,18 +754,35 @@ function onClickBack() {
         //    currentForm = BTN_WORDS_PHRASES;
         //    showCurrentForm(currentForm);
         //    break;
+        case BTN_ALL_WORDS:
+        case BTN_CHK_WORDS:
         case BTN_EDT_WORD:
-            currentForm = BTN_EDT_WORD;
-            showCurrentForm(prevEditForm);
+            //currentForm = BTN_EDT_WORD;
+            //showCurrentForm(prevEditForm);
+            if (typeOpen == BTN_ALL_WORDS) {
+                currentForm = BTN_ALL_WORDS;
+                showCurrentForm(BTN_ALL_WORDS);
+            } else if (typeOpen == BTN_CHK_WORDS) {
+                currentForm = BTN_CHK_WORDS;
+                showCurrentForm(BTN_CHK_WORDS);
+            } else if (typeOpen == BTN_CATEG_VIEW) {
+                onClickCategorieButton(currentCategorieID);
+            } else {
+                showCurrentForm(prevEditForm);
+                currentForm = BTN_ALL_WORDS;
+            }
+
             break;
         case BTN_ADD_CATEG:
         case BTN_EDT_CATEG:
             currentForm = BTN_CATEG;
-            showCurrentForm(prevEditForm);
+            //showCurrentForm(prevEditForm);
+            showCurrentForm(BTN_CATEG);
             break;
         case BTN_CATEG_VIEW_DETAIL:
             currentForm = BTN_CATEG_VIEW;
             showCurrentForm(BTN_CATEG_VIEW);
+            //onClickCategorieButton(currentCategorieID);
             break;
         default:
             navigator.app.exitApp();

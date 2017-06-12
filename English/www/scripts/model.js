@@ -4,6 +4,8 @@ var prevEditForm = 0;
 var currentForm = 0;
 var currentWordType = 0;
 var itemsFound = 0;
+var currentCategorieID = -1;
+var typeOpen = -1;
 
 var dbLocation = 'default';
 var model_dbname = "english31.db";
