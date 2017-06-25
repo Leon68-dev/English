@@ -291,7 +291,82 @@ function deleteCategorieById(id, callBack) {
     });
 }
 
-    
+function selectWordsCHK(callBack) {
+    var db = openDatabase();
+    db.transaction(function (tx) {
+        tx.executeSql("select * from vrows where is_checked = 1 order by id desc;", [], function (tx, res) {
+            callBack(res);
+        }, function (tx, error) {
+            console.log('SELECT error: ' + error.message);
+        });
+    });
+}
+
+function selectWordsCHK(callBack) {
+    var db = openDatabase();
+    db.transaction(function (tx) {
+        tx.executeSql("select * from vrows where is_checked = 1 order by id desc;", [], function (tx, res) {
+            callBack(res);
+        }, function (tx, error) {
+            console.log('SELECT error: ' + error.message);
+        });
+    });
+}
+
+function setWordCheckBox(id, checked) {
+    var db = openDatabase();
+    db.transaction(function (tx) {
+        var chk = 0;
+        if (checked == true)
+            chk = 1;
+        tx.executeSql("update words set is_checked = " + chk + " where id = " + id);
+    });
+}
+
+function selectFindWordsAll(searchText, callBack) {
+    var db = openDatabase();
+    db.transaction(function (tx) {
+        tx.executeSql("select * from vrows where (value_w like'%" + searchText + "%' or value_w2 like'%" + searchText + "%') order by value_w desc;", [], function (tx, res) {
+            callBack(res);
+        }, function (tx, error) {
+            console.log('SELECT error: ' + error.message);
+        });
+    });
+}
+
+function selectFindWordsCHK(searchText, callBack) {
+    var db = openDatabase();
+    db.transaction(function (tx) {
+        tx.executeSql("select * from vrows where is_checked = 1 and (value_w like'%" + searchText + "%' or value_w2 like'%" + searchText + "%') order by id desc;", [], function (tx, res) {
+            callBack(res);
+        }, function (tx, error) {
+            console.log('SELECT error: ' + error.message);
+        });
+    });
+}
+
+function selectFindWordsByType(code, searchText, callBack) {
+    var db = openDatabase();
+    db.transaction(function (tx) {
+        tx.executeSql("select * from vrows where code = " + code + " and (value_w like'%" + searchText + "%' or value_w2 like'%" + searchText + "%') order by value_w desc;", [], function (tx, res) {
+            callBack(res);
+        }, function (tx, error) {
+            console.log('SELECT error: ' + error.message);
+        });
+    });
+}
+
+function selectWordsByCode(code, callBack) {
+    var db = openDatabase();
+    db.transaction(function (tx) {
+        tx.executeSql("select * from vrows where code = " + code + " order by value_w desc;", [], function (tx, res) {
+            callBack(res);
+        }, function (tx, error) {
+            console.log('SELECT error: ' + error.message);
+        });
+    });
+}
+
 function openDatabase() {
     var db = window.sqlitePlugin.openDatabase({ name: model_dbname, location: dbLocation });
     return db;

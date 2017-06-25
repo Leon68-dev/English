@@ -57,7 +57,6 @@ function hideAll() {
     $("#frmCategoriesButtons").submit(function () {
         return false;
     });
-
 }
 
 function checkedValue(val) {
@@ -130,64 +129,47 @@ function getToastCountItems(itemsFound) {
 function setGridWordsBody(wordType) {
     $("#searchText").val("");
     clearTBody();
-    currentWordType = wordType;
-    var db = openDatabase();
-    db.transaction(function (tx) {
-        //if (wordType == NEW) {
-        //    tx.executeSql("select * from vrows where code = " + NEW + " order by id desc;", [], function (tx, res) {
-        //        var cnt = res.rows.length;
-        //        for (i = 0; i < cnt; i++) {
-        //            addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
-        //        }
-        //        getToastCountItems(cnt);
-        //    },function(tx, error) {
-        //        console.log('SELECT error: ' + error.message);
-        //    });
-        //} else
-
-        if (wordType == CHK) {
-            tx.executeSql("select * from vrows where is_checked = 1 order by id desc;", [], function (tx, res) {
-                var cnt = res.rows.length;
-                for (i = 0; i < cnt; i++) {
-                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
-                }
-                getToastCountItems(cnt);
-            }, function (tx, error) {
-                console.log('SELECT error: ' + error.message);
-            });
-        } else {
-            tx.executeSql("select * from vrows where code = " + wordType + " order by value_w desc;", [], function (tx, res) {
-                var cnt = res.rows.length;
-                for (i = 0; i < cnt; i++) {
-                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
-                }
-                getToastCountItems(cnt);
-            }, function (tx, error) {
-                console.log('SELECT error: ' + error.message);
-            });
-        }
-    });
+    //currentWordType = wordType;
+    //if (wordType == NEW) {
+    //    tx.executeSql("select * from vrows where code = " + NEW + " order by id desc;", [], function (tx, res) {
+    //        var cnt = res.rows.length;
+    //        for (i = 0; i < cnt; i++) {
+    //            addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
+    //        }
+    //        getToastCountItems(cnt);
+    //    },function(tx, error) {
+    //        console.log('SELECT error: ' + error.message);
+    //    });
+    //}  else 
+    if (wordType == CHK) {
+        selectWordsCHK(function(res){
+            var cnt = res.rows.length;
+            for (i = 0; i < cnt; i++) {
+                addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
+            }
+            getToastCountItems(cnt);
+        });
+    } else {
+        selectWordsByCode(wordType, function (res) {
+            var cnt = res.rows.length;
+            for (i = 0; i < cnt; i++) {
+                addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
+            }
+            getToastCountItems(cnt);
+        });
+   }
 }
 
 function onClickCheckBox(param) {
     var id = param.value;
     var isChecked = param.checked;
-
-    var db = openDatabase();
-    db.transaction(function (tx) {
-        var chk = 0;
-        if(isChecked == true)
-            chk = 1;
-        tx.executeSql("update words set is_checked = " + chk + " where id = " + id);
-    });
+    setWordCheckBox(id, isChecked);
 }
 
 function onClickButton(index) {
-
     if (index == BTN_ADD_WORD || index == BTN_CHK_WORDS || index == BTN_ALL_WORDS || index == BTN_CATEG_VIEW) {
         typeOpen = index;
     }
-
     currentForm = index;
     showCurrentForm(currentForm);
 }
@@ -213,19 +195,15 @@ function getSearchText() {
 
 function onClickButtonFind() {
     clearTBody();
-    var db = openDatabase();
-    db.transaction(function (tx) {
-        if (currentWordType == ALL) {
-            tx.executeSql("select * from vrows where (value_w like'%" + getSearchText() + "%' or value_w2 like'%" + getSearchText() + "%') order by value_w desc;", [], function (tx, res) {
-                var cnt = res.rows.length;
-                for (i = 0; i < cnt; i++) {
-                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
-                }
-                getToastCountItems(cnt);
-            }, function (tx, error) {
-                console.log('SELECT error: ' + error.message);
-            });
-        //} else if (currentWordType == NEW) {
+    if (currentWordType == ALL) {
+        selectFindWordsAll(getSearchText(), function (res) {
+            var cnt = res.rows.length;
+            for (i = 0; i < cnt; i++) {
+                addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
+            }
+            getToastCountItems(cnt);
+        });
+     //} else if (currentWordType == NEW) {
         //    tx.executeSql("select * from vrows where code = " + NEW + " and (value_w like'%" + getSearchText() + "%' or value_w2 like'%" + getSearchText() + "%') order by id desc;", [], function (tx, res) {
         //        var cnt = res.rows.length;
         //        for (i = 0; i < cnt; i++) {
@@ -235,29 +213,33 @@ function onClickButtonFind() {
         //    }, function (tx, error) {
         //        console.log('SELECT error: ' + error.message);
         //    });
-        } else if (currentWordType == CHK) {
-            tx.executeSql("select * from vrows where is_checked = 1 and (value_w like'%" + getSearchText() + "%' or value_w2 like'%" + getSearchText() + "%') order by id desc;", [], function (tx, res) {
-                var cnt = res.rows.length;
-                for (i = 0; i < cnt; i++) {
-                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
-                }
-                getToastCountItems(cnt);
-            }, function (tx, error) {
-                console.log('SELECT error: ' + error.message);
-            });
-        } else {
-            tx.executeSql("select * from vrows where code = " + currentWordType + " and (value_w like'%" + getSearchText() + "%' or value_w2 like'%" + getSearchText() + "%') order by value_w desc;", [], function (tx, res) {
-                var cnt = res.rows.length;
-                for (i = 0; i < cnt; i++) {
-                    addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
-                }
-                getToastCountItems(cnt);
-            }, function (tx, error) {
-                console.log('SELECT error: ' + error.message);
-            });
-        }
-    });
+    } else if (currentWordType == CHK) {
+        selectFindWordsCHK(getSearchText(), function (res) {
+            var cnt = res.rows.length;
+            for (i = 0; i < cnt; i++) {
+                addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
+            }
+            getToastCountItems(cnt);
+        });
+    } else {
+        selectFindWordsByType(currentWordType, searchText, function (res) {
+            var cnt = res.rows.length;
+            for (i = 0; i < cnt; i++) {
+                addStrValue(res.rows.item(i).value_w, res.rows.item(i).value_w2, res.rows.item(i).id, res.rows.item(i).is_checked);
+            }
+            getToastCountItems(cnt);
+        });
+    }
 }
+
+function deviceReady() {
+    hideAll();
+    setGridWordsBody(ALL);
+    $("#frmList").show();
+    createTablesWithCheck(0);
+}
+
+
 
 function addZerro(param) {
     if (param < 10)
@@ -295,7 +277,6 @@ function failFiles(error) {
     else if (error.code == FileError.INVALID_MODIFICATION_ERR) alert("Message :  INVALID_MODIFICATION_ERR")
     else if (error.code == FileError.QUOTA_EXCEEDED_ERR) alert("Message : QUOTA_EXCEEDED_ERR")
     else if (error.code == FileError.PATH_EXISTS_ERR) alert("Message : PATH_EXISTS_ERR")
-
     showCurrentForm(BTN_BACKUP);
 }
 
